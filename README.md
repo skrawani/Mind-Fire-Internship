@@ -1,1 +1,1 @@
-# Mind-Fire-Internship
+# Daily Assignments
