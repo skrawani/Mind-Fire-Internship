@@ -10,4 +10,4 @@
 
 ### Assignment
 1. Registration Form (Using only vanilla Form)
-1. Registration Form (Formatting by Tables)
+2. Registration Form (Formatting by Tables)
