@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drop And Fetch</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./Drag-Drop.js"></script>
+  </head>
+  <body>
+    <div id="div1" ondrop="drop(event)">
+      <a
+        href="https://www.google.com/maps"
+        draggable="true"
+        ondragstart="drag(event)"
+        id="drag1"
+        >My Location</a
+      >
+    </div>
+
+    <button id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+      Fetch
+    </button>
+    <script src="./Geolocation.js"></script>
+  </body>
+</html>
