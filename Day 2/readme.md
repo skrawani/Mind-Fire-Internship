@@ -10,5 +10,5 @@
   </tr>
  </table>
 <br>
-<p> Hosted Link - <a href="https://skrawani.github.io/Mind-Fire-Internship/Day%202/1/">Website</a></p>
+<p> Hosted Link - <a href="https://skrawani.github.io/Mind-Fire-Internship/Day%202/">Website</a></p>
 <a href="./screenshots/mobie_view.jpeg"> Mobile View</a>
