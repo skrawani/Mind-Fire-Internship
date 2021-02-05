@@ -160,6 +160,7 @@ hr {
 .desg {
   padding: 1rem 0;
 }
-.desg > p span {
+.desg > p a {
   color: rgb(0, 26, 255);
+  text-decoration: none;
 }
