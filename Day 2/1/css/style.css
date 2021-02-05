@@ -97,14 +97,14 @@ blockquote:before {
 }
 #tcards {
   display: flex;
-  margin: 0 15vw;
+  margin: 0 11vw;
   /* padding-left: 20vw; */
 }
 #testimonials > h3,
 hr {
   position: relative;
-  left: 15vw;
-  width: 67vw;
+  left: 11vw;
+  width: 75vw;
   margin: 0 1rem;
 }
 #testimonials > div img {
