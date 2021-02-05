@@ -12,11 +12,26 @@ section {
   justify-content: center;
   align-items: center;
   background-color: #4141c5;
+  justify-items: center;
 }
 #lpage {
   height: 30vh;
   width: 20vw;
   padding-left: 20vw;
+}
+@media only screen and (max-width: 600px) {
+  #nav {
+    padding: 2rem;
+    flex-direction: column;
+  }
+  #lpage {
+    padding: 1rem 0;
+    width: 80vw;
+  }
+
+  /* #lpage {
+    display: none;
+  } */
 }
 section > div > h1 {
   padding: 0 1.5rem 1.5rem 0;
@@ -37,6 +52,13 @@ section > div > h1 {
   /* margin: 0 2rem; */
   margin: 2rem;
   padding: 2rem;
+}
+@media only screen and (max-width: 600px) {
+  #comments,
+  #cards {
+    flex-direction: column;
+    padding: 0rem;
+  }
 }
 
 blockquote {
@@ -61,6 +83,7 @@ blockquote:before {
   align-items: center;
   /* justify-content: center; */
 }
+
 #cards > div > * {
   margin: 0.5rem;
 }
@@ -71,6 +94,7 @@ blockquote:before {
 .btn {
   color: white;
   padding: 0.5rem;
+  border: #fff;
 }
 .btn-blue {
   color: white;
@@ -85,9 +109,19 @@ blockquote:before {
   align-items: center;
   padding: 1rem;
 }
+@media only screen and (max-width: 600px) {
+  #tcards {
+    flex-direction: column;
+  }
+}
 #ad > * {
   margin: 0 2rem;
   font-weight: bold;
+}
+@media only screen and (max-width: 600px) {
+  #ad > * {
+    font-size: 0.5rem;
+  }
 }
 .btn-orange {
   background-color: orangered;
@@ -100,7 +134,12 @@ blockquote:before {
   margin: 0 11vw;
   /* padding-left: 20vw; */
 }
-#testimonials > h3,
+@media only screen and (max-width: 600px) {
+  #tcards {
+    flex-direction: column;
+  }
+}
+#testimonials > h1,
 hr {
   position: relative;
   left: 11vw;
