@@ -7,15 +7,16 @@ section {
 }
 #nav {
   background-image: url(../images/background-1409125.svg);
-  height: 30vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #4141c5;
 }
 #lpage {
-  height: 20vh;
+  height: 30vh;
+  width: 20vw;
   padding-left: 20vw;
-  width: 15vw;
 }
 section > div > h1 {
   padding: 0 1.5rem 1.5rem 0;
@@ -73,7 +74,7 @@ blockquote:before {
 }
 .btn-blue {
   color: white;
-  background-color: rgb(65, 65, 197);
+  background-color: #4141c5;
   padding: 0.5rem;
 }
 #ad {
@@ -94,10 +95,71 @@ blockquote:before {
 #testimonials {
   padding-top: 1.5rem;
 }
-
+#tcards {
+  display: flex;
+  margin: 0 15vw;
+  /* padding-left: 20vw; */
+}
 #testimonials > h3,
 hr {
   position: relative;
-  left: 20vw;
-  width: 60vw;
+  left: 15vw;
+  width: 67vw;
+  margin: 0 1rem;
+}
+#testimonials > div img {
+  width: 100px;
+  height: 100px;
+}
+
+.arrow_box {
+  position: relative;
+  background: #fff;
+  border: 4px solid #fff;
+  padding: 1rem;
+}
+.arrow_box:after,
+.arrow_box:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #fff;
+  border-width: 30px;
+  margin-left: -30px;
+}
+.arrow_box:before {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #fff;
+  border-width: 36px;
+  margin-left: -36px;
+}
+.dp {
+  border-radius: 50%;
+}
+#tcards {
+  padding-bottom: 2rem;
+}
+#tcards > div {
+  margin: 0 1rem;
+}
+
+#tcards > div > div {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+.desg {
+  padding: 1rem 0;
+}
+.desg > p span {
+  color: rgb(0, 26, 255);
 }
