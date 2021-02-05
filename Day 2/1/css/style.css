@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+section {
+  background-color: #f1f1f196;
+}
+#nav {
+  background-image: url(../images/background-1409125.svg);
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#lpage {
+  height: 20vh;
+  padding-left: 20vw;
+  width: 15vw;
+}
+section > div > h1 {
+  padding: 0 1.5rem 1.5rem 0;
+}
+#nav > div {
+  color: white;
+  padding-right: 10vw;
+}
+
+#comments,
+#cards {
+  display: flex;
+  justify-content: center;
+  padding: 0 10vw;
+}
+#comments > div,
+#cards > div {
+  /* margin: 0 2rem; */
+  margin: 2rem;
+  padding: 2rem;
+}
+
+blockquote {
+  color: #747474;
+}
+blockquote:before {
+  color: #747474;
+  content: "“";
+  vertical-align: super;
+  font-size: medium;
+  font-size: 2em;
+}
+
+#comments > div img {
+  float: right;
+  width: 5rem;
+}
+#cards > div {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+#cards > div > * {
+  margin: 0.5rem;
+}
+#cards > div > img {
+  width: 200px;
+  height: 100px;
+}
+.btn {
+  color: white;
+  padding: 0.5rem;
+}
+.btn-blue {
+  color: white;
+  background-color: rgb(65, 65, 197);
+  padding: 0.5rem;
+}
+#ad {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+
+  align-items: center;
+  padding: 1rem;
+}
+#ad > * {
+  margin: 0 2rem;
+  font-weight: bold;
+}
+.btn-orange {
+  background-color: orangered;
+}
+#testimonials {
+  padding-top: 1.5rem;
+}
+
+#testimonials > h3,
+hr {
+  position: relative;
+  left: 20vw;
+  width: 60vw;
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 652 652" fill="#747474"  xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{clip-path:url(#SVGID_4_);}
+	.st2{clip-path:url(#SVGID_6_);}
+</style>
+<path d="M228.3,349.8v13.8h-57.1v-13.8h20.4v-55.3h-20.4v-13.8h57.1v13.8h-20.4v55.3C207.9,349.8,228.3,349.8,228.3,349.8z"/>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="20" y="262" width="600" height="119.9"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<path class="st0" d="M131.8,280.6h-15.6l-11.4,65.5l-13.2-60.7c-0.6-4.2-2.4-4.8-6-4.8h-8.4c-3.6,0-5.4,1.2-6,4.8l-13.2,60.7
+		l-11.4-65.5H29.6l16.2,78.8c0.6,3.6,1.8,4.2,6,4.2h11.4c3.6,0,4.8-0.6,6-4.2l12.6-57.1l12.6,57.1c0.6,3.6,1.8,4.2,6,4.2h10.8
+		c3.6,0,5.4-0.6,6-4.2C117.4,359.4,131.8,280.6,131.8,280.6z M140.2,381.9H20V262h119.9v119.9H140.2z"/>
+</g>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_3_" x="20" y="262" width="600" height="119.9"/>
+		</defs>
+		<clipPath id="SVGID_4_">
+			<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+		</clipPath>
+		<path class="st1" d="M337.7,341.9c0,9,0.6,15.6,1.8,21h16.2c-0.6-4.2-1.2-12-1.2-22.2c-0.6-12-4.2-13.8-12.6-15.6
+			c9.6-1.8,13.8-6,13.8-21c0-12-1.8-16.8-5.4-19.8c-2.4-2.4-6.6-3.6-13.2-3.6h-50.5v83h16.8v-32.5h23.4c4.8,0,6.6,0.6,8.4,1.8
+			C337.1,334.1,337.7,335.9,337.7,341.9 M303.5,317.9V295h27.1c3.6,0,4.8,0.6,5.4,1.2c1.2,1.2,2.4,3,2.4,10.2
+			c0,7.2-1.2,9.6-2.4,10.8c-0.6,0.6-1.8,1.2-5.4,1.2C330.5,318.5,303.5,317.9,303.5,317.9z M379.8,381.9H259.6V262h119.9v119.9
+			H379.8z"/>
+	</g>
+</g>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_5_" x="20" y="262" width="600" height="119.9"/>
+		</defs>
+		<clipPath id="SVGID_6_">
+			<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+		</clipPath>
+		<path class="st2" d="M526.2,280.6v83h40.9c11.4,0,18-1.8,22.8-6c6-5.4,9-15,9-35.5s-3-30.1-9-35.5c-4.8-4.2-11.4-6-22.8-6H526.2z
+			 M582.1,322.1c0,18-1.2,22.2-4.8,24.6c-2.4,1.8-5.4,2.4-11.4,2.4H543v-54.7h22.8c6,0,9,0,11.4,2.4
+			C580.9,299.9,582.1,304.1,582.1,322.1 M620,381.9H500.1V262H620L620,381.9L620,381.9z"/>
+	</g>
+</g>
+<path d="M402.1,294.4v-13.8H473v26.5h-15v-12.6h-28.9v19.8H452v13.2h-22.8v22.2h29.5v-14.4h15v28.3h-71.5v-13.8h11.4v-55.3H402.1z"
+	/>
+</svg>
