@@ -23,7 +23,8 @@
 }
 
 .notification:hover {
-  background: blue;
+  background: #0275d8;
+  color: #fff;
 }
 
 .notification .badge {
@@ -32,7 +33,7 @@
   right: -10px;
   padding: 5px 10px;
   border-radius: 50%;
-  background: blue;
+  background: #0275d8;
 }
 .b-select {
   border: 6px solid transparent;
@@ -40,7 +41,7 @@
 }
 #top-bar .nav-item :hover,
 #top-bar .active {
-  background-color: blue;
+  background-color: #0275d8;
   color: white;
 }
 .carousel {
@@ -75,6 +76,21 @@
 .caption {
   color: #37bd32;
 }
+
+.carousel-prev-next {
+  font-size: 1.5rem;
+  color: #0275d8;
+  padding: 0.2rem 0.6rem;
+  /* margin: 0.5rem; */
+  border-radius: 100%;
+  border: 1px solid gray;
+}
+
+.carousel-prev-next :hover {
+  background-color: #0275d8;
+  color: ;
+}
+
 .card > div > i {
   font-size: 3.5rem;
   padding: 1rem;
@@ -99,3 +115,9 @@
 .checked {
   color: yellow;
 }
+.text-blue {
+  color: #0275d8;
+}
+/* .products div {
+  font-size: 0.2rem;
+} */
