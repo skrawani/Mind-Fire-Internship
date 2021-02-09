@@ -1,0 +1,123 @@
+.nav-item :hover {
+  color: #37bd32;
+}
+.nav-item {
+  font-size: 0.75rem;
+}
+
+.nav-link,
+.nav-item,
+.b-select {
+  color: grey;
+}
+.b-select :hover {
+  color: gray;
+}
+.notification {
+  /* color: white; */
+  text-decoration: none;
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification:hover {
+  background: #0275d8;
+  color: #fff;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: #0275d8;
+}
+.b-select {
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+#top-bar .nav-item :hover,
+#top-bar .active {
+  background-color: #0275d8;
+  color: white;
+}
+.carousel {
+  padding: 0 15vw;
+}
+
+.carousel-indicators li {
+  background-color: darkslategrey;
+  height: 1rem;
+  width: 1rem;
+  /* width: 30px; */
+  border-radius: 100%;
+}
+.carousel-indicators .active {
+  background-color: #37bd32;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: #37bd32;
+  border-radius: 100%;
+}
+.carousel-caption {
+  /* position: relative; */
+
+  left: 65%;
+  top: 2vw;
+  /* font-size: 2.5rem; */
+  color: black;
+  text-align: left;
+}
+.caption {
+  color: #37bd32;
+}
+
+.carousel-prev-next {
+  font-size: 1.5rem;
+  color: #0275d8;
+  padding: 0.2rem 0.6rem;
+  /* margin: 0.5rem; */
+  border-radius: 100%;
+  border: 1px solid gray;
+}
+
+.carousel-prev-next :hover {
+  background-color: #0275d8;
+  color: ;
+}
+
+.card > div > i {
+  font-size: 3.5rem;
+  padding: 1rem;
+}
+.card {
+  color: #fff;
+  height: 150px;
+  width: 255px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.b-logo {
+  width: 100px;
+  height: 100px;
+}
+.prod-img {
+  width: 100px;
+}
+
+.checked {
+  color: yellow;
+}
+.text-blue {
+  color: #0275d8;
+}
+/* .products div {
+  font-size: 0.2rem;
+} */
