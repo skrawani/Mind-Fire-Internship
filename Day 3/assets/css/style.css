@@ -104,6 +104,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .b-logo {
   width: 100px;
   height: 100px;
@@ -121,3 +122,6 @@
 /* .products div {
   font-size: 0.2rem;
 } */
+.card:hover {
+  background-color: black !important;
+}
