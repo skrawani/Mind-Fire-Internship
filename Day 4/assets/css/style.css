@@ -1,0 +1,91 @@
+@media only screen and (max-width: 600px) {
+  .test {
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+.nav-item :hover {
+  color: #37bd32;
+}
+
+.nav-link,
+.nav-item,
+.b-select {
+  color: grey;
+}
+.b-select :hover {
+  color: gray;
+}
+.notification {
+  /* color: white; */
+  text-decoration: none;
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification:hover {
+  background: blue;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: blue;
+}
+.b-select {
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+#top-bar .nav-item :hover,
+#top-bar .active {
+  background-color: blue;
+  color: white;
+}
+.carousel-indicators li {
+  background-color: darkslategrey;
+  height: 1rem;
+  width: 1rem;
+  /* width: 30px; */
+  border-radius: 100%;
+}
+.carousel-indicators .active {
+  background-color: #37bd32;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: #37bd32;
+  border-radius: 100%;
+}
+.card > div > i {
+  font-size: 3.5rem;
+  padding: 1rem;
+}
+.card {
+  color: #fff;
+  height: 150px;
+  width: 250px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.b-logo {
+  width: 100px;
+  height: 100px;
+}
+.prod-img {
+  width: 100px;
+}
+
+.checked {
+  color: yellow;
+}
