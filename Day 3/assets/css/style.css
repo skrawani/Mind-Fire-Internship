@@ -1,3 +1,4 @@
+/* for Nave Section */
 .nav-item :hover {
   color: #37bd32;
 }
@@ -9,12 +10,14 @@
 .nav-item,
 .b-select {
   color: grey;
+  border: 6px solid transparent;
 }
 .b-select :hover {
   color: gray;
 }
+
+/* for logo section */
 .notification {
-  /* color: white; */
   text-decoration: none;
   padding: 15px 26px;
   position: relative;
@@ -35,15 +38,15 @@
   border-radius: 50%;
   background: #0275d8;
 }
-.b-select {
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
-}
+
+/* for top bar section */
 #top-bar .nav-item :hover,
 #top-bar .active {
   background-color: #0275d8;
   color: white;
 }
+
+/* for carousel section */
 .carousel {
   padding: 0 15vw;
 }
@@ -52,7 +55,6 @@
   background-color: darkslategrey;
   height: 1rem;
   width: 1rem;
-  /* width: 30px; */
   border-radius: 100%;
 }
 .carousel-indicators .active {
@@ -65,14 +67,12 @@
   border-radius: 100%;
 }
 .carousel-caption {
-  /* position: relative; */
-
   left: 65%;
   top: 2vw;
-  /* font-size: 2.5rem; */
   color: black;
   text-align: left;
 }
+
 .caption {
   color: #37bd32;
 }
@@ -86,11 +86,7 @@
   border: 1px solid gray;
 }
 
-.carousel-prev-next :hover {
-  background-color: #0275d8;
-  color: ;
-}
-
+/* for mcards sectio */
 .card > div > i {
   font-size: 3.5rem;
   padding: 1rem;
@@ -104,11 +100,27 @@
   align-items: center;
   justify-content: center;
 }
+/* need to override bootstrap css for hover effect */
+.card:hover {
+  background-color: black !important;
+}
 
+/* for lastest  section */
+#latest .container {
+  width: 82vw;
+}
+
+/* for brands section */
 .b-logo {
   width: 100px;
   height: 100px;
 }
+
+/* for all section */
+#id > container {
+  width: 80vw;
+}
+
 .prod-img {
   width: 100px;
 }
@@ -116,12 +128,23 @@
 .checked {
   color: yellow;
 }
+
+/* Applied to 1 or more sections */
 .text-blue {
   color: #0275d8;
 }
-/* .products div {
-  font-size: 0.2rem;
-} */
-.card:hover {
-  background-color: black !important;
+
+.prev-next-container {
+  width: 88vw;
+}
+
+.pl-12 {
+  padding-left: 12%;
+}
+.pr-12 {
+  padding-right: 12%;
+}
+
+.pr-10 {
+  padding-right: 10%;
 }
