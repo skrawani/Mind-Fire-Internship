@@ -1,4 +1,24 @@
-/* for Nave Section */
+/* Applied to 1 or more sections */
+.text-blue {
+  color: #0275d8;
+}
+
+.prev-next-container {
+  width: 88vw;
+}
+
+.pl-12 {
+  padding-left: 12%;
+}
+.pr-12 {
+  padding-right: 12%;
+}
+
+.pr-10 {
+  padding-right: 10%;
+}
+
+/* for Nav Section */
 .nav-item :hover {
   color: #37bd32;
 }
@@ -10,10 +30,13 @@
 .nav-item,
 .b-select {
   color: grey;
-  border: 6px solid transparent;
+  border: 0 solid transparent;
 }
 .b-select :hover {
   color: gray;
+}
+.navbar {
+  padding-top: 0;
 }
 
 /* for logo section */
@@ -27,6 +50,7 @@
 
 .notification:hover {
   background: #0275d8;
+  color: var(--h, #fff);
   color: #fff;
 }
 
@@ -37,6 +61,10 @@
   padding: 5px 10px;
   border-radius: 50%;
   background: #0275d8;
+}
+
+.text-blue:hover {
+  color: var(--h, #fff);
 }
 
 /* for top bar section */
@@ -127,24 +155,4 @@
 
 .checked {
   color: yellow;
-}
-
-/* Applied to 1 or more sections */
-.text-blue {
-  color: #0275d8;
-}
-
-.prev-next-container {
-  width: 88vw;
-}
-
-.pl-12 {
-  padding-left: 12%;
-}
-.pr-12 {
-  padding-right: 12%;
-}
-
-.pr-10 {
-  padding-right: 10%;
 }
