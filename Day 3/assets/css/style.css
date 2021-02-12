@@ -47,11 +47,12 @@
   display: inline-block;
   border-radius: 2px;
 }
-
 .notification:hover {
   background: #0275d8;
-  color: var(--h, #fff);
-  color: #fff;
+}
+
+.notification:hover *, .notification:hover  {
+  color: #fff ;
 }
 
 .notification .badge {
@@ -63,9 +64,6 @@
   background: #0275d8;
 }
 
-.text-blue:hover {
-  color: var(--h, #fff);
-}
 
 /* for top bar section */
 #top-bar .nav-item :hover,
