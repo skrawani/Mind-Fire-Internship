@@ -50,7 +50,7 @@ const updateCart = () => {
     qty += cart.products[c];
     cost += cart.products[c] * prices[c];
   }
-  if (cost > 1000 || qty == 0) charges = 0;
+  if (cost >= 1000 || qty == 0) charges = 0;
   else if (qty === 1) charges = 50;
   else charges = 25;
 
