@@ -54,6 +54,7 @@ const updateCart = () => {
   else if (qty === 1) charges = 50;
   else charges = 25;
 
+  //   to update html
   document.getElementById("mrp").innerHTML = cost;
   document.getElementById("charges").innerHTML = charges;
   document.getElementById("amount").innerHTML = cost + charges;
