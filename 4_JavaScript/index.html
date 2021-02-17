@@ -1,21 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
-</head>
-<body>
-        <div class="container">
-            <div class="row">
-                <div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
+    <style>
+      img {
+        width: 100px;
+      }
+    </style>
+    <title>Cart Page</title>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        class="row justify-content-center align-content-center align-items-center"
+        style="height: 100vh"
+      >
+        <div class="col-11 col-md-5 col-lg-5">
+          <div class="card flex-row m-2">
+            <img src="./assets/images/books.jpg" alt="" />
 
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                </div>
+            <div class="pl-2 w-100">
+              <!-- price -->
+              <h5 class="text-center">Books</h5>
+              <p>Price : 250</p>
+              <div>
+                <span>Qty :</span>
+                <!-- decrement button -->
+                <button
+                  class="btn btn-danger mx-1"
+                  onclick="decrement(this.value)"
+                  value="books"
+                >
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+                <span class="qty books"> 0</span>
+                <!-- increment button  -->
+                <button
+                  class="btn btn-success mx-1"
+                  onclick="increment(this.value)"
+                  value="books"
+                >
+                  <i class="fas fa-plus-circle"></i>
+                </button>
+              </div>
+              <!-- amount -->
+              <div class="mt-3">
+                <span>Total MRP :</span>
+                <span class="amount books">0</span>
+              </div>
             </div>
-        </div>  
-</body>
+          </div>
+          <div class="card flex-row m-2">
+            <img src="./assets/images/furnitures.jpg" alt="" />
+
+            <div class="pl-2 w-100">
+              <!-- price -->
+              <h5 class="text-center">Furnitures</h5>
+              <p>Price : 500</p>
+              <div>
+                <!-- decrement button -->
+                <span>Qty :</span>
+                <button
+                  class="btn btn-danger mx-1"
+                  onclick="decrement(this.value)"
+                  value="furnitures"
+                >
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+                <span class="qty furnitures"> 0</span>
+                <!-- increment button  -->
+                <button
+                  class="btn btn-success mx-1"
+                  onclick="increment(this.value)"
+                  value="furnitures"
+                >
+                  <i class="fas fa-plus-circle"></i>
+                </button>
+              </div>
+              <!-- amount -->
+              <div class="mt-3">
+                <span>Total MRP :</span>
+                <span class="amount furnitures">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="card flex-row m-2">
+            <img src="./assets/images/appliances.jpg" alt="" />
+
+            <div class="pl-2 w-100">
+              <!-- price -->
+              <h5 class="text-center">Appliances</h5>
+              <p>Price : 300</p>
+              <div>
+                <span>Qty :</span>
+                <!-- decrement button -->
+                <button
+                  class="btn btn-danger mx-1"
+                  onclick="decrement(this.value)"
+                  value="appliances"
+                >
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+                <span class="qty appliances"> 0</span>
+                <!-- increment button  -->
+                <button
+                  class="btn btn-success mx-1"
+                  onclick="increment(this.value)"
+                  value="appliances"
+                >
+                  <i class="fas fa-plus-circle"></i>
+                </button>
+              </div>
+              <!-- amount -->
+              <div class="mt-3">
+                <span>Total MRP :</span>
+                <span class="amount appliances">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Amount Details -->
+        <div class="col-11 col-md-5 col-lg-5">
+          <div>
+            <p>Amount to Pay</p>
+            <p>Total MRP: <span id="mrp">0</span></p>
+            <p>Shipping Charges: <span id="charges">0</span></p>
+            <p>Total Amount : <span id="amount">0</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
