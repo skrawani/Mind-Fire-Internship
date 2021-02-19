@@ -6,6 +6,12 @@ body > div {
   height: 100vh;
 }
 form {
-  width: 50vh;
+  width: 400px;
   background-color: white;
+}
+
+@media only screen and (max-width: 500px) {
+  form {
+    width: 90vw;
+  }
 }
