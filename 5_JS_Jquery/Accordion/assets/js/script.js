@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  $(".accordion div").click(function () {
-    var id = this.id;
-    $(`#${id} p`).toggle("fast");
+  $(".accordion div h5").click(function () {
+    $(`#${this.id} ~  p`).toggle("fast");
   });
 });

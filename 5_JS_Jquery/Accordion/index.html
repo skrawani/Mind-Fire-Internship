@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
-      div {
-        padding: 1rem;
+      .accordion > div {
         border: 1px solid black;
       }
+      h5 {
+        background-color: #d8d5d5;
+        height: 100%;
+        margin: 0;
+        padding: 1rem;
+      }
       p {
+        padding: 0.5rem;
         display: none;
       }
     </style>
@@ -18,8 +24,8 @@
   </head>
   <body>
     <div class="accordion">
-      <div id="sec-1">
-        <h5>Section -1</h5>
+      <div>
+        <h5 id="sec-1">Section - 1</h5>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus ea
           neque accusamus velit, amet, maiores cum praesentium tempora nisi
@@ -27,8 +33,8 @@
           nobis nesciunt!
         </p>
       </div>
-      <div id="sec-2">
-        <h5>Section - 2</h5>
+      <div>
+        <h5 id="sec-2">Section - 2</h5>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus ea
           neque accusamus velit, amet, maiores cum praesentium tempora nisi
@@ -36,8 +42,8 @@
           nobis nesciunt!
         </p>
       </div>
-      <div id="sec-3">
-        <h5>Section - 3</h5>
+      <div>
+        <h5 id="sec-3">Section - 3</h5>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus ea
           neque accusamus velit, amet, maiores cum praesentium tempora nisi
