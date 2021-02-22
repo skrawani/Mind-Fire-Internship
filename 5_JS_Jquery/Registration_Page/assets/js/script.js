@@ -5,11 +5,9 @@ const validateEmail = (email) => {
 };
 
 const validateName = (name) => {
-  //check if name if empty or greater than 40 characters
-  if (name == "" || name.lenght > 40) return false;
   //   check if Name only contains alphabets
-  const re = /^[0-9a-z]+$/;
-  return !re.test(String(name).toLowerCase());
+  const re = /^[a-zA-Z ]{1,40}$/;
+  return re.test(String(name).toLowerCase());
 };
 
 const validatePhoneNo = (phone) => {
@@ -36,6 +34,11 @@ const validatePass = (pass) => {
   return false;
 };
 
+const clearPrevMsg = () => {
+  document.getElementById("msg-email").classList.remove("d-block");
+  document.getElementById("msg-name").classList.remove("d-block");
+};
+
 function validateForm() {
   try {
     //   get all form values form html
@@ -46,39 +49,57 @@ function validateForm() {
     const password = document.forms["myform"]["password"].value;
     const cpassword = document.forms["myform"]["cpassword"].value;
 
+    // clear all previous messages
+    // document.getElementById("msg-email").classList.remove("d-block");
+    // document.getElementById("msg-name").classList.remove("d-block");
+    // document.getElementById("msg-gender").classList.remove("d-block");
+    // document.getElementById("msg-phone").classList.remove("d-block");
+    // document.getElementById("msg-password").classList.remove("d-block");
+    // document.getElementById("msg-cpassword").classList.remove("d-block");
+
     // check if Email is valid or not
     if (!validateEmail(email)) {
-      alert("Enter valid Email Address");
+      document.forms["myform"]["email"].classList.add("border-danger");
+      document.getElementById("msg-email").innerHTML = "Email Id is not valid";
+      document.getElementById("msg-email").classList.add("d-block");
       return false;
     }
 
     // check if Name is valid or not
     if (!validateName(name)) {
-      alert("Enter valid Name");
+      document.forms["myform"]["name"].classList.add("border-danger");
+      document.getElementById("msg-name").innerHTML =
+        "Name Length must be greater than 0  and less than 40";
+      document.getElementById("msg-name").classList.add("d-block");
+
       return false;
     }
 
     // check if Gender is Empty
     if (gender == "") {
-      alert("Enter gender input");
+      document.getElementById("msg-gender").innerHTML = "Select a gender";
       return false;
     }
 
     // check if PhoneNo is valid or not
     if (!validatePhoneNo(phone)) {
-      alert("Enter valid Phone Number");
+      document.forms["myform"]["phone"].classList.add("border-danger");
+      document.getElementById("msg-phone").innerHTML = "Enter valid Phone no";
+      document.getElementById("msg-phone").classList.add("d-block");
       return false;
     }
 
     // check if Password is in Correct Format(valid) or not
     if (!validatePass(password)) {
-      var msg =
-        "Password Should be in Following Format\n\n" +
-        "• Must be atleat 8 characters long\n" +
-        "• Must Contain a uppercase , a lowercase character\n" +
-        "• Must Contain a digit and a special Character\n\n";
-
-      alert(msg);
+      document.forms["myform"]["password"].classList.add("border-danger");
+      document.getElementById("msg-pass").innerHTML =
+        ' <p class="p-0 pl-4 m-0 ">Password must</p>\
+      <ul>\
+        <li>be atleat 8 characters long</li>\
+        <li>contain a uppercase, a lowercase character</li>\
+        <li>contain a digit and a special Character</li>\
+      </ul>';
+      document.getElementById("msg-pass").classList.add("d-block");
       return false;
     }
 
@@ -90,5 +111,6 @@ function validateForm() {
   } catch (error) {
     // log error (if any)
     console.log(error);
+    return false;
   }
 }
