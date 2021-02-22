@@ -31,11 +31,19 @@
         <div class="form-group">
           <label for="email">Email address</label>
           <input type="text" class="form-control" id="email" name="email" />
+          <p
+            id="msg-email"
+            class="w-100 d-none text-center rounded border bg-error border-danger text-danger"
+          ></p>
         </div>
 
         <div class="form-group">
           <label for="name"> Name </label>
           <input type="text" name="name" id="name" class="form-control" />
+          <p
+            id="msg-name"
+            class="w-100 d-none text-center rounded border bg-error border-danger text-danger"
+          ></p>
         </div>
 
         <div class="form-group">
@@ -67,6 +75,7 @@
             <label class="form-check-label">
               <input
                 type="radio"
+                style="border-color: red !important; color: red !important"
                 class="form-check-input"
                 name="gender"
                 value="other"
@@ -74,21 +83,37 @@
               Other
             </label>
           </div>
+          <p
+            id="msg-gender"
+            class="w-100 d-none text-center rounded border bg-error border-danger text-danger"
+          ></p>
         </div>
 
         <div class="form-group">
           <label for="phone"> Phone No </label>
           <input type="text" class="form-control" id="phone" />
+          <p
+            id="msg-phone"
+            class="w-100 d-none text-center rounded border bg-error border-danger text-danger"
+          ></p>
         </div>
 
         <div class="form-group">
           <label for="password"> Password </label>
           <input type="password" class="form-control" id="password" />
+          <p
+            id="msg-pass"
+            class="w-100 d-none rounded border bg-error border-danger text-danger"
+          ></p>
         </div>
 
         <div class="form-group">
           <label for="cpassword"> Confirm Password </label>
           <input type="password" class="form-control" id="cpassword" />
+          <p
+            id="msg-cpass"
+            class="w-100 d-none text-center rounded border bg-error border-danger text-danger"
+          ></p>
         </div>
 
         <button type="submit" class="btn btn-primary float-right">
