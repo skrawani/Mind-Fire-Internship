@@ -2,6 +2,7 @@ body {
   background-image: url(../images/background-1409125.svg);
   background-color: blue;
 }
+
 body > div {
   height: 100vh;
 }

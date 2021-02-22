@@ -36,7 +36,14 @@ const validatePass = (pass) => {
 
 const clearPrevMsg = () => {
   document.getElementById("msg-email").classList.remove("d-block");
+  document.forms["myform"]["email"].classList.remove("border-danger");
   document.getElementById("msg-name").classList.remove("d-block");
+  document.forms["myform"]["name"].classList.remove("border-danger");
+  document.getElementById("msg-gender").classList.remove("d-block");
+  document.getElementById("msg-phone").classList.remove("d-block");
+  document.forms["myform"]["phone"].classList.remove("border-danger");
+  document.getElementById("msg-pass").classList.remove("d-block");
+  document.forms["myform"]["password"].classList.remove("border-danger");
 };
 
 function validateForm() {
@@ -50,12 +57,7 @@ function validateForm() {
     const cpassword = document.forms["myform"]["cpassword"].value;
 
     // clear all previous messages
-    // document.getElementById("msg-email").classList.remove("d-block");
-    // document.getElementById("msg-name").classList.remove("d-block");
-    // document.getElementById("msg-gender").classList.remove("d-block");
-    // document.getElementById("msg-phone").classList.remove("d-block");
-    // document.getElementById("msg-password").classList.remove("d-block");
-    // document.getElementById("msg-cpassword").classList.remove("d-block");
+    clearPrevMsg();
 
     // check if Email is valid or not
     if (!validateEmail(email)) {
@@ -69,7 +71,7 @@ function validateForm() {
     if (!validateName(name)) {
       document.forms["myform"]["name"].classList.add("border-danger");
       document.getElementById("msg-name").innerHTML =
-        "Name Length must be greater than 0  and less than 40";
+        "Name must only contains alphabets and length should be greater than 0 and less than 40";
       document.getElementById("msg-name").classList.add("d-block");
 
       return false;
@@ -78,6 +80,7 @@ function validateForm() {
     // check if Gender is Empty
     if (gender == "") {
       document.getElementById("msg-gender").innerHTML = "Select a gender";
+      document.getElementById("msg-gender").classList.add("d-block");
       return false;
     }
 
@@ -105,7 +108,10 @@ function validateForm() {
 
     // check if Both Passwords are same or not
     if (password !== cpassword) {
-      alert("Passwords are not same");
+      document.forms["myform"]["password"].classList.add("border-danger");
+      document.forms["myform"]["cpassword"].classList.add("border-danger");
+      document.getElementById("msg-pass").innerHTML = "Passwords are not same";
+      document.getElementById("msg-pass").classList.add("d-block");
       return false;
     }
   } catch (error) {
