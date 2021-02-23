@@ -1,0 +1,54 @@
+.card-img {
+  width: 12rem;
+  height: 10rem;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-caption {
+  padding: auto;
+  font-size: 0.75rem;
+}
+
+.btn-grp button {
+  font-size: 0.5rem !important;
+}
+
+.btn-grp .btn {
+  border-radius: 0;
+  height: 30px;
+  padding: 0 0.7rem !important;
+  width: 0.1rem;
+}
+
+.border-grey {
+  border-color: rgb(207, 198, 198) !important;
+}
+
+.btn-grp {
+  margin-left: 4rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .card-title {
+    font-size: 0.8rem;
+  }
+  .card-caption {
+    padding: auto;
+    font-size: 0.5rem;
+  }
+
+  .btn-grp {
+    margin-left: 0rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .card-caption {
+    font-size: 0.45rem;
+  }
+}

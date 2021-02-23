@@ -24,9 +24,7 @@ const increment = (value) => {
   //   update qty in html
   document.getElementsByClassName(`qty ${value}`)[0].innerHTML =
     cart.products[value];
-  // update amount in html
-  document.getElementsByClassName(`amount ${value}`)[0].innerHTML =
-    cart.products[value] * prices[value];
+
   // call updateCart function to update Cart values
   updateCart();
 };
@@ -36,8 +34,6 @@ const decrement = (value) => {
     cart.products[value] === 0 ? 0 : cart.products[value] - 1;
   document.getElementsByClassName(`qty ${value}`)[0].innerHTML =
     cart.products[value];
-  document.getElementsByClassName(`amount ${value}`)[0].innerHTML =
-    cart.products[value] * prices[value];
   updateCart();
 };
 
@@ -58,4 +54,5 @@ const updateCart = () => {
   document.getElementById("mrp").innerHTML = cost;
   document.getElementById("charges").innerHTML = charges;
   document.getElementById("amount").innerHTML = cost + charges;
+  document.getElementById("msg-cartno").innerHTML = qty;
 };

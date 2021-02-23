@@ -18,132 +18,204 @@
     />
     <style>
       img {
-        width: 100px;
+        width: 200px;
       }
     </style>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Product Cart</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
+      <h3 class="text-center py-5">Shopping Cart</h3>
       <div
         class="row justify-content-center align-content-center align-items-center"
-        style="height: 100vh"
       >
-        <div class="col-11 col-md-5 col-lg-5">
-          <div class="card flex-row m-2">
-            <img src="./assets/images/books.jpg" alt="" />
+        <div class="col-11 col-md-5 col-lg-5 p-3 card">
+          <h5 class="pl-3">Cart ( <span id="msg-cartno">0 </span> items )</h5>
+          <div
+            class="card border-left-0 border-right-0 border-top-0 flex-row m-2"
+          >
+            <img class="card-img" src="./assets/images/books.jpg" alt="" />
 
-            <div class="pl-2 w-100">
+            <div class="p-3 pt-1 w-100">
               <!-- price -->
-              <h5 class="text-center">Books</h5>
-              <p>Price : 250</p>
-              <div>
-                <span>Qty :</span>
-                <!-- decrement button -->
-                <button
-                  class="btn btn-danger mx-1"
-                  onclick="decrement(this.value)"
-                  value="books"
-                >
-                  <i class="fas fa-minus-circle"></i>
-                </button>
-                <span class="qty books"> 0</span>
-                <!-- increment button  -->
-                <button
-                  class="btn btn-success mx-1"
-                  onclick="increment(this.value)"
-                  value="books"
-                >
-                  <i class="fas fa-plus-circle"></i>
-                </button>
+              <div class="row">
+                <div class="col-7">
+                  <p class="card-title">Books</p>
+                  <span class="card-caption">paperback</span>
+                </div>
+                <div class="mt-2 btn-grp">
+                  <!-- decrement button -->
+                  <div class="border border-grey">
+                    <button
+                      class="btn px-3 border-light"
+                      onclick="decrement(this.value)"
+                      value="books"
+                    >
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="qty books"> 0</span>
+                    <!-- increment button  -->
+                    <button
+                      class="btn px-3 bg-light border-light"
+                      onclick="increment(this.value)"
+                      value="books"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <!-- amount -->
-              <div class="mt-3">
-                <span>Total MRP :</span>
-                <span class="amount books">0</span>
+
+              <div class="card-caption mt-5 row justify-content-center">
+                <span class="col-6 col-md-6 col-lg-5 pr-0">
+                  <i class="far fa-trash-alt pr-2"></i>
+                  REMOVE ITEM
+                </span>
+                <span class="col-6 col-md-6 col-lg-5 px-0">
+                  <i class="fas fa-heart"></i>
+                  MOVE TO WISHLIST
+                </span>
+                <strong
+                  class="col-6 col-md-2 col-lg-2 px-0 pt-2 p-md-0 p-lg-0 text-center"
+                >
+                  $250.00
+                </strong>
               </div>
             </div>
           </div>
-          <div class="card flex-row m-2">
-            <img src="./assets/images/furnitures.jpg" alt="" />
+          <div
+            class="card border-left-0 border-right-0 border-top-0 flex-row m-2"
+          >
+            <img class="card-img" src="./assets/images/appliances.jpg" alt="" />
 
-            <div class="pl-2 w-100">
+            <div class="p-3 pt-1 w-100">
               <!-- price -->
-              <h5 class="text-center">Furnitures</h5>
-              <p>Price : 500</p>
-              <div>
-                <!-- decrement button -->
-                <span>Qty :</span>
-                <button
-                  class="btn btn-danger mx-1"
-                  onclick="decrement(this.value)"
-                  value="furnitures"
-                >
-                  <i class="fas fa-minus-circle"></i>
-                </button>
-                <span class="qty furnitures"> 0</span>
-                <!-- increment button  -->
-                <button
-                  class="btn btn-success mx-1"
-                  onclick="increment(this.value)"
-                  value="furnitures"
-                >
-                  <i class="fas fa-plus-circle"></i>
-                </button>
+              <div class="row">
+                <div class="col-7">
+                  <p class="card-title">Appliances</p>
+                  <span class="card-caption">stainless steel</span>
+                </div>
+                <div class="mt-2 btn-grp">
+                  <!-- decrement button -->
+                  <div class="border border-grey">
+                    <button
+                      class="btn px-3 border-light"
+                      onclick="decrement(this.value)"
+                      value="appliances"
+                    >
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="qty appliances"> 0</span>
+                    <!-- increment button  -->
+                    <button
+                      class="btn px-3 bg-light border-light"
+                      onclick="increment(this.value)"
+                      value="appliances"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <!-- amount -->
-              <div class="mt-3">
-                <span>Total MRP :</span>
-                <span class="amount furnitures">0</span>
+
+              <div class="card-caption mt-5 row justify-content-center">
+                <span class="col-6 col-md-6 col-lg-5 pr-0">
+                  <i class="far fa-trash-alt pr-2"></i>
+                  REMOVE ITEM
+                </span>
+                <span class="col-6 col-md-6 col-lg-5 px-0">
+                  <i class="fas fa-heart"></i>
+                  MOVE TO WISHLIST
+                </span>
+                <strong
+                  class="col-6 col-md-2 col-lg-2 px-0 pt-2 p-md-0 p-lg-0 text-center"
+                >
+                  $300.00
+                </strong>
               </div>
             </div>
           </div>
-          <div class="card flex-row m-2">
-            <img src="./assets/images/appliances.jpg" alt="" />
+          <div
+            class="card border-left-0 border-right-0 border-top-0 flex-row m-2"
+          >
+            <img class="card-img" src="./assets/images/furnitures.jpg" alt="" />
 
-            <div class="pl-2 w-100">
+            <div class="p-3 pt-1 w-100">
               <!-- price -->
-              <h5 class="text-center">Appliances</h5>
-              <p>Price : 300</p>
-              <div>
-                <span>Qty :</span>
-                <!-- decrement button -->
-                <button
-                  class="btn btn-danger mx-1"
-                  onclick="decrement(this.value)"
-                  value="appliances"
-                >
-                  <i class="fas fa-minus-circle"></i>
-                </button>
-                <span class="qty appliances"> 0</span>
-                <!-- increment button  -->
-                <button
-                  class="btn btn-success mx-1"
-                  onclick="increment(this.value)"
-                  value="appliances"
-                >
-                  <i class="fas fa-plus-circle"></i>
-                </button>
+              <div class="row">
+                <div class="col-7">
+                  <p class="card-title">Furnitures</p>
+                  <span class="card-caption">polished</span>
+                </div>
+                <div class="mt-2 btn-grp">
+                  <!-- decrement button -->
+                  <div class="border border-grey">
+                    <button
+                      class="btn border-light"
+                      onclick="decrement(this.value)"
+                      value="furnitures"
+                    >
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="qty furnitures"> 0</span>
+                    <!-- increment button  -->
+                    <button
+                      class="btn bg-light border-light"
+                      onclick="increment(this.value)"
+                      value="furnitures"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <!-- amount -->
-              <div class="mt-3">
-                <span>Total MRP :</span>
-                <span class="amount appliances">0</span>
+
+              <div class="card-caption mt-5 row justify-content-center">
+                <span class="col-6 col-md-6 col-lg-5 pr-0">
+                  <i class="far fa-trash-alt pr-2"></i>
+                  REMOVE ITEM
+                </span>
+                <span class="col-6 col-md-6 col-lg-5 px-0">
+                  <i class="fas fa-heart"></i>
+                  MOVE TO WISHLIST
+                </span>
+                <strong
+                  class="col-6 col-md-2 col-lg-2 px-0 pt-2 p-md-0 p-lg-0 text-center"
+                >
+                  $500.00
+                </strong>
               </div>
             </div>
           </div>
         </div>
         <!-- Amount Details -->
-        <div class="col-11 col-md-5 col-lg-5">
-          <div>
-            <p>Amount to Pay</p>
-            <p>Total MRP: <span id="mrp">0</span></p>
-            <p>Shipping Charges: <span id="charges">0</span></p>
-            <p>Total Amount : <span id="amount">0</span></p>
+        <div class="col-11 mt-3 m-md-0 m-lg-0 col-md-4 col-lg-4">
+          <div class="card p-4">
+            <p class="card-title mb-4">The Total Amount of</p>
+            <div
+              class="d-flex flex-row justify-content-between font-weight-light"
+            >
+              <p class="card-text">Temporary Amount</p>
+              <p>$<span id="mrp">0</span></p>
+            </div>
+            <div
+              class="d-flex flex-row justify-content-between font-weight-light"
+            >
+              <p class="card-text">Shipping</p>
+              <p>$<span id="charges">0</span></p>
+            </div>
+            <hr />
+            <div class="d-flex flex-row justify-content-between">
+              <p class="card-text">Total Amount</p>
+              <p>$<span id="amount">0</span></p>
+            </div>
+            <button class="btn btn-primary btn-block">GO TO CHECKOUT</button>
           </div>
         </div>
       </div>
     </div>
+
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
