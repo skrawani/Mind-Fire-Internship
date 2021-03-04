@@ -6,15 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Submitted</title>
-  <style> 
-    td,th {
-      width:20vw;
+  <style>
+    td,
+    th {
+      width: 20vw;
     }
   </style>
 </head>
 
 <body>
-<?php session_start();
+  <?php session_start();
   $servername = "localhost";
   $username = "root";
   $password = "";
@@ -28,22 +29,21 @@
     $msg = "Connection failed: " . mysqli_connect_error();
     exit();
   }
-
   $stmt = $conn->prepare("INSERT INTO user(email, name, gender, phone, pass) VALUES (?, ?, ?, ?, ?)");
-  $stmt->bind_param('sssss',$_SESSION['email'], $_SESSION['name'] , $_SESSION['gender'], $_SESSION['phone'], $_SESSION['pass']);
-  
+  $stmt->bind_param('sssss', $_SESSION['email'], $_SESSION['name'], $_SESSION['gender'], $_SESSION['phone'], $_SESSION['pass']);
+
   if ($stmt->execute() === TRUE) {
-      $msg = "New record created successfully";
+    $msg = "New record created successfully";
   } else {
-      $msg = "Error: "  . "<br>" . $conn->error;
+    $msg = "Error: "  . "<br>" . $conn->error;
   }
 
   $conn->close();
 
-?>
+  ?>
   <h2>Form Submitted</h2>
   <table>
-    <tr >
+    <tr>
       <th>Field</th>
       <th>Value</th>
     </tr>
