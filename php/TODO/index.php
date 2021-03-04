@@ -54,10 +54,11 @@
   </section>
   <section id="add-task" class="mt-5 px-5">
     <div class="container">
-      <form class="row border border-dark rounded-pill overflow-hidden" onsubmit="event.preventDefault(); addTask();">
+      <form class="row border border-dark rounded-pill overflow-hidden " onsubmit="event.preventDefault(); handleSubmit(this); ">
         <input type=" text" name="task" id="inp-add-task" class="col-11 rounded-0 border-0" />
-        <button type=" submit" class="btn btn-success rounded-0 col-1 position-relative">
-          Add Task
+
+        <button type=" submit" value="-1" onclick="" class="btn btn-success fas fa-arrow-right border-0 py-3  rounded-0 col-1 position-relative">
+
         </button>
       </form>
     </div>
