@@ -53,10 +53,15 @@ class Queries
         }
         return json_encode($msg);
     }
+    public function isComp($id)
+    {
+
+        $stmt = "SELECT isComp FROM tasks where id = $id;";
+        $data = $this->conn->query($stmt);
+        $result = [];
+        foreach ($data as $key => $value) {
+            $result[$key] = $value;
+        }
+        return $result[0]['isComp'];
+    }
 };
-
-
-// $q = new Queries("/Connect.php");
-// // $q->addTask("hey3", true, false);
-// $q->viewTasks();
-// // var_dump();

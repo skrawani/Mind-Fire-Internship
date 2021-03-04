@@ -11,7 +11,6 @@ class Connect
     public function connectDB()
     {
         $conn =  new mysqli($this->config['server'], $this->config['username'], $this->config['password'], $this->config['dbName']) or die("Connection failed: " . mysqli_connect_error());
-        // var_dump($conn);
         return $conn;
     }
 }

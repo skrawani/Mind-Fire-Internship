@@ -1,0 +1,35 @@
+body {
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
+}
+.strike-through {
+  text-decoration: line-through;
+  color: gray;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+.m-disabled,
+.special-card {
+  background-color: rgba(245, 245, 245, 1);
+  opacity: 0.4;
+}
+
+.special-card {
+  pointer-events: none;
+}
+
+#taskCard {
+  height: 73vh;
+  width: 90vw;
+}
