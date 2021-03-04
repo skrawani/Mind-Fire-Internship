@@ -1,16 +1,16 @@
 <?php
-
-
 class Queries
 {
     private $conn;
     // add task to DB
+    // Default is Connect.php but can be overridden if required
+    // constructor to store db connect variable in class private variable
     public function __construct($connLoc = "/Connect.php")
     {
         $this->conn = require __DIR__ . $connLoc;
-        // var_dump($this->conn);
     }
 
+    // Add Task in Database
     public function addTask($msg, $isComp, $isFav)
     {
         $stmt = $this->conn->prepare("INSERT INTO tasks(msg, isComp, isFav) VALUES (?, ?, ?)");
@@ -22,6 +22,8 @@ class Queries
         }
         return json_encode($msg);
     }
+
+    // Retrive Tasks from DB and send it to front-end
     public function viewTasks()
     {
         $stmt = "SELECT * FROM tasks;";
@@ -32,6 +34,8 @@ class Queries
         }
         return  $result;
     }
+
+    // Delete a task in DB
     public function deleteTasks($id)
     {
         $stmt = "DELETE FROM tasks where id = $id;";
@@ -43,6 +47,8 @@ class Queries
         }
         return json_encode($msg);
     }
+
+    // Edit a Task in DB(Msg or is Checked)
     public function editTask($id, $field, $msg)
     {
         $stmt = "UPDATE tasks SET $field='$msg' WHERE id=$id;";
@@ -53,9 +59,10 @@ class Queries
         }
         return json_encode($msg);
     }
+
+    // Returns if a particular is Checked(completed) or not
     public function isComp($id)
     {
-
         $stmt = "SELECT isComp FROM tasks where id = $id;";
         $data = $this->conn->query($stmt);
         $result = [];
