@@ -1,6 +1,7 @@
+<?php
 return [
-'server' => 'localhost',
-'username' => 'root',
-'password' => 'pass123',
-'dbName' => 'todo',
+    'server' => 'localhost',
+    'username' => 'root',
+    'password' => 'pass123',
+    'dbName' => 'todo',
 ];
