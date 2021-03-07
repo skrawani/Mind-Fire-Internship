@@ -64,6 +64,13 @@ const onClickCheckBox = (ele) => {
 };
 
 const handleSubmit = (e) => {
+  if (e.childNodes[1].value == "") {
+    document
+      .getElementById("inp-add-task")
+      .setAttribute("placeholder", "Task name can't be empty...");
+    document.getElementById("inp-add-task").classList.add("text-danger");
+    return false;
+  }
   if (e.childNodes[3].value === "-1") {
     addTask(e);
   } else {
@@ -73,6 +80,7 @@ const handleSubmit = (e) => {
   document
     .getElementById("inp-add-task")
     .setAttribute("placeholder", "Enter task here...");
+  document.getElementById("inp-add-task").classList.remove("text-danger");
 };
 
 const addTask = (e) => {

@@ -2,6 +2,6 @@
 return [
     'server' => 'localhost',
     'username' => 'root',
-    'password' => '',
+    'password' => 'pass123',
     'dbName' => 'todo',
 ];

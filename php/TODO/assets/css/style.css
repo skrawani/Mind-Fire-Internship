@@ -33,3 +33,7 @@ button:focus {
   height: 73vh;
   width: 90vw;
 }
+
+.text-danger::-webkit-input-placeholder {
+  color: #e46565;
+}

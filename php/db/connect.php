@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "pass123";
 $dbName = "todo";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbName);
@@ -21,5 +21,3 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
-
-?>

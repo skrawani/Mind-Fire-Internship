@@ -15,7 +15,7 @@ $emailErr =  $nameErr = $genderErr = $phoneErr = $passErr = $cpassErr = "";
 // Check if Value Exist in DB or not
 function isExist($key, $val)
 {
-    $mysqli = new mysqli("localhost", "root", "", "todo");
+    $mysqli = new mysqli("localhost", "root", "pass123", "todo");
     $stmt = "SELECT * FROM user WHERE $key = '$val';";
     $result = $mysqli->query($stmt);
 

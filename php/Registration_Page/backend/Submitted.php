@@ -18,7 +18,7 @@
   <?php session_start();
   $servername = "localhost";
   $username = "root";
-  $password = "";
+  $password = "pass123";
   $dbName = "todo";
   $msg = "";
   // Create connection
