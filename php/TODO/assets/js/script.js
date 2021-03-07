@@ -1,3 +1,4 @@
+// To load Tasks from Db and display them using DOM
 const loadTasks = () => {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -32,6 +33,7 @@ const loadTasks = () => {
   xhttp.send();
 };
 
+// Function to Delete a Task
 const deleteTask = (ele) => {
   let id = ele.parentNode.parentNode.id.slice(5);
   var xmlhttp = new XMLHttpRequest();
@@ -47,6 +49,7 @@ const deleteTask = (ele) => {
   xmlhttp.send(vars);
 };
 
+// Function to Handle check for Task Completion
 const onClickCheckBox = (ele) => {
   let id = ele.parentNode.parentNode.id.slice(5);
   var xhttp = new XMLHttpRequest();
@@ -54,7 +57,6 @@ const onClickCheckBox = (ele) => {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let data = this.responseText;
-      console.log("da", data == "0" ? "1" : "0");
       editTask(ele, "isComp", data == "0" ? "1" : "0", id);
     }
   };
@@ -63,6 +65,7 @@ const onClickCheckBox = (ele) => {
   xhttp.send(vars);
 };
 
+// Function to handle Tasnk Submit and call edit function if it's a edit or call insert function otherwise
 const handleSubmit = (e) => {
   if (e.childNodes[1].value == "") {
     document
@@ -83,9 +86,8 @@ const handleSubmit = (e) => {
   document.getElementById("inp-add-task").classList.remove("text-danger");
 };
 
+// Function to insert task into DB
 const addTask = (e) => {
-  console.log(e.childNodes[1].value);
-  console.log(e.childNodes[3].value);
   let task = document.getElementById("inp-add-task").value;
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("POST", "./backend/utils/addTask.php", true);
@@ -101,6 +103,7 @@ const addTask = (e) => {
   xmlhttp.send(vars);
 };
 
+// Helper Function for Editing a task for handling preprocessing
 const handleEdit = (ele) => {
   let id = ele.parentNode.parentNode.id.slice(5);
   let spanEle = document.querySelector(`#task-${id} > span`);
@@ -111,15 +114,13 @@ const handleEdit = (ele) => {
     .getElementById("inp-add-task")
     .setAttribute("placeholder", "Edit task here...");
   document.getElementById("inp-add-task").parentNode.childNodes[3].value = id;
-  console.log(
-    document.getElementById("inp-add-task").parentNode.childNodes[3].value
-  );
 };
 
+// Function to edit task in DB
 const editTask = (ele, field = "msg", msg = false, id = null) => {
   msg = msg ? msg : ele.childNodes[1].value;
   id = id !== null ? id : ele.childNodes[3].value;
-  console.log(msg, id);
+
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("POST", "./backend/utils/editTask.php", true);
   xmlhttp.onreadystatechange = function () {
