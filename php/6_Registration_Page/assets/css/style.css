@@ -1,0 +1,29 @@
+.bg-img {
+  background-image: url(../images/background-1409125.svg);
+  background-color: blue;
+}
+
+form,
+.profile-card {
+  width: 600px;
+  background-color: white;
+  margin: 3rem 0;
+}
+
+.bg-error {
+  background-color: rgba(253, 115, 115, 0.116);
+}
+
+@media only screen and (max-width: 500px) {
+  form {
+    width: 90vw;
+  }
+}
+input[type="radio"] {
+  border: 1px solid red !important;
+}
+
+.profile-img {
+  width: 12rem;
+  /* height: 10rem; */
+}
