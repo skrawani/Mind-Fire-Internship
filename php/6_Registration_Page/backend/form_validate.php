@@ -12,25 +12,13 @@ function preProcessInput($data)
 }
 
 // All variables
-$email = $name = $gender = $phone = $pass = $cpass = "";
+$email = $name = $gender = $phone = $addr =  $education  = $linkedin = $github =  "";
 $skill = $interests = [];
-$emailErr =  $nameErr = $genderErr = $phoneErr = $passErr = $cpassErr = "";
+$emailErr =  $nameErr = $genderErr = $phoneErr = $addrErr =  $educationErr  = $linkedinErr = $githubErr = $skillErr = $interestsErr = $imgErr =  "";
 
-// Check if Value Exist in DB or not
-function isExist($key, $val)
-{
-    $mysqli = new mysqli("localhost", "root", "pass123", "todo");
-    $stmt = "SELECT * FROM user WHERE $key = '$val';";
-    $result = $mysqli->query($stmt);
-
-    $mysqli->close();
-    if ($result->num_rows == 0)
-        return false;
-    return true;
-}
 
 // Function to do Validation of Fields
-function validateFields($key, $re, $ifEmpty, $ifInvalid, $ifSame = false)
+function validateFields($key, $re, $ifEmpty, $ifInvalid)
 {
     $data = $_POST[$key];
     if (empty($data))
@@ -40,7 +28,7 @@ function validateFields($key, $re, $ifEmpty, $ifInvalid, $ifSame = false)
         if (!preg_match($re, $tmp))
             return $ifInvalid;
     }
-    if ($ifSame && isExist($key, $data))  return $ifSame;
+
     return "";
 }
 
@@ -72,8 +60,8 @@ function validateDate($key, $ifEmpty, $ifInvalid)
     return "";
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Name Validation
     $_SESSION["name"] = $name = $_POST["name"];
@@ -86,68 +74,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Date of Birth Validation
     // $dobErr = $nameErr  ? "" : validateDate("dob", "Date of Birth is Required!", "DOB must lies between 1900 to current date");
-    $dobErr = validateDate("dob", "Date of Birth is Required!", "DOB must lies between 1900 to current date");
+    $dobErr = $nameErr ? "" : validateDate("dob", "Date of Birth is Required!", "DOB must lies between 1900 to current date");
 
     // Gender Validation
     if (empty($_POST['gender']))
-        $genderErr = $emailErr || $nameErr ? "" : "Gender is Required!";
+        $genderErr =  $nameErr || $dobErr  ? "" : "Gender is Required!";
     else
         $_SESSION["gender"] = $gender = $_POST['gender'];
 
     // Email Validation
     $email = $_SESSION["email"] = $_POST["email"];
-    $emailErr = validateFields(
+    $emailErr = $nameErr || $dobErr || $genderErr   ? "" :  validateFields(
         "email",
         '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
         "Email is Required!",
-        "Enter valid email id",
-        "Another account with same EMAIL ID exist!"
+        "Enter valid email id"
     );
 
     // Phone No validation
     $_SESSION["phone"] = $phone = $_POST["phone"];
-    $phoneErr = $emailErr || $nameErr || $genderErr  ? "" : validateFields("phone", '/^\d{10}$/', "Phone no is Required!", "Enter valid phone no.", "Another account with same PHONE NO exist!");
+    $phoneErr = $nameErr || $dobErr || $genderErr  || $emailErr  ? "" :  validateFields("phone", '/^\d{10}$/', "Phone no is Required!", "Enter valid phone no.", "Another account with same PHONE NO exist!");
 
 
     // skilss Validation
     $_SESSION["skill"] = $skill = $_POST["skill"];
-    $skillErr = count($skill) === 0 ? "Skills are required!" : "";
+    $skillErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr ? "" : (count($skill) === 0 ? "Skills are required!" : "");
 
 
-    // TODO: VAlidate Image
-
+    // Vaidate Image 
+    $imgErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr || $skillErr ? "" : $imgErr;
     // About is Optional
 
     // VAlidate Validation
     $_SESSION["addr"] = $addr = $_POST["addr"];
-    $addrErr = $addr == "" ? "Addesss is required!" : "";
+    $addrErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr   ? "" : ($addr == "" ? "Addesss is required!" : "");
 
     //  Education Qualification
     $_SESSION["education"] = $education = $_POST["education"];
-    $educationErr = $education == "" ? "Education field is required!" : "";
+    $educationErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr  ? "" : ($education == "" ? "Education field is required!" : "");
 
 
     // Interests
     $_SESSION["interests"] = $interests = $_POST["interests"];
-    $interestsErr = count($interests) === 0 ? "Interests are required!" : "";
+    $interestsErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr || $educationErr ? "" : (count($interests) === 0 ? "Interests are required!" : "");
 
 
     // VAlidate Linkedin
-    $linkedinErr = validateURL(
+    $_SESSION["linkedin"] = $linkedin = $_POST["linkedin"];
+    $linkedinErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr || $educationErr || $interestsErr ? "" :  validateURL(
         "linkedin",
         "",
         "Enter valid Linked URL"
     );
 
     // VAlidate Github
-    $githubErr = validateURL(
+    $_SESSION["github"] = $github = $_POST["github"];
+    $githubErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr || $educationErr || $interestsErr || $linkedinErr ? "" :  validateURL(
         "github",
         "",
         "Enter valid Github URL"
     );
 
-    if (!$emailErr && !$nameErr && !$genderErr && !$phoneErr && !$passErr && !$cpassErr) {
-        header('Location: ./backend/Submitted.php');
+
+
+    // 'Location:download.php?fname='.$_POST['fname']."&lname=".$_POST['lname']
+    if (!$githubErr && !$nameErr && !$dobErr && !$genderErr && !$emailErr && !$imgErr && !$addrErr && !$educationErr && !$interestsErr && !$linkedinErr) {
+        header('Location: ./profile.php?email=' . $_POST['email'] . '&name=' . $_POST['name'] . '&gender=' . $_POST['gender'] . '&phone=' . $_POST['phone'] . '&addr=' . $_POST['addr'] . '&education=' . $_POST['education'] . '&skill=' . $_POST['skill'] . '&interests=' . $_POST['interests'] . '&target_file=' . $target_file . '&linkedin=' . $_POST['linkedin'] . '&github=' . $_POST['github']);
         exit();
     }
 }
