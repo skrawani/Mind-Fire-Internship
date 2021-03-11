@@ -17,14 +17,13 @@
   <?php
   // starting the session
   // session_start();
-  // include_once("./backend/form_validate.php");
-  // TODO: Image Upload
+  include_once("./backend/form_validate.php");
   // TODO: Form Validation
 
   ?>
   <div class="d-flex justify-content-center align-content-center align-items-center">
     <!-- input types are text and required atrribute is not used to skip html validation -->
-    <form class="p-4 rounded" name="myform" action="./profile.php" method="POST">
+    <form class="p-4 rounded" name="myform" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
       <h3 class="text-center pb-2">Registration Form</h3>
 
 
@@ -36,7 +35,7 @@
       <div class="form-group">
         <label for="dob"> Date of birth: </label>
         <input type="date" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>" />
-        <p id="msg-dob" class=" <?php if ($dobErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $nameErr; ?></p>
+        <p id="msg-dob" class=" <?php if ($dobErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $dobErr; ?></p>
       </div>
 
 
@@ -80,7 +79,6 @@
       </div>
 
 
-
       <div class="form-group " id="skills">
         <label for="skills">Skills</label>
         <br>
@@ -89,7 +87,7 @@
           <label class="form-check-label" for="inlineCheckbox1">html</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="skill[] value=" css">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="skill[]" value="css">
           <label class="form-check-label" for="inlineCheckbox2">css</label>
         </div>
         <div class="form-check form-check-inline">
@@ -103,14 +101,15 @@
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="skill[]" value="mySQL">
           <label class="form-check-label" for="inlineCheckbox5">mySQL</label>
+
         </div>
+        <p id="msg-skill" class=" <?php if ($skillErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $skillErr; ?></p>
 
       </div>
 
       <div class="form-group">
         <label for="img">Select image:</label>
         <input type="file" class="form-control p-1" id="img" name="img" accept="image/*" value="<?php echo $img ?>">
-
         <p id="msg-img" class=" <?php if ($imgErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $imgErr; ?></p>
       </div>
 
@@ -127,7 +126,7 @@
 
 
       <div class="form-group">
-        <label for="addr"> Education Qualification</label>
+        <label for="education"> Education Qualification</label>
         <select class="form-control" id="education" name="education">
           <option selected disabled>Nothing selected</option>
           <option class="dropdown-item" value="doctorate" href="#">Doctorate</option>
@@ -135,10 +134,13 @@
           <option class="dropdown-item" value="bachelors" href="#">Bachelors</option>
           <option class="dropdown-item" value="high-school" href="#">High School</option>
         </select>
+
+        <p id="msg-education" class=" <?php if ($educationErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $educationErr; ?></p>
+
       </div>
 
       <div class="form-group p-1">
-        <label for="addr"> Interests</label>
+        <label for="interests"> Interests</label>
         <select class="form-control" name="interests[]" id="interests" multiple data-live-search="true">
           <option class="dropdown-item" value="lorem">Lorem</option>
           <option class="dropdown-item" value="ipsum">Ipsum</option>
@@ -147,17 +149,20 @@
           <option class="dropdown-item" value="amet">amet</option>
           <option class="dropdown-item" value="consectetur">consectetur</option>
         </select>
+
+        <p id="msg-interests" class=" <?php if ($interestsErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $interestsErr; ?></p>
+
       </div>
 
       <div class="form-group">
-        <label for="addr"> LinkedIn</label>
-        <input type="url" class="form-control" id="linkedin" name="linkedin" value="<?php echo $linkedin ?>" />
+        <label for="linkedin"> LinkedIn</label>
+        <input type="text" class="form-control" id="linkedin" name="linkedin" value="<?php echo $linkedin ?>" />
         <p id="msg-linkedin" class=" <?php if ($linkedinErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $linkedinErr; ?></p>
       </div>
       <div class="form-group">
 
-        <label for="addr"> Github</label>
-        <input type="url" class="form-control" id="github" name="github" value="<?php echo $github ?>" />
+        <label for="github"> Github</label>
+        <input type="text" class="form-control" id="github" name="github" value="<?php echo $github ?>" />
         <p id="msg-github" class=" <?php if ($githubErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $githubErr; ?></p>
       </div>
 

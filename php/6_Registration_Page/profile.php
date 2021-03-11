@@ -13,12 +13,13 @@
 
 <body style="height: 100vh">
   <?php
-  var_dump($_POST)
+  var_dump($_POST);
+  include_once("./backend/upload.php");
   ?>
   <section>
     <div class="bg-img" style="height: 15vh"></div>
     <div style="position: relative; top: -5rem" class="d-flex flex-column justify-content-center align-content-center align-items-center">
-      <img class="profile-img rounded-circle pb-2" src="./assets/images/profile_user.jpg" alt="" srcset="" />
+      <img class="profile-img rounded-circle pb-2" src="<?php echo $target_file ?>" alt="" srcset="" />
       <span id="name" class="font-weight-bold"><?php echo $_POST["name"] ?></span>
       <span id="phone">+91 <?php echo $_POST["phone"] ?></span>
       <a href="mailto:<?php echo $_POST['email'] ?>" class="email text-primary"><?php echo $_POST["email"] ?></a>
@@ -58,7 +59,7 @@
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Highest Education Qualification:</span>
-        <span class="col-5">Bachelors </span>
+        <span class="col-5"><?php echo $_POST["education"] ?></span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
