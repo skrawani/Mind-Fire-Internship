@@ -67,13 +67,13 @@
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
-        <span class="col-4">LinkedIn:</span>
-        <a href="<?php echo $_GET['linkedin'] ?>" class="col-5"><?php echo $_GET["linkedin"] ?></a>
+        <span class="col-9 col-md-4 col-lg-4">LinkedIn:</span>
+        <a href="<?php echo $_GET['linkedin'] ?>" class="col-9 col-md-5 col-lg-5"><?php echo $_GET["linkedin"] ?></a>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
-        <span class="col-4">Github:</span>
-        <a href="<?php echo $_GET['github'] ?>" class="col-5"><?php echo $_GET["github"] ?></a>
+        <span class="col-9 col-md-4 col-lg-4">Github:</span>
+        <a href="<?php echo $_GET['github'] ?>" class="col-9 col-md-5 col-lg-5"><?php echo $_GET["github"] ?></a>
       </div>
     </div>
   </section>
