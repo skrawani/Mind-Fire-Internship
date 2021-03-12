@@ -1,6 +1,17 @@
 .bg-img {
   background-image: url(../images/background-1409125.svg);
   background-color: blue;
+  height: 15vh;
+}
+
+#head {
+  position: relative;
+  top: -5rem;
+}
+
+#details {
+  position: relative;
+  top: -5vh;
 }
 
 form,
@@ -25,5 +36,6 @@ input[type="radio"] {
 
 .profile-img {
   width: 12rem;
+  height: 12rem;
   /* height: 10rem; */
 }

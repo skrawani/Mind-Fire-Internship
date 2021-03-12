@@ -62,7 +62,7 @@ function validateDate($key, $ifEmpty, $ifInvalid)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Name Validation
-    $_SESSION["name"] = $name = $_POST["name"];
+    $name = $_POST["name"];
     $nameErr =   validateFields(
         "name",
         '/^[a-zA-Z ]{1,40}$/',
@@ -78,10 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['gender']))
         $genderErr =  $nameErr || $dobErr  ? "" : "Gender is Required!";
     else
-        $_SESSION["gender"] = $gender = $_POST['gender'];
+        $gender = $_POST['gender'];
 
     // Email Validation
-    $email = $_SESSION["email"] = $_POST["email"];
+    $email = $_POST["email"];
     $emailErr = $nameErr || $dobErr || $genderErr   ? "" :  validateFields(
         "email",
         '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',

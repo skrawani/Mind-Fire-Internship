@@ -42,7 +42,7 @@ if (isset($_POST["submit"])) {
         $imgErr = "Sorry, your file was not uploaded.";
         // if everything is ok, try to upload file
     } else {
-        var_dump($target_file);
+
         if (!$imgErr && !move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
             $imgErr = "Sorry, there was an error uploading your file.";
         }

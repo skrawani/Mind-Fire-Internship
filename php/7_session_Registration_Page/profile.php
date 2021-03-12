@@ -11,73 +11,71 @@
   <title>Document</title>
 </head>
 
-<body style="height: 100vh">
+<body>
   <?php
-  var_dump($_GET);
-  // include_once("./backend/upload.php");
+  session_start();
   ?>
   <section>
-    <div class="bg-img" style="height: 15vh"></div>
-    <div style="position: relative; top: -5rem" class="d-flex flex-column justify-content-center align-content-center align-items-center">
-      <img class="profile-img rounded-circle pb-2" src="<?php echo $_GET["target_file"] ?>" alt="" srcset="" />
-      <span id="name" class="font-weight-bold"><?php echo $_GET["name"] ?></span>
-      <span id="phone">+91 <?php echo $_GET["phone"] ?></span>
-      <a href="mailto:<?php echo $_GET['email'] ?>" class="email text-primary"><?php echo $_GET["email"] ?></a>
+    <div class="bg-img"></div>
+    <div id="head" class="d-flex flex-column justify-content-center align-content-center align-items-center">
+      <img class="profile-img rounded-circle pb-2" src="<?php echo $_SESSION["img"] ?>" alt="" srcset="" />
+      <span id="name" class="font-weight-bold"><?php echo $_SESSION["name"] ?></span>
+      <span id="phone">+91 <?php echo $_SESSION["phone"] ?></span>
+      <a href="mailto:<?php echo $_SESSION['email'] ?>" class="email text-primary"><?php echo $_SESSION["email"] ?></a>
     </div>
   </section>
-  <section class="d-flex flex-column justify-content-center align-content-center align-items-center" style="position: relative; top: -5vh">
+  <section id="details" class="d-flex flex-column justify-content-center align-content-center align-items-center">
     <div class="container d-flex flex-column justify-content-center">
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Date of Birth:</span>
-        <span class="col-5"><?php echo $_GET["dob"] ?></span>
+        <span class="col-5"><?php echo $_SESSION["dob"] ?></span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Gender:</span>
-        <span class="col-5"><?php echo $_GET["gender"] ?></span>
+        <span class="col-5"><?php echo $_SESSION["gender"] ?></span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Skills:</span>
         <span class="col-5">
           <?php
-          echo implode(", ", $_GET["skill"]);
+          echo implode(", ", $_SESSION["skill"]);
           ?>
         </span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">About:</span>
-        <span class="col-5"><?php echo $_GET["about"] ?></span>
+        <span class="col-5"><?php echo $_SESSION["about"] ?></span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Address:</span>
-        <span class="col-5"><?php echo $_GET["addr"] ?></span>
+        <span class="col-5"><?php echo $_SESSION["addr"] ?></span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Highest Education Qualification:</span>
-        <span class="col-5"><?php echo $_GET["education"] ?></span>
+        <span class="col-5"><?php echo $_SESSION["education"] ?></span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Interests:</span>
         <div class="col-5">
-          <?php echo implode(", ", $_GET["interests"]); ?>
-
+          <?php echo implode(", ", $_SESSION["interests"]); ?>
         </div>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
-        <span class="col-4">LinkedIn:</span>
-        <span class="col-5"><?php echo $_GET["linkedin"] ?></span>
+        <span class="col-9 col-md-4 col-lg-4">LinkedIn:</span>
+        <a href="<?php echo $_SESSION['linkedin'] ?>" class="col-9 col-md-5 col-lg-5"><?php echo $_SESSION["linkedin"] ?></a>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
-        <span class="col-4">Github:</span>
-        <span class="col-5"><?php echo $_GET["github"] ?></span>
+        <span class="col-9 col-md-4 col-lg-4">Github:</span>
+        <a href="<?php echo $_SESSION['github'] ?>" class="col-9 col-md-5 col-lg-5"><?php echo $_SESSION["github"] ?></a>
       </div>
     </div>
   </section>

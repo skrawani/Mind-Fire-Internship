@@ -15,12 +15,9 @@
 
 <body class="bg-img">
   <?php
-  // starting the session
-  // session_start();
-  include_once("./backend/upload.php");
-  include_once("./backend/form_validate.php");
-
-  // TODO: Form Validation
+  session_start();
+  include_once("./backend/utils/upload.php");
+  include_once("./backend/utils/form_validate.php");
 
   ?>
   <div class="d-flex justify-content-center align-content-center align-items-center">
@@ -70,13 +67,13 @@
       </div>
       <div class="form-group">
         <label for="email">Email address</label>
-        <input type="text" class="form-control" id="email" name="email" value="<?php echo $email ?>" />
+        <input type="email" class="form-control" id="email" name="email" value="<?php echo $email ?>" />
         <p id="msg-email" class=" <?php if ($emailErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $emailErr; ?></p>
       </div>
 
       <div class="form-group">
         <label for="phone"> Contact No </label>
-        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $phone ?>" />
+        <input type="number" class="form-control" id="phone" name="phone" value="<?php echo $phone ?>" />
         <p id="msg-phone" class=" <?php if ($phoneErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $phoneErr; ?></p>
       </div>
 
@@ -117,12 +114,12 @@
 
       <div class="form-group">
         <label for="about"> About</label>
-        <textarea type="text" class="form-control" id="about" name="about" value="<?php echo $about ?>"></textarea>
+        <textarea type="text" class="form-control" id="about" name="about"><?php echo $about ?></textarea>
         <p id="msg-about" class=" <?php if ($aboutErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $aboutErr; ?></p>
       </div>
       <div class="form-group">
         <label for="addr"> Address</label>
-        <textarea type="text" class="form-control" id="addr" name="addr" value="<?php echo $addr ?>"></textarea>
+        <textarea type="text" class="form-control" id="addr" name="addr"><?php echo $addr ?></textarea>
         <p id="msg-addr" class=" <?php if ($addrErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $addrErr; ?></p>
       </div>
 
@@ -158,13 +155,13 @@
 
       <div class="form-group">
         <label for="linkedin"> LinkedIn</label>
-        <input type="text" class="form-control" id="linkedin" name="linkedin" value="<?php echo $linkedin ?>" />
+        <input type="url" class="form-control" id="linkedin" name="linkedin" value="<?php echo $linkedin ?>" />
         <p id="msg-linkedin" class=" <?php if ($linkedinErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $linkedinErr; ?></p>
       </div>
       <div class="form-group">
 
         <label for="github"> Github</label>
-        <input type="text" class="form-control" id="github" name="github" value="<?php echo $github ?>" />
+        <input type="url" class="form-control" id="github" name="github" value="<?php echo $github ?>" />
         <p id="msg-github" class=" <?php if ($githubErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $githubErr; ?></p>
       </div>
 
