@@ -1,8 +1,6 @@
 <?php
+
 // Function To PreProcess The Input Fields
-
-var_dump($_POST);
-
 function preProcessInput($data)
 {
     $data = trim($data);
@@ -73,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     // Date of Birth Validation
-    // $dobErr = $nameErr  ? "" : validateDate("dob", "Date of Birth is Required!", "DOB must lies between 1900 to current date");
+    $dob = $_POST["dob"];
     $dobErr = $nameErr ? "" : validateDate("dob", "Date of Birth is Required!", "DOB must lies between 1900 to current date");
 
     // Gender Validation
@@ -92,54 +90,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     // Phone No validation
-    $_SESSION["phone"] = $phone = $_POST["phone"];
+    $phone = $_POST["phone"];
     $phoneErr = $nameErr || $dobErr || $genderErr  || $emailErr  ? "" :  validateFields("phone", '/^\d{10}$/', "Phone no is Required!", "Enter valid phone no.", "Another account with same PHONE NO exist!");
 
-
     // skilss Validation
-    $_SESSION["skill"] = $skill = $_POST["skill"];
+    $skill = $_POST["skill"];
     $skillErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr ? "" : (count($skill) === 0 ? "Skills are required!" : "");
-
 
     // Vaidate Image 
     $imgErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr || $skillErr ? "" : $imgErr;
     // About is Optional
+    $about = $_POST['about'];
 
     // VAlidate Validation
-    $_SESSION["addr"] = $addr = $_POST["addr"];
-    $addrErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr   ? "" : ($addr == "" ? "Addesss is required!" : "");
+    $addr = $_POST["addr"];
+    $addrErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr || $skillErr || $imgErr   ? "" : ($addr == "" ? "Addesss is required!" : "");
 
     //  Education Qualification
-    $_SESSION["education"] = $education = $_POST["education"];
-    $educationErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr  ? "" : ($education == "" ? "Education field is required!" : "");
-
+    $education = $_POST["education"];
+    $educationErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr || $skillErr || $imgErr  || $addrErr  ? "" : ($education == "" ? "Education field is required!" : "");
 
     // Interests
-    $_SESSION["interests"] = $interests = $_POST["interests"];
-    $interestsErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr || $educationErr ? "" : (count($interests) === 0 ? "Interests are required!" : "");
-
+    $interests = $_POST["interests"];
+    $interestsErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr || $skillErr || $imgErr  || $addrErr || $educationErr ? "" : (count($interests) === 0 ? "Interests are required!" : "");
 
     // VAlidate Linkedin
-    $_SESSION["linkedin"] = $linkedin = $_POST["linkedin"];
-    $linkedinErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr || $educationErr || $interestsErr ? "" :  validateURL(
+    $linkedin = $_POST["linkedin"];
+    $linkedinErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr || $skillErr || $imgErr  || $addrErr || $educationErr || $interestsErr ? "" :  validateURL(
         "linkedin",
         "",
         "Enter valid Linked URL"
     );
 
     // VAlidate Github
-    $_SESSION["github"] = $github = $_POST["github"];
-    $githubErr = $nameErr || $dobErr || $genderErr  || $emailErr || $imgErr || $addrErr || $educationErr || $interestsErr || $linkedinErr ? "" :  validateURL(
+    $github = $_POST["github"];
+    $githubErr = $nameErr || $dobErr || $genderErr  || $emailErr || $phoneErr || $skillErr || $imgErr  || $addrErr || $educationErr || $interestsErr || $linkedinErr ? "" :  validateURL(
         "github",
         "",
         "Enter valid Github URL"
     );
 
-
-
-    // 'Location:download.php?fname='.$_POST['fname']."&lname=".$_POST['lname']
-    if (!$githubErr && !$nameErr && !$dobErr && !$genderErr && !$emailErr && !$imgErr && !$addrErr && !$educationErr && !$interestsErr && !$linkedinErr) {
-        header('Location: ./profile.php?email=' . $_POST['email'] . '&name=' . $_POST['name'] . '&gender=' . $_POST['gender'] . '&phone=' . $_POST['phone'] . '&addr=' . $_POST['addr'] . '&education=' . $_POST['education'] . '&skill=' . $_POST['skill'] . '&interests=' . $_POST['interests'] . '&target_file=' . $target_file . '&linkedin=' . $_POST['linkedin'] . '&github=' . $_POST['github']);
+    $skill = implode(", ", $skill);
+    $interests = implode(", ", $interests);
+    if (!$githubErr && !$nameErr && !$dobErr && !$genderErr && !$emailErr && !$phoneErr && !$skillErr &&  !$imgErr &&  !$addrErr && !$educationErr && !$interestsErr && !$linkedinErr && !$githubErr) {
+        header('Location: ./profile.php?email=' . $email . '&name=' . $name .  '&dob=' . $dob . '&about=' . $about . '&gender=' . $gender . '&phone=' . $phone . '&addr=' . $addr . '&education=' . $education . '&skill=' . $skill . '&interests=' . $interests . '&target_file=' . $target_file . '&linkedin=' . $linkedin . '&github=' . $github);
         exit();
     }
 }

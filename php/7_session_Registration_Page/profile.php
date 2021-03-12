@@ -11,17 +11,21 @@
   <title>Document</title>
 </head>
 
-<body>
+<body style="height: 100vh">
+  <?php
+  var_dump($_GET);
+  // include_once("./backend/upload.php");
+  ?>
   <section>
-    <div class="bg-img"></div>
-    <div id="head" class="d-flex flex-column justify-content-center align-content-center align-items-center">
+    <div class="bg-img" style="height: 15vh"></div>
+    <div style="position: relative; top: -5rem" class="d-flex flex-column justify-content-center align-content-center align-items-center">
       <img class="profile-img rounded-circle pb-2" src="<?php echo $_GET["target_file"] ?>" alt="" srcset="" />
       <span id="name" class="font-weight-bold"><?php echo $_GET["name"] ?></span>
       <span id="phone">+91 <?php echo $_GET["phone"] ?></span>
       <a href="mailto:<?php echo $_GET['email'] ?>" class="email text-primary"><?php echo $_GET["email"] ?></a>
     </div>
   </section>
-  <section id="details" class="d-flex flex-column justify-content-center align-content-center align-items-center">
+  <section class="d-flex flex-column justify-content-center align-content-center align-items-center" style="position: relative; top: -5vh">
     <div class="container d-flex flex-column justify-content-center">
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
@@ -38,7 +42,7 @@
         <span class="col-4">Skills:</span>
         <span class="col-5">
           <?php
-          echo $_GET["skill"];
+          echo implode(", ", $_GET["skill"]);
           ?>
         </span>
       </div>
@@ -61,19 +65,19 @@
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Interests:</span>
         <div class="col-5">
-          <?php echo  $_GET["interests"]; ?>
+          <?php echo implode(", ", $_GET["interests"]); ?>
 
         </div>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">LinkedIn:</span>
-        <a href="<?php echo $_GET['linkedin'] ?>" class="col-5"><?php echo $_GET["linkedin"] ?></a>
+        <span class="col-5"><?php echo $_GET["linkedin"] ?></span>
       </div>
       <div class="row py-3 justify-content-center">
         <span class="col-0 col-md-3 col-lg-3"></span>
         <span class="col-4">Github:</span>
-        <a href="<?php echo $_GET['github'] ?>" class="col-5"><?php echo $_GET["github"] ?></a>
+        <span class="col-5"><?php echo $_GET["github"] ?></span>
       </div>
     </div>
   </section>
