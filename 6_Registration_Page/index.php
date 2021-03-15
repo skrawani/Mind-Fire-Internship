@@ -19,11 +19,12 @@
   include_once("./backend/utils/form_validate.php");
 
   ?>
+
   <div class="d-flex justify-content-center align-content-center align-items-center">
     <!-- input types are text and required atrribute is not used to skip html validation -->
     <form class="p-4 rounded" name="myform" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
       <h3 class="text-center pb-2">Registration Form</h3>
-      <p class="required-header text-center "> fileds are Required</p>
+      <p class="required-header text-center "> fields are Required</p>
 
       <div class="form-group  ">
         <label for="name" class="required"> Name </label>
