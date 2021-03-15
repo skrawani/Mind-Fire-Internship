@@ -1,8 +1,6 @@
 <?php
-
 //include database connection file
 include_once("connect.php");
-var_dump($_GET);
 if (isset($_POST["submit"])) {
 
     //process the data
@@ -11,7 +9,6 @@ if (isset($_POST["submit"])) {
     $age = $_POST["age"];
     $gender = $_POST["gender"];
     $state_id = $_POST["state_id"];
-
 
     //error variable
     $error = array();
@@ -31,8 +28,6 @@ if (isset($_POST["submit"])) {
     if ($error) {
         echo implode("<br />", $error);
     } else {
-        /*$query = "INSERT INTO users(name, age, gender) VALUES ";
-        $query .= "('$name', $age, '$gender')";*/
 
         if (!empty($id)) {
             $query = "UPDATE users SET ";
@@ -102,10 +97,6 @@ if (isset($_GET["task"]) && ($_GET["task"] == "edit")) {
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
 
-    // echo '<pre>';
-    // print_r($row);
-    // echo '</pre>';
-
     $name = $row["name"];
     $age = $row["age"];
     $gender = $row["gender"];
@@ -148,13 +139,9 @@ if (isset($_GET["task"]) && ($_GET["task"] == "delete")) {
 
     //process the data
     $id = (int) $_GET["id"];
-
-
     $query = "DELETE FROM users ";
     $query .= "WHERE id = $id";
-
     echo $query;
-
     $status = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
     if ($status) {
@@ -164,9 +151,7 @@ if (isset($_GET["task"]) && ($_GET["task"] == "delete")) {
         echo "Data could not be delete";
     }
 }
-
 ?>
-
 <?php
 //include database dis-connection file
 include_once("disconnect.php");
