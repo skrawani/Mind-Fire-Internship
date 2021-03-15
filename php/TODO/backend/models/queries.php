@@ -1,4 +1,5 @@
 <?php
+// Class for all queries related to task 
 class Queries
 {
     private $conn;
@@ -20,13 +21,13 @@ class Queries
         } else {
             $msg = ["success" => "0", "msg" => "Error: "  . "<br>" . $this->conn->error, "id" =>  $stmt->insert_id];
         }
-        return json_encode($msg);
+        return $msg;
     }
 
     // Retrive Tasks from DB and send it to front-end
     public function viewTasks()
     {
-        $stmt = "SELECT * FROM tasks;";
+        $stmt = "SELECT id, msg,isComp,isFav  FROM tasks;";
         $data = $this->conn->query($stmt);
         $result = [];
         foreach ($data as $key => $value) {
@@ -45,7 +46,7 @@ class Queries
         } else {
             $msg = ["success" => "0", "msg" => "Error deleting record: " . $this->conn->error];
         }
-        return json_encode($msg);
+        return $msg;
     }
 
     // Edit a Task in DB(Msg or is Checked)
@@ -57,7 +58,7 @@ class Queries
         } else {
             $msg = ["success" => "0", "msg" => "Error deleting record: " . $this->conn->error];
         }
-        return json_encode($msg);
+        return $msg;
     }
 
     // Returns if a particular is Checked(completed) or not

@@ -37,7 +37,7 @@ const loadTasks = () => {
 const deleteTask = (ele) => {
   let id = ele.parentNode.parentNode.id.slice(5);
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "./backend/utils/deleteTask.php", true);
+  xmlhttp.open("DELETE", "./backend/utils/deleteTask.php", true);
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
@@ -122,7 +122,7 @@ const editTask = (ele, field = "msg", msg = false, id = null) => {
   id = id !== null ? id : ele.childNodes[3].value;
 
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "./backend/utils/editTask.php", true);
+  xmlhttp.open("PUT", "./backend/utils/editTask.php", true);
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));

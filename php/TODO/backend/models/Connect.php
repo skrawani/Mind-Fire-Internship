@@ -15,5 +15,5 @@ class Connect
     }
 }
 
-$conn = new Connect('/../app/config.php');
+$conn = new Connect('/../../app/config.php');
 return $conn->connectDB();
