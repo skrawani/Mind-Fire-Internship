@@ -12,6 +12,10 @@
 </head>
 
 <body>
+  <?php
+
+  var_dump($_GET["target_file"]);
+  ?>
   <section>
     <div class="bg-img"></div>
     <div id="head" class="d-flex flex-column justify-content-center align-content-center align-items-center">

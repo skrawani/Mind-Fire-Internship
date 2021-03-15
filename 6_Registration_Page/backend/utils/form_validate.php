@@ -130,10 +130,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "Enter valid Github URL"
     );
 
-    $skill = implode(", ", $skill);
-    $interests = implode(", ", $interests);
     if (!$githubErr && !$nameErr && !$dobErr && !$genderErr && !$emailErr && !$phoneErr && !$skillErr &&  !$imgErr &&  !$addrErr && !$educationErr && !$interestsErr && !$linkedinErr && !$githubErr) {
-        header('Location: ./profile.php?email=' . $email . '&name=' . $name .  '&dob=' . $dob . '&about=' . $about . '&gender=' . $gender . '&phone=' . $phone . '&addr=' . $addr . '&education=' . $education . '&skill=' . $skill . '&interests=' . $interests . '&target_file=' . $target_file . '&linkedin=' . $linkedin . '&github=' . $github);
+        $skillS = implode(", ", $skill);
+        $interestsS = implode(", ", $interests);
+        header('Location: ./profile.php?email=' . $email . '&name=' . $name .  '&dob=' . $dob . '&about=' . $about . '&gender=' . $gender . '&phone=' . $phone . '&addr=' . $addr . '&education=' . $education . '&skill=' . $skillS . '&interests=' . $interestsS . '&target_file=' . $target_file . '&linkedin=' . $linkedin . '&github=' . $github);
         exit();
     }
 }
