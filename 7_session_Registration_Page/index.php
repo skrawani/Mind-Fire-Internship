@@ -20,26 +20,27 @@
   include_once("./backend/utils/form_validate.php");
 
   ?>
+
   <div class="d-flex justify-content-center align-content-center align-items-center">
     <!-- input types are text and required atrribute is not used to skip html validation -->
     <form class="p-4 rounded" name="myform" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
       <h3 class="text-center pb-2">Registration Form</h3>
+      <p class="required-header text-center "> fields are Required</p>
 
-
-      <div class="form-group">
-        <label for="name"> Name </label>
+      <div class="form-group  ">
+        <label for="name" class="required"> Name </label>
         <input type="text" name="name" id="name" class="form-control" value="<?php echo $name ?>" />
         <p id="msg-name" class=" <?php if ($nameErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $nameErr; ?></p>
       </div>
       <div class="form-group">
-        <label for="dob"> Date of birth: </label>
+        <label for="dob" class="required"> Date of birth: </label>
         <input type="date" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>" />
         <p id="msg-dob" class=" <?php if ($dobErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $dobErr; ?></p>
       </div>
 
 
       <div class="form-group">
-        <label for="gender"> Gender </label>
+        <label for="gender" class="required"> Gender </label>
         <br />
         <div class="form-check-inline">
           <label class="form-check-label">
@@ -66,39 +67,39 @@
         <p id="msg-gender" class=" <?php if ($genderErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $genderErr; ?></p>
       </div>
       <div class="form-group">
-        <label for="email">Email address</label>
+        <label for="email" class="required">Email address</label>
         <input type="email" class="form-control" id="email" name="email" value="<?php echo $email ?>" />
         <p id="msg-email" class=" <?php if ($emailErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $emailErr; ?></p>
       </div>
 
       <div class="form-group">
-        <label for="phone"> Contact No </label>
+        <label for="phone" class="required"> Contact No </label>
         <input type="number" class="form-control" id="phone" name="phone" value="<?php echo $phone ?>" />
         <p id="msg-phone" class=" <?php if ($phoneErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $phoneErr; ?></p>
       </div>
 
 
       <div class="form-group " id="skills">
-        <label for="skills">Skills</label>
+        <label for="skills" class="required">Skills</label>
         <br>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="skill[]" value="html">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="skill[]" value="html" <?php if (in_array("html", $skill))  echo "checked" ?>>
           <label class="form-check-label" for="inlineCheckbox1">html</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="skill[]" value="css">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="skill[]" value="css" <?php if (in_array("css", $skill))  echo "checked" ?>>
           <label class="form-check-label" for="inlineCheckbox2">css</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="skill[]" value="php">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="skill[]" value="php" <?php if (in_array("php", $skill))  echo "checked" ?>>
           <label class="form-check-label" for="inlineCheckbox3">php</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="skill[]" value="reactJS">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="skill[]" value="reactJS" <?php if (in_array("reactJS", $skill))  echo "checked" ?>>
           <label class="form-check-label" for="inlineCheckbox4">reactJS</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="skill[]" value="mySQL">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="skill[]" value="mySQL" <?php if (in_array("mySQL", $skill))  echo "checked" ?>>
           <label class="form-check-label" for="inlineCheckbox5">mySQL</label>
 
         </div>
@@ -107,7 +108,7 @@
       </div>
 
       <div class="form-group">
-        <label for="img">Select image:</label>
+        <label for="img" class="required">Select image:</label>
         <input type="file" class="form-control p-1" id="img" name="img" accept="image/*" value="<?php echo $img ?>">
         <p id="msg-img" class=" <?php if ($imgErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $imgErr; ?></p>
       </div>
@@ -118,20 +119,20 @@
         <p id="msg-about" class=" <?php if ($aboutErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $aboutErr; ?></p>
       </div>
       <div class="form-group">
-        <label for="addr"> Address</label>
+        <label for="addr" class="required"> Address</label>
         <textarea type="text" class="form-control" id="addr" name="addr"><?php echo $addr ?></textarea>
         <p id="msg-addr" class=" <?php if ($addrErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $addrErr; ?></p>
       </div>
 
 
       <div class="form-group">
-        <label for="education"> Education Qualification</label>
+        <label for="education" class="required"> Education Qualification</label>
         <select class="form-control" id="education" name="education">
           <option selected disabled>Nothing selected</option>
-          <option class="dropdown-item" value="doctorate" href="#">Doctorate</option>
-          <option class="dropdown-item" value="masters" href="#">Masters</option>
-          <option class="dropdown-item" value="bachelors" href="#">Bachelors</option>
-          <option class="dropdown-item" value="high-school" href="#">High School</option>
+          <option class="dropdown-item" value="doctorate" href="#" <?php if ($education && $education === "doctorate")  echo "selected" ?>>Doctorate</option>
+          <option class="dropdown-item" value="masters" href="#" <?php if ($education && $education === "masters")  echo "selected" ?>>Masters</option>
+          <option class="dropdown-item" value="bachelors" href="#" <?php if ($education && $education === "bachelors")  echo "selected" ?>>Bachelors</option>
+          <option class="dropdown-item" value="high-school" href="#" <?php if ($education && $education === "high-school")  echo "selected" ?>>High School</option>
         </select>
 
         <p id="msg-education" class=" <?php if ($educationErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $educationErr; ?></p>
@@ -139,14 +140,14 @@
       </div>
 
       <div class="form-group p-1">
-        <label for="interests"> Interests</label>
+        <label for="interests" class="required"> Interests</label>
         <select class="form-control" name="interests[]" id="interests" multiple data-live-search="true">
-          <option class="dropdown-item" value="lorem">Lorem</option>
-          <option class="dropdown-item" value="ipsum">Ipsum</option>
-          <option class="dropdown-item" value="dolor">dolor</option>
-          <option class="dropdown-item" value="sit">sit</option>
-          <option class="dropdown-item" value="amet">amet</option>
-          <option class="dropdown-item" value="consectetur">consectetur</option>
+          <option class="dropdown-item" value="lorem" <?php if (in_array("lorem", $interests))  echo "selected" ?>>Lorem</option>
+          <option class="dropdown-item" value="ipsum" <?php if (in_array("ipsum", $interests))  echo "selected" ?>>Ipsum</option>
+          <option class="dropdown-item" value="dolor" <?php if (in_array("dolor", $interests))  echo "selected" ?>>dolor</option>
+          <option class="dropdown-item" value="sit" <?php if (in_array("sit", $interests))  echo "selected" ?>>sit</option>
+          <option class="dropdown-item" value="amet" <?php if (in_array("amet", $interests))  echo "selected" ?>>amet</option>
+          <option class="dropdown-item" value="consectetur" <?php if (in_array("consectetur", $interests))  echo "selected" ?>>consectetur</option>
         </select>
 
         <p id="msg-interests" class=" <?php if ($interestsErr == "") echo "d-none"  ?>  w-100  text-center rounded border bg-error border-danger text-danger"> <?php echo $interestsErr; ?></p>

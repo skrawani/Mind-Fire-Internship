@@ -39,3 +39,9 @@ input[type="radio"] {
   height: 12rem;
   /* height: 10rem; */
 }
+
+/* for required styling */
+.required::after , .required-header::before{
+  content: " *";
+  color: red;
+}
