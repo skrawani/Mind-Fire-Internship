@@ -41,8 +41,8 @@ const deleteTask = (ele) => {
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
+      loadTasks();
     }
-    loadTasks();
   };
   var vars = "id=" + id;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -95,8 +95,8 @@ const addTask = (e) => {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
       document.getElementById("inp-add-task").value = "";
+      loadTasks();
     }
-    loadTasks();
   };
   var vars = "task=" + task + "&isComp=0" + "&isFav=0";
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -126,8 +126,8 @@ const editTask = (ele, field = "msg", msg = false, id = null) => {
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
+      loadTasks();
     }
-    loadTasks();
   };
   var vars = "id=" + id + "&field=" + field + "&msg=" + msg;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
