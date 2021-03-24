@@ -14,8 +14,9 @@ class Queries
     // Add Task in Database
     public function addTask($msg, $isComp, $isFav)
     {
-        $stmt = $this->conn->prepare("INSERT INTO tasks(msg, isComp, isFav) VALUES (?, ?, ?)");
-        $stmt->bind_param('sss', $msg, $isComp, $isFav);
+        $defaultDescription = '';
+        $stmt = $this->conn->prepare("INSERT INTO tasks(msg, description, isComp, isFav ) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param('ssss', $msg, $defaultDescription, $isComp, $isFav);
         if ($stmt->execute() === TRUE) {
             $msg = ["success" => "1", "msg" => "New Record Successfully created", "id" =>  $stmt->insert_id];
         } else {
@@ -27,7 +28,7 @@ class Queries
     // Retrive Tasks from DB and send it to front-end
     public function viewTasks()
     {
-        $stmt = "SELECT id, msg,isComp,isFav  FROM tasks;";
+        $stmt = "SELECT id,msg,isComp,isFav,description  FROM tasks;";
         $data = $this->conn->query($stmt);
         $result = [];
         foreach ($data as $key => $value) {
@@ -50,9 +51,13 @@ class Queries
     }
 
     // Edit a Task in DB(Msg or is Checked)
-    public function editTask($id, $field, $msg)
+    public function editTask($id, $field1, $msg1, $field2 = null, $msg2 = null)
     {
-        $stmt = "UPDATE tasks SET $field='$msg' WHERE id=$id;";
+        if ($field2 === null || $msg2 === null)
+            $stmt = "UPDATE tasks SET $field1='$msg1' WHERE id=$id;";
+        else
+            $stmt = "UPDATE tasks SET $field1='$msg1', $field2='$msg2' WHERE id=$id;";
+
         if ($this->conn->query($stmt) === TRUE) {
             $msg = ["success" => "1", "msg" => "Record successfully Editted"];
         } else {
@@ -62,14 +67,14 @@ class Queries
     }
 
     // Returns if a particular is Checked(completed) or not
-    public function isComp($id)
+    public function loadCheckBoxValue($id, $key)
     {
-        $stmt = "SELECT isComp FROM tasks where id = $id;";
+        $stmt = "SELECT $key FROM tasks where id = $id;";
         $data = $this->conn->query($stmt);
         $result = [];
-        foreach ($data as $key => $value) {
-            $result[$key] = $value;
+        foreach ($data as $k => $value) {
+            $result[$k] = $value;
         }
-        return $result[0]['isComp'];
+        return $result[0][$key];
     }
 };

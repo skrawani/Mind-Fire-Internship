@@ -19,4 +19,4 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $q = new Queries();
 
 // calling viewTasks and return output in string
-echo $q->isComp($_POST['id']);
+echo $q->loadCheckBoxValue($_POST['id'], $_POST['key']);

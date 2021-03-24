@@ -22,4 +22,7 @@ parse_str(file_get_contents("php://input"), $post_vars);
 $q = new Queries();
 
 // calling deleteTasks and return status msg in json  
-echo json_encode($q->editTask($post_vars['id'], $post_vars['field'],  $post_vars['msg']));
+if (!isset($post_vars['field2']))
+    echo json_encode($q->editTask($post_vars['id'], $post_vars['field'],  $post_vars['msg']));
+else
+    echo json_encode($q->editTask($post_vars['id'], $post_vars['field'],  $post_vars['msg'], $post_vars['field2'],  $post_vars['msg2']));
