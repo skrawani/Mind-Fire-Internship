@@ -77,4 +77,17 @@ class Queries
         }
         return $result[0][$key];
     }
+    public function searchNormal($key,  $byPrority = '2')
+    {
+        $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where (msg like "' . $key . '%" ' .
+            'or description like "' . $key . '%") and isFav != ' . $byPrority  . ' order by isFav != ' . '1 , id;';
+
+        // return $stmt;
+        $data = $this->conn->query($stmt);
+        $result = [];
+        foreach ($data as $k => $value) {
+            $result[$k] = $value;
+        }
+        return $result;
+    }
 };

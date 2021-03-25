@@ -1,14 +1,11 @@
-// To load Tasks from Db and display them using DOM
-const loadTasks = () => {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      let data = JSON.parse(this.responseText);
-      document.getElementById("taskCard").innerHTML = "";
-      data.forEach((obj) => {
-        document.getElementById("taskCard").innerHTML += `<div id="task-${
-          obj.id
-        }" class="m-card ${obj.isComp === "1" ? "m-disabled" : ""} ">
+var globalData = [];
+
+const displayTask = () => {
+  document.getElementById("taskCard").innerHTML = "";
+  globalData.forEach((obj) => {
+    document.getElementById("taskCard").innerHTML += `<div id="task-${
+      obj.id
+    }" class="m-card ${obj.isComp === "1" ? "m-disabled" : ""} ">
         <div class="row flex-row py-3 p-md-3 p-lg-3  border-bottom ">
             <div class="row justify-content-around icons col-2 col-md-1 col-lg-1 mr-2" style="height: 100%">
             <input type="checkbox" name="isComp" onchange="onClickCheckBox(this)" ${
@@ -21,8 +18,8 @@ const loadTasks = () => {
             <a class="task col-6 overflow-auto col-md-9 col-lg-10  text-decoration-none text-dark ${
               obj.isComp === "1" ? "strike-through" : ""
             }  "   data-toggle="collapse" href="#collapse-${
-          obj.id
-        }" role="button" >
+      obj.id
+    }" role="button" >
               ${obj.msg}
             </a>
             <div class="col-4 col-md-2 col-lg-1 d-flex flex-row justify-content-end">
@@ -46,7 +43,17 @@ const loadTasks = () => {
               </div>
             </div>
       </div>`;
-      });
+  });
+};
+
+// To load Tasks from Db and display them using DOM
+const loadTask = () => {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let data = JSON.parse(this.responseText);
+      globalData = data;
+      displayTask();
     }
   };
   xhttp.open("GET", "backend/utils/loadTasks.php", true);
@@ -61,7 +68,7 @@ const deleteTask = (ele) => {
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
-      loadTasks();
+      searchNormal();
     }
   };
   var vars = "id=" + id;
@@ -117,7 +124,7 @@ const addTask = (e) => {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
       document.getElementById("inp-add-task").value = "";
-      loadTasks();
+      loadTask();
     }
   };
   var vars = "task=" + task + "&isComp=0" + "&isFav=0";
@@ -158,7 +165,7 @@ const editTask = (
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
-      loadTasks();
+      searchNormal();
     }
   };
   var vars = "id=" + id + "&field=" + field + "&msg=" + msg;
@@ -186,6 +193,7 @@ const handleModal = (ele) => {
   // console.log(ele.closest(".m-card star"));
   // document.
 };
+
 const handleModalSubmit = () => {
   // console.log(e);
   let id = document.getElementById("modalID").value;
@@ -195,4 +203,33 @@ const handleModalSubmit = () => {
   editTask(null, "msg", title, id, "description", description);
   let closeBtn = document.querySelector("[data-dismiss=modal]");
   closeBtn.click();
+};
+
+const searchNormal = () => {
+  //
+  let key = document.getElementById("tsearch").value;
+  let pc = document.getElementById("fav_checkbox").checked;
+
+  if (key.length === 0) {
+    loadTask();
+    return;
+  }
+  console.log(key);
+  let byPrority = pc === true ? 0 : 2;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "./backend/utils/search.php", true);
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      console.log(JSON.parse(xmlhttp.responseText));
+      globalData = JSON.parse(xmlhttp.responseText);
+      displayTask();
+    }
+  };
+  var vars = "key=" + key + "&byPrority=" + byPrority;
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send(vars);
+  // if(!isFullText)
+  // {
+
+  // }
 };

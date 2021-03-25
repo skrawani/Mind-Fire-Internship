@@ -58,3 +58,21 @@ button:focus {
   color: yellow;
   position: absolute;
 }
+
+/* checkbox type button */
+#ck-button {
+  border-radius: 1px;
+}
+
+#ck-button label input {
+  display: none;
+}
+#ck-button input + span {
+  position: relative;
+  top: -0.25rem;
+}
+
+#ck-button input:checked + span {
+  background-color: rgb(235, 235, 0);
+  color: white;
+}
