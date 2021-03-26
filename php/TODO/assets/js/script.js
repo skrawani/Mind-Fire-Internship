@@ -1,5 +1,7 @@
+// Gloabal variable(state) to store Tasks Data
 var globalData = [];
 
+// Function to dispay task through DOM
 const displayTask = () => {
   document.getElementById("taskCard").innerHTML = "";
   globalData.forEach((obj) => {
@@ -46,7 +48,7 @@ const displayTask = () => {
   });
 };
 
-// To load Tasks from Db and display them using DOM
+// To load Tasks from Db
 const loadTask = () => {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -68,7 +70,7 @@ const deleteTask = (ele) => {
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
-      searchNormal();
+      search();
     }
   };
   var vars = "id=" + id;
@@ -80,7 +82,6 @@ const deleteTask = (ele) => {
 const onClickCheckBox = (ele) => {
   let key = ele.name;
   let id = ele.closest(".m-card").id.slice(5);
-  // console.log("ID", ele.closest(".m-card"));
   var xhttp = new XMLHttpRequest();
   xhttp.open("POST", "backend/utils/isTaskCompleted.php", true);
   xhttp.onreadystatechange = function () {
@@ -132,21 +133,6 @@ const addTask = (e) => {
   xmlhttp.send(vars);
 };
 
-// Helper Function for Editing a task for handling preprocessing
-const handleEdit = (ele) => {
-  let id = ele.closest(".m-card").id.slice(5);
-
-  let spanEle = document.querySelector(`#task-${id} span`);
-  // console.log(spanEle);
-  ele.closest(".m-card").classList.add("special-card", "bg-warning");
-  ele.closest(".m-card").setAttribute("disabled", true);
-  document.getElementById("inp-add-task").value = spanEle.innerHTML.trim();
-  document
-    .getElementById("inp-add-task")
-    .setAttribute("placeholder", "Edit task here...");
-  document.getElementById("inp-add-task").parentNode.childNodes[3].value = id;
-};
-
 // Function to edit task in DB
 const editTask = (
   ele,
@@ -159,13 +145,12 @@ const editTask = (
   msg = msg ? msg : ele.childNodes[1].value;
   id = id !== null ? id : ele.childNodes[3].value;
 
-  // console.log(ele, field, msg, id, field2, msg2);
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("PUT", "./backend/utils/editTask.php", true);
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       console.log(JSON.parse(xmlhttp.responseText));
-      searchNormal();
+      search();
     }
   };
   var vars = "id=" + id + "&field=" + field + "&msg=" + msg;
@@ -176,8 +161,8 @@ const editTask = (
   if (ele && ele.childNodes[1]) ele.childNodes[1].value = "";
 };
 
+// Function to handle onlClick for Modal (Editting)
 const handleModal = (ele) => {
-  // console.log(ele.closest(".m-card").childNodes[1].childNodes[3].innerHTML);
   let id = ele.closest(".m-card").id;
   let vid = id.slice(5);
   let title = document.querySelector(`#${id} a`).innerHTML.trim();
@@ -185,51 +170,41 @@ const handleModal = (ele) => {
     .querySelector(`#${id} .description`)
     .innerHTML.trim();
 
-  // console.log(document.querySelector(`#${id} .description`).innerHTML);
   document.getElementById("modalTitle").value = title;
   document.getElementById("modalDescription").value = description;
   document.getElementById("modalID").value = vid;
-
-  // console.log(ele.closest(".m-card star"));
-  // document.
 };
 
+// Function to Handle Modal Submit(editing)
 const handleModalSubmit = () => {
-  // console.log(e);
   let id = document.getElementById("modalID").value;
   let title = document.querySelector("#modalTitle").value;
   let description = document.getElementById("modalDescription").value;
-  // console.log(id, title, description);
   editTask(null, "msg", title, id, "description", description);
   let closeBtn = document.querySelector("[data-dismiss=modal]");
   closeBtn.click();
 };
 
-const searchNormal = () => {
-  //
+// Function to Handle searching(with all filters)
+const search = () => {
   let key = document.getElementById("tsearch").value;
   let pc = document.getElementById("fav_checkbox").checked;
-
+  let ft = document.getElementById("ft_checkbox").checked;
   if (key.length === 0) {
     loadTask();
     return;
   }
-  console.log(key);
   let byPrority = pc === true ? 0 : 2;
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("POST", "./backend/utils/search.php", true);
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      console.log(JSON.parse(xmlhttp.responseText));
       globalData = JSON.parse(xmlhttp.responseText);
       displayTask();
     }
   };
   var vars = "key=" + key + "&byPrority=" + byPrority;
+  if (ft) vars += "&isFullText=" + ft;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send(vars);
-  // if(!isFullText)
-  // {
-
-  // }
 };

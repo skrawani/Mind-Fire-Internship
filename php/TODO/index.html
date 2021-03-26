@@ -24,29 +24,50 @@
   <body>
     <div class="header container">
       <div class="row mt-5 m-3 justify-content-center">
-        <h2 class="text-light col-2 font-weight-bold">TODO</h2>
+        <a href="./index.html" class="text-decoration-none">
+          <h2 class="text-light col-2 font-weight-bold">TODO</h2>
+        </a>
         <form
-          class="col-8 d-flex flex-row"
-          onsubmit="event.preventDefault(); searchNormal();"
+          class="col-12 col-md-8 col-lg-8 d-flex flex-column flex-md-row flex-lg-row"
+          onsubmit="event.preventDefault(); search();"
         >
-          <div class="autocomplete col-10 d-flex flex-row">
+          <div class="autocomplete col-12 col-md-9 col-lg-9 d-flex flex-row">
             <input
-              class="form-control col-10 rounded"
+              class="form-control col-8 col-md-9 col-lg-9 rounded"
               type="search"
               id="tsearch"
               name="tsearch"
             />
-            <div id="ck-button">
-              <label class="btn">
-                <input title="Only Favourites" type="checkbox" id="fav_checkbox" /><span class="p-2 btn-light fas fa-star rounded-circle"></span>  
-                </span>
-              </label>
+            <div
+              class="col-5 col-md-3 col-lg-3 d-flex bg-light rounded-right rounded-pill pb-3 form-control"
+            >
+              <div id="ck-button">
+                <label class="btn p-0">
+                  <input
+                    title="Only Favourites"
+                    type="checkbox"
+                    id="fav_checkbox"
+                  />
+                  <span class="p-2 btn-light fas fa-star rounded-circle"></span>
+                </label>
+              </div>
+              <div id="ck-button">
+                <label class="btn">
+                  <input title="fulltext" type="checkbox" id="ft_checkbox" />
+                  <span class="p-2 ft font-weight-bolder rounded-circle">
+                    FT</span
+                  >
+                </label>
+              </div>
             </div>
           </div>
 
-          <!-- <input type="checkbox  " name="priority" id="fltr_priority" /> -->
-
-          <button class="btn btn-primary ml-2" type="submit">Search</button>
+          <button
+            class="btn btn-primary ml-2 mt-2 mt-md-0 mt-lg-0"
+            type="submit"
+          >
+            Search
+          </button>
         </form>
       </div>
     </div>

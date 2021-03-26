@@ -77,10 +77,24 @@ class Queries
         }
         return $result[0][$key];
     }
-    public function searchNormal($key,  $byPrority = '2')
+
+
+    // function to perform searching with both filters support (priority only, full text)
+    public function search($key,  $byPrority = '2', $isFullText = false)
     {
-        $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where (msg like "' . $key . '%" ' .
-            'or description like "' . $key . '%") and isFav != ' . $byPrority  . ' order by isFav != ' . '1 , id;';
+        $key = addslashes($key);
+
+        if (!$isFullText) {
+            $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where (msg like "' . $key . '%" ' .
+                'or description like "' . $key . '%")';
+        } else {
+            $tokens = implode("* ", explode(" ", $key)) . "*";
+            $stmt = "SELECT id,msg,description,isComp,isFav FROM  tasks  WHERE MATCH (msg, description) AGAINST( ' " . $tokens . " ' IN BOOLEAN MODE)";
+        }
+
+        if ($byPrority != '2') {
+            $stmt .= 'and isFav != ' . $byPrority;
+        }
 
         // return $stmt;
         $data = $this->conn->query($stmt);
