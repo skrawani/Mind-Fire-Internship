@@ -7,6 +7,11 @@ header('Content-Type: application/json');
 // import Queries
 include_once("../models/queries.php");
 
+// Make sure the requested call in POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(array("message" => "Action Not Allowed"));
+    exit;
+}
 
 $q = new Queries();
 
