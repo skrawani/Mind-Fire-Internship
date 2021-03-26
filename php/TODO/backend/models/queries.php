@@ -96,7 +96,6 @@ class Queries
             $stmt .= 'and isFav != ' . $byPrority;
         }
 
-        // return $stmt;
         $data = $this->conn->query($stmt);
         $result = [];
         foreach ($data as $k => $value) {
