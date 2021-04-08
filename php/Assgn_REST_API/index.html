@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS Files -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src="./app.js"></script>
+    <title>Registration Page</title>
+  </head>
+
+  <body>
+    <div
+      class="d-flex justify-content-center align-content-center align-items-center"
+    >
+      <form
+        class="p-4 rounded"
+        name="myform"
+        onsubmit="handleSubmit(); return false;"
+        method="POST"
+      >
+        <h4 class="text-center pb-2">Get Elevation</h4>
+        <div class="form-group">
+          <label for="email">Address</label>
+          <textarea
+            name="addr"
+            id="addr"
+            cols="36"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <div id="res" class="d-none">Elevation : <span id="elev"></span> m</div>
+        <button type="submit" class="btn btn-primary float-right">
+          Submit
+        </button>
+      </form>
+    </div>
+    <!-- Imported External JS -->
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
