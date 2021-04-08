@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$q = new Queries();
+$queryObj = new Queries();
 
 // calling viewTasks and return output in string
-echo $q->loadCheckBoxValue($_POST['id'], $_POST['key']);
+echo $queryObj->loadCheckBoxValue($_POST['id'], $_POST['key']);

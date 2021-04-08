@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     exit;
 }
 // Extracting the variables
-parse_str(file_get_contents("php://input"), $post_vars);
+parse_str(file_get_contents("php://input"), $postVars);
 
-$q = new Queries();
+$queryObj = new Queries();
 
 // calling deleteTasks and return  status msg in json  
-echo json_encode($q->deleteTasks($post_vars['id']));
+echo json_encode($queryObj->deleteTasks($postVars['id']));

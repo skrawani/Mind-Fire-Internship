@@ -18,9 +18,9 @@ class Queries
         $stmt = $this->conn->prepare("INSERT INTO tasks(msg, description, isComp, isFav ) VALUES (?, ?, ?, ?)");
         $stmt->bind_param('ssss', $msg, $defaultDescription, $isComp, $isFav);
         if ($stmt->execute() === TRUE) {
-            $msg = ["success" => "1", "msg" => "New Record Successfully created", "id" =>  $stmt->insert_id];
+            $msg = ["success" => "1", "message" => "New task added ", "id" =>  $stmt->insert_id];
         } else {
-            $msg = ["success" => "0", "msg" => "Error: "  . "<br>" . $this->conn->error, "id" =>  $stmt->insert_id];
+            $msg = ["success" => "0", "message" => "Error: "  . "<br>" . $this->conn->error, "id" =>  $stmt->insert_id];
         }
         return $msg;
     }
@@ -43,9 +43,9 @@ class Queries
         $stmt = "DELETE FROM tasks where id = $id;";
 
         if ($this->conn->query($stmt) === TRUE) {
-            $msg = ["success" => "1", "msg" => "Record deleted successfully"];
+            $msg = ["success" => "1", "message" => "Task deleted"];
         } else {
-            $msg = ["success" => "0", "msg" => "Error deleting record: " . $this->conn->error];
+            $msg = ["success" => "0", "message" => "Error deleting record: " . $this->conn->error];
         }
         return $msg;
     }
@@ -59,9 +59,9 @@ class Queries
             $stmt = "UPDATE tasks SET $field1='$msg1', $field2='$msg2' WHERE id=$id;";
 
         if ($this->conn->query($stmt) === TRUE) {
-            $msg = ["success" => "1", "msg" => "Record successfully Editted"];
+            $msg = ["success" => "1", "message" => "Task updated"];
         } else {
-            $msg = ["success" => "0", "msg" => "Error deleting record: " . $this->conn->error];
+            $msg = ["success" => "0", "message" => "Error deleting record: " . $this->conn->error];
         }
         return $msg;
     }

@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$q = new Queries();
+$queryObj = new Queries();
 
 // Calling search function depending upon isFullText is set or not
 if (isset($_POST['isFullText']))
-    echo json_encode($q->search($_POST["key"], $_POST["byPrority"], true));
+    echo json_encode($queryObj->search($_POST["key"], $_POST["byPrority"], true));
 else
-    echo json_encode($q->search($_POST["key"], $_POST["byPrority"]));
+    echo json_encode($queryObj->search($_POST["key"], $_POST["byPrority"]));

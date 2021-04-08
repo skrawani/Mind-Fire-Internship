@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 include_once("../models/queries.php");
 
 
-$q = new Queries();
+$queryObj = new Queries();
 
 // calling viewTasks and return output in json
-echo json_encode($q->viewTasks());
+echo json_encode($queryObj->viewTasks());

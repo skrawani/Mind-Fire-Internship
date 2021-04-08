@@ -17,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
 }
 
 // Extracting the variables
-parse_str(file_get_contents("php://input"), $post_vars);
+parse_str(file_get_contents("php://input"), $postVars);
 
-$q = new Queries();
+$queryObj = new Queries();
 
 // calling deleteTasks and return status msg in json  
-if (!isset($post_vars['field2']))
-    echo json_encode($q->editTask($post_vars['id'], $post_vars['field'],  $post_vars['msg']));
+if (!isset($postVars['field2']))
+    echo json_encode($queryObj->editTask($postVars['id'], $postVars['field'],  $postVars['msg']));
 else
-    echo json_encode($q->editTask($post_vars['id'], $post_vars['field'],  $post_vars['msg'], $post_vars['field2'],  $post_vars['msg2']));
+    echo json_encode($queryObj->editTask($postVars['id'], $postVars['field'],  $postVars['msg'], $postVars['field2'],  $postVars['msg2']));

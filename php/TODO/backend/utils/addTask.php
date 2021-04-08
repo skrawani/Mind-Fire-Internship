@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Creating Instance of the Query class
-$q = new Queries();
+$queryObj = new Queries();
 
 // calling addTask and return  output in json  
-echo json_encode($q->addTask($_POST['task'], $_POST['isComp'],  $_POST['isFav']));
+echo json_encode($queryObj->addTask($_POST['task'], $_POST['isComp'],  $_POST['isFav']));

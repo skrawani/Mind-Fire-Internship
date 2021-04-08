@@ -52,7 +52,7 @@ const displayTask = () => {
 const loadTask = () => {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       let data = JSON.parse(this.responseText);
       globalData = data;
       displayTask();
@@ -68,8 +68,24 @@ const deleteTask = (ele) => {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("DELETE", "./backend/utils/deleteTask.php", true);
   xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      console.log(JSON.parse(xmlhttp.responseText));
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+      let res = JSON.parse(xmlhttp.responseText);
+      let alertButtonContent = `<button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+        <span aria-hidden="true">&times;</span>
+      </button>`;
+      let alertColor = res.success === "1" ? "alert-warning" : "alert-danger";
+      document.getElementById("myAlert").innerHTML =
+        res.message + alertButtonContent;
+      document.getElementById("myAlert").classList.add(alertColor);
+      document.getElementById("myAlert").classList.remove("d-none");
+      setTimeout(() => {
+        document.getElementById("myAlert").classList.add("d-none");
+      }, 5000);
       search();
     }
   };
@@ -85,9 +101,9 @@ const onClickCheckBox = (ele) => {
   var xhttp = new XMLHttpRequest();
   xhttp.open("POST", "backend/utils/isTaskCompleted.php", true);
   xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState === 4 && this.status === 200) {
       let data = this.responseText;
-      editTask(ele, key, data == "0" ? "1" : "0", id);
+      editTask(ele, key, data === "0" ? "1" : "0", id);
     }
   };
   let vars = "id=" + id + "&key=" + key;
@@ -97,7 +113,7 @@ const onClickCheckBox = (ele) => {
 
 // Function to handle Tasnk Submit and call edit function if it's a edit or call insert function otherwise
 const handleSubmit = (e) => {
-  if (e.childNodes[1].value == "") {
+  if (e.childNodes[1].value === "") {
     document
       .getElementById("inp-add-task")
       .setAttribute("placeholder", "Task name can't be empty...");
@@ -122,8 +138,25 @@ const addTask = (e) => {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("POST", "./backend/utils/addTask.php", true);
   xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      console.log(JSON.parse(xmlhttp.responseText));
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+      let res = JSON.parse(xmlhttp.responseText);
+      let alertButtonContent = `<button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+        <span aria-hidden="true">&times;</span>
+      </button>`;
+      let alertColor = res.success === "1" ? "alert-success" : "alert-danger";
+      document.getElementById("myAlert").innerHTML =
+        res.message + alertButtonContent;
+      document.getElementById("myAlert").classList.add(alertColor);
+      document.getElementById("myAlert").classList.remove("d-none");
+      setTimeout(() => {
+        document.getElementById("myAlert").classList.add("d-none");
+      }, 5000);
+
       document.getElementById("inp-add-task").value = "";
       loadTask();
     }
@@ -148,8 +181,24 @@ const editTask = (
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("PUT", "./backend/utils/editTask.php", true);
   xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      console.log(JSON.parse(xmlhttp.responseText));
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+      let res = JSON.parse(xmlhttp.responseText);
+      let alertButtonContent = `<button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+        <span aria-hidden="true">&times;</span>
+      </button>`;
+      let alertColor = res.success === "1" ? "alert-primary" : "alert-danger";
+      document.getElementById("myAlert").innerHTML =
+        res.message + alertButtonContent;
+      document.getElementById("myAlert").classList.add(alertColor);
+      document.getElementById("myAlert").classList.remove("d-none");
+      setTimeout(() => {
+        document.getElementById("myAlert").classList.add("d-none");
+      }, 5000);
       search();
     }
   };
@@ -198,7 +247,7 @@ const search = () => {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("POST", "./backend/utils/search.php", true);
   xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
       globalData = JSON.parse(xmlhttp.responseText);
       displayTask();
     }
