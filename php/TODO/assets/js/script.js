@@ -109,12 +109,12 @@ const addTask = () => {
       </button>`;
 
       let alertColor = res.success === "1" ? "alert-success" : "alert-danger";
-      document.getElementById("myAlert").innerHTML =
-        res.message + alertButtonContent;
-      document.getElementById("myAlert").classList.add(alertColor);
-      document.getElementById("myAlert").classList.remove("d-none");
+      let alertEle = document.getElementById("myAlert");
+      alertEle.innerHTML = res.message + alertButtonContent;
+      alertEle.classList.add(alertColor);
+      alertEle.classList.remove("d-none");
       setTimeout(() => {
-        document.getElementById("myAlert").classList.add("d-none");
+        if (alertEle) alertEle.classList.add("d-none");
       }, 5000);
       loadTask();
     }
@@ -157,12 +157,12 @@ const editTask = () => {
         <span aria-hidden="true">&times;</span>
       </button>`;
       let alertColor = res.success === "1" ? "alert-primary" : "alert-danger";
-      document.getElementById("myAlert").innerHTML =
-        res.message + alertButtonContent;
-      document.getElementById("myAlert").classList.add(alertColor);
-      document.getElementById("myAlert").classList.remove("d-none");
+      let alertEle = document.getElementById("myAlert");
+      alertEle.innerHTML = res.message + alertButtonContent;
+      alertEle.classList.add(alertColor);
+      alertEle.classList.remove("d-none");
       setTimeout(() => {
-        document.getElementById("myAlert").classList.add("d-none");
+        if (alertEle) alertEle.classList.add("d-none");
       }, 5000);
       search();
     }

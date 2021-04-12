@@ -77,7 +77,7 @@ class Queries
         return $result[0];
     }
 
-
+    // TODO: Changes for Second Filter
     // function to perform searching with both filters support (priority only, full text)
     public function search($key,  $byPrority = '2', $isFullText = false)
     {
@@ -92,8 +92,6 @@ class Queries
         // }
 
         $stmt .= 'and isFav != ' . $byPrority;
-
-
         $data = $this->conn->query($stmt);
         $result = [];
         foreach ($data as $k => $value) {
