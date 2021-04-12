@@ -12,11 +12,11 @@ class Queries
     }
 
     // Add Task in Database
-    public function addTask($msg, $isComp, $isFav)
+    public function addTask($msg, $description, $isComp, $isFav)
     {
-        $defaultDescription = '';
+
         $stmt = $this->conn->prepare("INSERT INTO tasks(msg, description, isComp, isFav ) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param('ssss', $msg, $defaultDescription, $isComp, $isFav);
+        $stmt->bind_param('ssss', $msg, $description, $isComp, $isFav);
         if ($stmt->execute() === TRUE) {
             $msg = ["success" => "1", "message" => "New task added ", "id" =>  $stmt->insert_id];
         } else {
@@ -42,22 +42,21 @@ class Queries
     {
         $stmt = "DELETE FROM tasks where id = $id;";
 
-        if ($this->conn->query($stmt) === TRUE) {
+        if ($this->conn->query($stmt) === TRUE && mysqli_affected_rows($this->conn) !== 0) {
             $msg = ["success" => "1", "message" => "Task deleted"];
         } else {
-            $msg = ["success" => "0", "message" => "Error deleting record: " . $this->conn->error];
+            $errorMsg = $this->conn->error === "" ? "File Not Found!" : $this->conn->error;
+            $msg = ["success" => "0", "message" => "Error deleting record : " .  $errorMsg];
         }
         return $msg;
     }
 
-    // Edit a Task in DB(Msg or is Checked)
-    public function editTask($id, $field1, $msg1, $field2 = null, $msg2 = null)
-    {
-        if ($field2 === null || $msg2 === null)
-            $stmt = "UPDATE tasks SET $field1='$msg1' WHERE id=$id;";
-        else
-            $stmt = "UPDATE tasks SET $field1='$msg1', $field2='$msg2' WHERE id=$id;";
 
+    // Edit a Task in DB(Msg or is Checked)
+    public function editTask($id, $msg, $description, $isComp, $isFav)
+    {
+
+        $stmt = "UPDATE tasks SET msg = '$msg', description='$description', isComp='$isComp', isFav='$isFav' WHERE id=$id;";
         if ($this->conn->query($stmt) === TRUE) {
             $msg = ["success" => "1", "message" => "Task updated"];
         } else {
@@ -75,7 +74,7 @@ class Queries
         foreach ($data as $k => $value) {
             $result[$k] = $value;
         }
-        return $result[0][$key];
+        return $result[0];
     }
 
 
@@ -83,18 +82,17 @@ class Queries
     public function search($key,  $byPrority = '2', $isFullText = false)
     {
         $key = addslashes($key);
+        $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where 1 ';
+        // if (!$isFullText) {
+        //     $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where (msg like "' . $key . '%" ' .
+        //         'or description like "' . $key . '%")';
+        // } else {
+        //     $tokens = implode("* ", explode(" ", $key)) . "*";
+        //     $stmt = "SELECT id,msg,description,isComp,isFav FROM  tasks  WHERE MATCH (msg, description) AGAINST( ' " . $tokens . " ' IN BOOLEAN MODE)";
+        // }
 
-        if (!$isFullText) {
-            $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where (msg like "' . $key . '%" ' .
-                'or description like "' . $key . '%")';
-        } else {
-            $tokens = implode("* ", explode(" ", $key)) . "*";
-            $stmt = "SELECT id,msg,description,isComp,isFav FROM  tasks  WHERE MATCH (msg, description) AGAINST( ' " . $tokens . " ' IN BOOLEAN MODE)";
-        }
+        $stmt .= 'and isFav != ' . $byPrority;
 
-        if ($byPrority != '2') {
-            $stmt .= 'and isFav != ' . $byPrority;
-        }
 
         $data = $this->conn->query($stmt);
         $result = [];

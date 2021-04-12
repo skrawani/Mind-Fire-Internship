@@ -1,5 +1,8 @@
 <?php
 
+// NOTE: Only for debugging purpose will delete on final commit
+
+
 // required headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');

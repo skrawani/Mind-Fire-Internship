@@ -9,25 +9,17 @@ const displayTask = () => {
       obj.id
     }" class="m-card ${obj.isComp === "1" ? "m-disabled" : ""} ">
         <div class="row flex-row py-3 p-md-3 p-lg-3  border-bottom ">
-            <div class="row justify-content-around icons col-2 col-md-1 col-lg-1 mr-2" style="height: 100%">
-            <input type="checkbox" name="isComp" onchange="onClickCheckBox(this)" ${
-              obj.isComp === "1" ? "checked" : ""
-            }  />
-            <input type="checkbox" class="star" name="isFav"  onchange="onClickCheckBox(this)" ${
-              obj.isFav === "1" ? "checked" : ""
-            } />
-            </div>
-            <a class="task col-6 overflow-auto col-md-9 col-lg-10  text-decoration-none text-dark ${
-              obj.isComp === "1" ? "strike-through" : ""
-            }  "   data-toggle="collapse" href="#collapse-${
-      obj.id
-    }" role="button" >
-              ${obj.msg}
+           
+            <a class="task row col-9 overflow-auto col-md-9 col-lg-10  text-decoration-none text-dark"  data-toggle="collapse" 
+            href="#collapse-${obj.id}" role="button" >
+             <span class="col-9 col-md-10 col-lg-10 "> ${obj.msg} </span>
+             <span class="col-3 col-md-2 col-lg-2 px-0  btn btn-${
+               obj.isFav === "1" ? "success" : "danger"
+             }">${obj.isFav === "1" ? "" : "not a"}  priority </span>
             </a>
-            <div class="col-4 col-md-2 col-lg-1 d-flex flex-row justify-content-end">
-              <button class="btn edit icons fas fa-eye" type="button" data-toggle="collapse" data-target="#collapse-${
-                obj.id
-              }" ></button>
+           
+            <div class="col-4 col-md-2 col-lg-2 d-flex flex-row justify-content-end">
+             
               <button class="btn edit icons far fa-edit" data-toggle="modal"
               data-target="#exampleModal" onClick="handleModal(this)" ></button>
               <button class="btn delete icons far fa-trash-alt" onClick="deleteTask(this)"></button>
@@ -58,7 +50,7 @@ const loadTask = () => {
       displayTask();
     }
   };
-  xhttp.open("GET", "backend/utils/loadTasks.php", true);
+  xhttp.open("GET", "./backend/controller/TaskController.php", true);
   xhttp.send();
 };
 
@@ -66,7 +58,7 @@ const loadTask = () => {
 const deleteTask = (ele) => {
   let id = ele.closest(".m-card").id.slice(5);
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("DELETE", "./backend/utils/deleteTask.php", true);
+  xmlhttp.open("DELETE", "./backend/controller/TaskController.php", true);
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
       let res = JSON.parse(xmlhttp.responseText);
@@ -78,68 +70,35 @@ const deleteTask = (ele) => {
         >
         <span aria-hidden="true">&times;</span>
       </button>`;
+
       let alertColor = res.success === "1" ? "alert-warning" : "alert-danger";
-      document.getElementById("myAlert").innerHTML =
-        res.message + alertButtonContent;
-      document.getElementById("myAlert").classList.add(alertColor);
-      document.getElementById("myAlert").classList.remove("d-none");
+      let alertEle = document.getElementById("myAlert");
+      alertEle.innerHTML = res.message + alertButtonContent;
+      alertEle.classList.add(alertColor);
+      alertEle.classList.remove("d-none");
       setTimeout(() => {
-        document.getElementById("myAlert").classList.add("d-none");
+        if (alertEle) alertEle.classList.add("d-none");
       }, 5000);
       search();
     }
   };
-  var vars = "id=" + id;
+  var vars = "api=deleteTask" + "&id=" + id;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send(vars);
 };
 
-// Function to Handle check for Task Completion
-const onClickCheckBox = (ele) => {
-  let key = ele.name;
-  let id = ele.closest(".m-card").id.slice(5);
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "backend/utils/isTaskCompleted.php", true);
-  xhttp.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      let data = this.responseText;
-      editTask(ele, key, data === "0" ? "1" : "0", id);
-    }
-  };
-  let vars = "id=" + id + "&key=" + key;
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(vars);
-};
-
-// Function to handle Tasnk Submit and call edit function if it's a edit or call insert function otherwise
-const handleSubmit = (e) => {
-  if (e.childNodes[1].value === "") {
-    document
-      .getElementById("inp-add-task")
-      .setAttribute("placeholder", "Task name can't be empty...");
-    document.getElementById("inp-add-task").classList.add("text-danger");
-    return false;
-  }
-  if (e.childNodes[3].value === "-1") {
-    addTask(e);
-  } else {
-    editTask(e);
-  }
-  e.childNodes[3].value = "-1";
-  document
-    .getElementById("inp-add-task")
-    .setAttribute("placeholder", "Enter task here...");
-  document.getElementById("inp-add-task").classList.remove("text-danger");
-};
-
 // Function to insert task into DB
-const addTask = (e) => {
-  let task = document.getElementById("inp-add-task").value;
+const addTask = () => {
+  let title = document.querySelector("#modalTitle").value;
+  let description = document.getElementById("modalDescription").value;
+  let priority = document.getElementById("modalPriority").value;
+  let isFav = priority === "yes" ? 1 : 0;
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "./backend/utils/addTask.php", true);
+  xmlhttp.open("POST", "./backend/controller/TaskController.php", true);
   xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      let res = JSON.parse(xmlhttp.responseText);
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 201) {
+      let res = xmlhttp.responseText;
+      res = JSON.parse(res);
       let alertButtonContent = `<button
           type="button"
           class="close"
@@ -148,6 +107,7 @@ const addTask = (e) => {
         >
         <span aria-hidden="true">&times;</span>
       </button>`;
+
       let alertColor = res.success === "1" ? "alert-success" : "alert-danger";
       document.getElementById("myAlert").innerHTML =
         res.message + alertButtonContent;
@@ -156,33 +116,38 @@ const addTask = (e) => {
       setTimeout(() => {
         document.getElementById("myAlert").classList.add("d-none");
       }, 5000);
-
-      document.getElementById("inp-add-task").value = "";
       loadTask();
     }
   };
-  var vars = "task=" + task + "&isComp=0" + "&isFav=0";
+
+  var vars =
+    "api=addTask" +
+    "&task=" +
+    title +
+    "&description=" +
+    description +
+    "&isComp=0" +
+    "&isFav=" +
+    isFav;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send(vars);
 };
 
 // Function to edit task in DB
-const editTask = (
-  ele,
-  field = "msg",
-  msg = false,
-  id = null,
-  field2 = null,
-  msg2 = null
-) => {
-  msg = msg ? msg : ele.childNodes[1].value;
-  id = id !== null ? id : ele.childNodes[3].value;
+const editTask = () => {
+  let id = document.getElementById("modalID").value;
+  let title = document.getElementById("modalTitle").value;
+  let description = document.getElementById("modalDescription").value;
+  let priority = document.getElementById("modalPriority").value;
+  let isFav = priority === "yes" ? 1 : 0;
 
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("PUT", "./backend/utils/editTask.php", true);
+  xmlhttp.open("PUT", "./backend/controller/TaskController.php", true);
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      let res = JSON.parse(xmlhttp.responseText);
+      let res = xmlhttp.responseText;
+
+      res = JSON.parse(res);
       let alertButtonContent = `<button
           type="button"
           class="close"
@@ -202,24 +167,42 @@ const editTask = (
       search();
     }
   };
-  var vars = "id=" + id + "&field=" + field + "&msg=" + msg;
-  if (field2 !== null && msg2 !== null)
-    vars += "&field2=" + field2 + "&msg2=" + msg2;
+  var vars =
+    "api=editTask" +
+    "&id=" +
+    id +
+    "&task=" +
+    title +
+    "&description=" +
+    description +
+    "&isComp=0" +
+    "&isFav=" +
+    isFav;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send(vars);
-  if (ele && ele.childNodes[1]) ele.childNodes[1].value = "";
 };
 
 // Function to handle onlClick for Modal (Editting)
 const handleModal = (ele) => {
   let id = ele.closest(".m-card").id;
   let vid = id.slice(5);
-  let title = document.querySelector(`#${id} a`).innerHTML.trim();
+  let title = document.querySelector(`#${id} a > span`).innerHTML.trim();
   let description = document
     .querySelector(`#${id} .description`)
     .innerHTML.trim();
-
+  let priority = document
+    .querySelector(`#${id} a span:last-child`)
+    .innerHTML.trim();
   document.getElementById("modalTitle").value = title;
+
+  let priorityEle = document.getElementById("modalPriority");
+  if (priority == "priority") {
+    priorityEle.childNodes[1].setAttribute("selected", "selected");
+    priorityEle.childNodes[3].removeAttribute("selected");
+  } else {
+    priorityEle.childNodes[1].removeAttribute("selected");
+    priorityEle.childNodes[3].setAttribute("selected", "selected");
+  }
   document.getElementById("modalDescription").value = description;
   document.getElementById("modalID").value = vid;
 };
@@ -227,33 +210,54 @@ const handleModal = (ele) => {
 // Function to Handle Modal Submit(editing)
 const handleModalSubmit = () => {
   let id = document.getElementById("modalID").value;
-  let title = document.querySelector("#modalTitle").value;
-  let description = document.getElementById("modalDescription").value;
-  editTask(null, "msg", title, id, "description", description);
+  if (id === "") {
+    addTask();
+  } else {
+    editTask();
+  }
   let closeBtn = document.querySelector("[data-dismiss=modal]");
   closeBtn.click();
 };
 
+// FIXME: Dependent Modules are changed so have to change this function
+// TODO: Changes for 2nd filter(Full Text Search)
 // Function to Handle searching(with all filters)
-const search = () => {
-  let key = document.getElementById("tsearch").value;
-  let pc = document.getElementById("fav_checkbox").checked;
-  let ft = document.getElementById("ft_checkbox").checked;
+const search = (key = "") => {
+  // let key = document.getElementById("tsearch").value;
   if (key.length === 0) {
     loadTask();
     return;
   }
-  let byPrority = pc === true ? 0 : 2;
+  let priority = document.getElementById("priorityInput").checked;
+  let nPriority = document.getElementById("npriorityInput").checked;
+
+  // NOTE: if no filters are selected then by default both priority and not priority task will be displayed
+  let byPrority = 2;
+  if (priority === true && nPriority === true) {
+    byPrority = 2;
+  } else if (priority) {
+    byPrority = 0;
+  } else if (nPriority) {
+    byPrority = 1;
+  }
+
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "./backend/utils/search.php", true);
+  xmlhttp.open("POST", "./backend/controller/TaskController.php", true);
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
       globalData = JSON.parse(xmlhttp.responseText);
       displayTask();
     }
   };
-  var vars = "key=" + key + "&byPrority=" + byPrority;
-  if (ft) vars += "&isFullText=" + ft;
+  var vars = "api=filter" + "&key=" + key + "&byPrority=" + byPrority;
+  // if (ft) vars += "&isFullText=" + ft;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send(vars);
+};
+
+// Function to Handle Filter
+const handleFilter = () => {
+  search("byPriority");
+  document.getElementById("dropdown-menu").classList.remove("show");
+  return false;
 };

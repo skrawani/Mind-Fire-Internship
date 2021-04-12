@@ -24,10 +24,74 @@
   <body>
     <div class="header container">
       <div class="row mt-5 m-3 justify-content-center">
-        <a href="./index.html" class="text-decoration-none">
+        <a href="./index.html" class="text-decoration-none ml-auto">
           <h2 class="text-light col-2 font-weight-bold">TODO</h2>
         </a>
-        <form
+
+        <!-- TODO: Filter Frontend (half done) -->
+        <div class="btn-group ml-auto dropdown">
+          <a
+            class="btn btn-secondary rounded py-2 px-3"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Filters
+          </a>
+          <div id="dropdown-menu" class="dropdown-menu">
+            <form
+              class="accordion"
+              id="accordionExample"
+              onsubmit="handleFilter(); return false;"
+            >
+              <div>
+                <a
+                  class="nav-link text-decoration-none text-dark"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Priority
+                </a>
+                <div
+                  id="collapseOne"
+                  class="collapse px-3 show"
+                  data-parent="#accordionExample"
+                >
+                  <div action="">
+                    <input
+                      type="checkbox"
+                      name="priorityInput"
+                      id="priorityInput"
+                      class="m-1"
+                    />
+                    <label for="priorityInput">Priority </label>
+                    <br />
+                    <input
+                      type="checkbox"
+                      name="npriorityInput"
+                      id="npriorityInput"
+                      class="m-1"
+                    />
+                    <label for="npriorityInput">Not Priority </label>
+                  </div>
+                </div>
+              </div>
+              <div class="w-100 d-flex justify-content-center mt-2 px-3">
+                <button class="btn btn-primary btn-block" type="submit">
+                  Filter
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- TODO: Move Search Module to Filters -->
+        <!-- <form
           class="col-12 col-md-8 col-lg-8 d-flex flex-column flex-md-row flex-lg-row"
           onsubmit="event.preventDefault(); search();"
         >
@@ -68,8 +132,9 @@
           >
             Search
           </button>
-        </form>
+        </form> -->
       </div>
+
       <div
         id="myAlert"
         class="alert fade show alert-dismissible d-none"
@@ -90,7 +155,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
               <button
                 type="button"
                 class="close"
@@ -105,6 +170,17 @@
                 <div class="form-group">
                   <label for="modalTitle">Title</label>
                   <input type="text" class="form-control" id="modalTitle" />
+                </div>
+                <div class="form-group">
+                  <label for="modalPriority">Priority</label>
+                  <select
+                    class="form-control"
+                    name="modalPriority"
+                    id="modalPriority"
+                  >
+                    <option value="yes">Yes</option>
+                    <option value="no" selected>No</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="modalDescription">
@@ -130,25 +206,17 @@
           </div>
         </div>
       </div>
-      <div class="container">
-        <form
-          class="row border border-dark rounded-pill overflow-hidden"
-          onsubmit="event.preventDefault(); handleSubmit(this); "
+      <div class="container d-flex justify-content-center">
+        <button
+          type=" submit"
+          value="-1"
+          class="btn btn-success fas fas fa-plus-circle p-3 rounded-pill col-3 col-md-2 col-lg-2 position-relative"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          onclick="document.getElementById('modalDescription').value = '';"
         >
-          <input
-            type=" text"
-            name="task"
-            id="inp-add-task"
-            class="col-10 col-md-11 col-lg-11 rounded-0 border-0"
-            placeholder="Enter task here..."
-          />
-
-          <button
-            type=" submit"
-            value="-1"
-            class="btn btn-success fas fa-arrow-right border-0 py-3 rounded-0 col-2 col-md-1 col-lg-1 position-relative"
-          ></button>
-        </form>
+          Add Task
+        </button>
       </div>
     </section>
     <script
