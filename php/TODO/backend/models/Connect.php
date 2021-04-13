@@ -10,7 +10,15 @@ class Connect
 
     public function connectDB()
     {
-        $conn =  new mysqli($this->config['server'], $this->config['username'], $this->config['password'], $this->config['dbName']) or die("Connection failed: " . mysqli_connect_error());
+        try {
+            if ($conn =  new mysqli($this->config['server'], $this->config['username'], $this->config['password'], $this->config['dbName'])) {
+            } else {
+                throw new Exception('Unable to connect');
+            }
+        } catch (Exception $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+            echo json_encode(array("message" =>  $e->getMessage(), "code" => $e->getCode()));
+        }
         return $conn;
     }
 }

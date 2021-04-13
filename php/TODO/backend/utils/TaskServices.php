@@ -1,7 +1,15 @@
 <?php
 // import Queries and Return Data Class
-include_once("../models/queries.php");
-include_once("../utils/ReturnData.php");
+try {
+    if (!@include_once("../models/queries.php"))
+        throw new Exception('queries.php does not exist');
+    if (!@include_once("../utils/ReturnData.php"))
+        throw new Exception('ReturnData.php does not exist');
+} catch (Exception $e) {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo json_encode(array("message" =>  $e->getMessage(), "code" => $e->getCode()));
+}
+
 
 // Class to Provide all services of Tasks
 class TaskServices
@@ -57,5 +65,12 @@ class TaskServices
     {
         $resp =  $this->queryObj->search($_POST["byPriority"], $_POST["byTitle"], $_POST["byDesc"]);
         $this->returnObj->send(200, $resp);
+    }
+
+    // Send Access Not allowed for any other access
+    public function accesNotAllowed()
+    {
+        $resp = array("message" => "Access Not Allowed");
+        $this->returnObj->send(403, $resp);
     }
 }

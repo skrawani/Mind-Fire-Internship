@@ -60,7 +60,13 @@ const deleteTask = (ele) => {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("DELETE", "./backend/controller/TaskController.php", true);
   xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+    if (
+      xmlhttp.readyState === 4 &&
+      (xmlhttp.status === 200 ||
+        xmlhttp.status === 400 ||
+        xmlhttp.status === 403 ||
+        xmlhttp.status === 500)
+    ) {
       let res = JSON.parse(xmlhttp.responseText);
       let alertButtonContent = `<button
           type="button"
@@ -71,7 +77,10 @@ const deleteTask = (ele) => {
         <span aria-hidden="true">&times;</span>
       </button>`;
 
-      let alertColor = res.success === "1" ? "alert-warning" : "alert-danger";
+      let alertColor =
+        res.success === "1" || xmlhttp.status === 200
+          ? "alert-warning"
+          : "alert-danger";
       let alertEle = document.getElementById("myAlert");
       alertEle.innerHTML = res.message + alertButtonContent;
       alertEle.classList.add(alertColor);
@@ -108,7 +117,10 @@ const addTask = () => {
         <span aria-hidden="true">&times;</span>
       </button>`;
 
-      let alertColor = res.success === "1" ? "alert-success" : "alert-danger";
+      let alertColor =
+        res.success === "1" || xmlhttp.status === 201
+          ? "alert-success"
+          : "alert-danger";
       let alertEle = document.getElementById("myAlert");
       alertEle.innerHTML = res.message + alertButtonContent;
       alertEle.classList.add(alertColor);
@@ -144,7 +156,13 @@ const editTask = () => {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open("PUT", "./backend/controller/TaskController.php", true);
   xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+    if (
+      xmlhttp.readyState === 4 &&
+      (xmlhttp.status === 200 ||
+        xmlhttp.status === 400 ||
+        xmlhttp.status === 403 ||
+        xmlhttp.status === 500)
+    ) {
       let res = xmlhttp.responseText;
 
       res = JSON.parse(res);
@@ -156,7 +174,10 @@ const editTask = () => {
         >
         <span aria-hidden="true">&times;</span>
       </button>`;
-      let alertColor = res.success === "1" ? "alert-primary" : "alert-danger";
+      let alertColor =
+        res.success === "1" || xmlhttp.status === 200
+          ? "alert-primary"
+          : "alert-danger";
       let alertEle = document.getElementById("myAlert");
       alertEle.innerHTML = res.message + alertButtonContent;
       alertEle.classList.add(alertColor);

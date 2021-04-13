@@ -1,16 +1,18 @@
 <?php
-// NOTE: Header files for debugging purpose will remove in Final commit
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 // required headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/x-www-form-urlencoded');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With');
-include_once("../utils/TaskServices.php");
+
+try {
+    if (!@include_once("../utils/TaskServices.php"))
+        throw new Exception('TaskServices.php does not exist');
+} catch (Exception $e) {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo json_encode(array("message" =>  $e->getMessage(), "code" => $e->getCode()));
+}
 
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -43,4 +45,6 @@ else if ($requestMethod  === 'GET') {
 // call Filter Service
 else if ($requestMethod  === 'POST' && isset($postVars['api']) && $postVars['api'] === 'filter') {
     $taskObj->search($postVars);
+} else {
+    $taskObj->accesNotAllowed();
 }
