@@ -4,6 +4,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 // required headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/x-www-form-urlencoded');
@@ -35,16 +36,11 @@ else if ($requestMethod  === 'DELETE' && isset($postVars['api']) && $postVars['a
 else if ($requestMethod  === 'PUT' && isset($postVars['api']) && $postVars['api'] === 'editTask') {
     $taskObj->editTask($postVars);
 }
-// call isTaskCompleted Serice
-else if ($requestMethod  === 'POST' && isset($postVars['api']) && $postVars['api'] === 'isTaskCompleted') {
-    $taskObj->isTaskCompleted($postVars);
-}
-// NOTE: Might remove it later as functinality is removed from app
 // call loadTasks Serice
 else if ($requestMethod  === 'GET') {
     $taskObj->loadTasks();
 }
-// TODO: Controller for search
+// call Filter Service
 else if ($requestMethod  === 'POST' && isset($postVars['api']) && $postVars['api'] === 'filter') {
     $taskObj->search($postVars);
 }

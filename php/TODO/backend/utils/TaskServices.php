@@ -45,14 +45,6 @@ class TaskServices
         $this->helperSend($resp, 200, 400);
     }
 
-    // NOTE: Might remove is ,as functionality is removed form app
-    // Service Function to isTaskCompleted task 
-    public function isTaskCompleted($postVars)
-    {
-        $resp =  $this->queryObj->loadCheckBoxValue($postVars['id'], $postVars['key']);
-        $this->returnObj->send(200, $resp);
-    }
-
     // Service Function to load All Tasks
     public function loadTasks()
     {
@@ -63,7 +55,6 @@ class TaskServices
     // Setvice Function for Searching
     public function search($postVars)
     {
-        // TODO: Search by title and search by Description filter
         $resp =  $this->queryObj->search($_POST["byPriority"], $_POST["byTitle"], $_POST["byDesc"]);
         $this->returnObj->send(200, $resp);
     }

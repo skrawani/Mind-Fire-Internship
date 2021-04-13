@@ -219,12 +219,8 @@ const handleModalSubmit = () => {
   closeBtn.click();
 };
 
-// FIXME: Dependent Modules are changed so have to change this function
-// TODO: Changes for 2nd filter(Full Text Search)
 // Function to Handle searching(with all filters)
 const search = () => {
-  // let key = document.getElementById("tsearch").value;
-
   let priority = document.getElementById("priorityInput").checked;
   let nPriority = document.getElementById("npriorityInput").checked;
   let titleSearch = document.getElementById("titleSearch").value;
@@ -256,7 +252,6 @@ const search = () => {
     titleSearch +
     "&byDesc=" +
     descSearch;
-  // if (ft) vars += "&isFullText=" + ft;
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send(vars);
 };
