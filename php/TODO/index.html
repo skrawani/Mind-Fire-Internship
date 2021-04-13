@@ -29,7 +29,7 @@
         </a>
 
         <!-- TODO: Filter Frontend (half done) -->
-        <div class="btn-group ml-auto dropdown">
+        <div class="ml-auto dropdown">
           <a
             class="btn btn-secondary rounded py-2 px-3"
             href="#"
@@ -41,11 +41,12 @@
           >
             Filters
           </a>
-          <div id="dropdown-menu" class="dropdown-menu">
+          <div id="dropdown-menu" class="dropdown-menu dropdown-menu-right">
             <form
               class="accordion"
               id="accordionExample"
               onsubmit="handleFilter(); return false;"
+              style="width: 13rem"
             >
               <div>
                 <a
@@ -60,7 +61,7 @@
                 <div
                   id="collapseOne"
                   class="collapse px-3 show"
-                  data-parent="#accordionExample"
+                  cdata-parent="#accordionExample"
                 >
                   <div action="">
                     <input
@@ -78,6 +79,56 @@
                       class="m-1"
                     />
                     <label for="npriorityInput">Not Priority </label>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a
+                  class="nav-link text-decoration-none text-dark"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  aria-expanded="true"
+                  aria-controls="collapseTwo"
+                >
+                  Search By title
+                </a>
+                <div
+                  id="collapseTwo"
+                  class="collapse px-3"
+                  cdata-parent="#accordionExample"
+                >
+                  <div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="titleSearch"
+                      id="titleSearch"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <a
+                  class="nav-link text-decoration-none text-dark"
+                  data-toggle="collapse"
+                  data-target="#collapseThree"
+                  aria-expanded="true"
+                  aria-controls="collapseThree"
+                >
+                  Search By Description
+                </a>
+                <div
+                  id="collapseThree"
+                  class="collapse px-3"
+                  cdata-parent="#accordionExample"
+                >
+                  <div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="descSearch"
+                      id="descSearch"
+                    />
                   </div>
                 </div>
               </div>

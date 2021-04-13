@@ -64,7 +64,7 @@ class TaskServices
     public function search($postVars)
     {
         // TODO: Search by title and search by Description filter
-        $resp =  $this->queryObj->search($_POST["key"], $_POST["byPrority"]);
+        $resp =  $this->queryObj->search($_POST["byPriority"], $_POST["byTitle"], $_POST["byDesc"]);
         $this->returnObj->send(200, $resp);
     }
 }

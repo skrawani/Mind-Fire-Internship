@@ -79,19 +79,22 @@ class Queries
 
     // TODO: Changes for Second Filter
     // function to perform searching with both filters support (priority only, full text)
-    public function search($key,  $byPrority = '2', $isFullText = false)
+    public function search($byPrority, $byTitle, $byDesc)
     {
-        $key = addslashes($key);
+        $byTitle = addslashes($byTitle);
+        $byDesc = addslashes($byDesc);
         $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where 1 ';
-        // if (!$isFullText) {
-        //     $stmt = 'SELECT id,msg,description,isComp,isFav  FROM tasks t where (msg like "' . $key . '%" ' .
-        //         'or description like "' . $key . '%")';
-        // } else {
-        //     $tokens = implode("* ", explode(" ", $key)) . "*";
-        //     $stmt = "SELECT id,msg,description,isComp,isFav FROM  tasks  WHERE MATCH (msg, description) AGAINST( ' " . $tokens . " ' IN BOOLEAN MODE)";
-        // }
+        if ($byTitle !== "") {
+            $tokens = implode("* ", explode(" ", $byTitle)) . "*";
+            $stmt .= "and MATCH (msg) AGAINST( ' " . $tokens . " ' IN BOOLEAN MODE) ";
+        }
+        if ($byDesc !== "") {
+            $tokens = implode("* ", explode(" ", $byDesc)) . "*";
+            $stmt .= "and MATCH (description) AGAINST( ' " . $tokens . " ' IN BOOLEAN MODE) ";
+        }
 
         $stmt .= 'and isFav != ' . $byPrority;
+        // return array('stmt' => $stmt);
         $data = $this->conn->query($stmt);
         $result = [];
         foreach ($data as $k => $value) {
