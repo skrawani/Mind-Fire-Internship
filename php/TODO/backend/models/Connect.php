@@ -11,8 +11,7 @@ class Connect
     public function connectDB()
     {
         try {
-            if ($conn =  new mysqli($this->config['server'], $this->config['username'], $this->config['password'], $this->config['dbName'])) {
-            } else {
+            if (!($conn =  new mysqli($this->config['server'], $this->config['username'], $this->config['password'], $this->config['dbName']))) {
                 throw new Exception('Unable to connect');
             }
         } catch (Exception $e) {

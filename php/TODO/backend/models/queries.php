@@ -3,6 +3,7 @@
 class Queries
 {
     private $conn;
+    private $success = "success", $message = "message";
     // add task to DB
     // Default is Connect.php but can be overridden if required
     // constructor to store db connect variable in class private variable
@@ -18,9 +19,9 @@ class Queries
         $stmt = $this->conn->prepare("INSERT INTO tasks(msg, description, isComp, isFav ) VALUES (?, ?, ?, ?)");
         $stmt->bind_param('ssss', $msg, $description, $isComp, $isFav);
         if ($stmt->execute() === TRUE) {
-            $msg = ["success" => "1", "message" => "New task added ", "id" =>  $stmt->insert_id];
+            $msg = [$this->success => "1", $this->message => "New task added ", "id" =>  $stmt->insert_id];
         } else {
-            $msg = ["success" => "0", "message" => "Error: "  . "<br>" . $this->conn->error, "id" =>  $stmt->insert_id];
+            $msg = [$this->success => "0", $this->message => "Error: "  . "<br>" . $this->conn->error, "id" =>  $stmt->insert_id];
         }
         return $msg;
     }
@@ -43,10 +44,10 @@ class Queries
         $stmt = "DELETE FROM tasks where id = $id;";
 
         if ($this->conn->query($stmt) === TRUE && mysqli_affected_rows($this->conn) !== 0) {
-            $msg = ["success" => "1", "message" => "Task deleted"];
+            $msg = [$this->success => "1", $this->message => "Task deleted"];
         } else {
             $errorMsg = $this->conn->error === "" ? "File Not Found!" : $this->conn->error;
-            $msg = ["success" => "0", "message" => "Error deleting record : " .  $errorMsg];
+            $msg = [$this->success => "0", $this->message => "Error deleting record : " .  $errorMsg];
         }
         return $msg;
     }
@@ -58,9 +59,9 @@ class Queries
 
         $stmt = "UPDATE tasks SET msg = '$msg', description='$description', isComp='$isComp', isFav='$isFav' WHERE id=$id;";
         if ($this->conn->query($stmt) === TRUE) {
-            $msg = ["success" => "1", "message" => "Task updated"];
+            $msg = [$this->success => "1", $this->message => "Task updated"];
         } else {
-            $msg = ["success" => "0", "message" => "Error deleting record: " . $this->conn->error];
+            $msg = [$this->success => "0", $this->message => "Error deleting record: " . $this->conn->error];
         }
         return $msg;
     }
@@ -101,4 +102,4 @@ class Queries
         }
         return $result;
     }
-};
+}

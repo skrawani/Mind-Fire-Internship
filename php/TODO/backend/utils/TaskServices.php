@@ -1,10 +1,14 @@
 <?php
 // import Queries and Return Data Class
 try {
-    if (!@include_once("../models/queries.php"))
+    if (!@include_once("../models/queries.php")) {
+
         throw new Exception('queries.php does not exist');
-    if (!@include_once("../utils/ReturnData.php"))
+    }
+    if (!@include_once("../utils/ReturnData.php")) {
+
         throw new Exception('ReturnData.php does not exist');
+    }
 } catch (Exception $e) {
     header('HTTP/1.1 500 Internal Server Error');
     echo json_encode(array("message" =>  $e->getMessage(), "code" => $e->getCode()));
@@ -61,7 +65,7 @@ class TaskServices
     }
 
     // Setvice Function for Searching
-    public function search($postVars)
+    public function search()
     {
         $resp =  $this->queryObj->search($_POST["byPriority"], $_POST["byTitle"], $_POST["byDesc"]);
         $this->returnObj->send(200, $resp);

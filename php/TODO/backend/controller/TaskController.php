@@ -7,8 +7,9 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With');
 
 try {
-    if (!@include_once("../utils/TaskServices.php"))
+    if (!@include_once("../utils/TaskServices.php")) {
         throw new Exception('TaskServices.php does not exist');
+    }
 } catch (Exception $e) {
     header('HTTP/1.1 500 Internal Server Error');
     echo json_encode(array("message" =>  $e->getMessage(), "code" => $e->getCode()));

@@ -1,0 +1,6 @@
+projectKey=skrawani
+serverUrl=http://localhost:9000
+serverVersion=7.1.0.11001
+dashboardUrl=http://localhost:9000/dashboard/index/skrawani
+ceTaskId=AXjaky16Am67_Ohb9qDh
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXjaky16Am67_Ohb9qDh

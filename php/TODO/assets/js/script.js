@@ -1,6 +1,36 @@
 // Gloabal variable(state) to store Tasks Data
 var globalData = [];
 
+const helperCustomAlert = (
+  res,
+  successStatusCode,
+  successColorCode,
+  errorColorCode,
+  nextCallFunction
+) => {
+  res = JSON.parse(res);
+  let alertButtonContent = `<button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+      <span aria-hidden="true">&times;</span>
+    </button>`;
+  let alertColor =
+    res.success === "1" || xmlhttp.status === successStatusCode
+      ? successColorCode
+      : errorColorCode;
+  let alertEle = document.getElementById("myAlert");
+  alertEle.innerHTML = res.message + alertButtonContent;
+  alertEle.classList.add(alertColor);
+  alertEle.classList.remove("d-none");
+  setTimeout(() => {
+    if (alertEle) alertEle.classList.add("d-none");
+  }, 5000);
+  nextCallFunction();
+};
+
 // Function to dispay task through DOM
 const displayTask = () => {
   document.getElementById("taskCard").innerHTML = "";
@@ -67,28 +97,8 @@ const deleteTask = (ele) => {
         xmlhttp.status === 403 ||
         xmlhttp.status === 500)
     ) {
-      let res = JSON.parse(xmlhttp.responseText);
-      let alertButtonContent = `<button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-        <span aria-hidden="true">&times;</span>
-      </button>`;
-
-      let alertColor =
-        res.success === "1" || xmlhttp.status === 200
-          ? "alert-warning"
-          : "alert-danger";
-      let alertEle = document.getElementById("myAlert");
-      alertEle.innerHTML = res.message + alertButtonContent;
-      alertEle.classList.add(alertColor);
-      alertEle.classList.remove("d-none");
-      setTimeout(() => {
-        if (alertEle) alertEle.classList.add("d-none");
-      }, 5000);
-      search();
+      let res = xmlhttp.responseText;
+      helperCustomAlert(res, 200, "alert-warning", "alert-danger", search);
     }
   };
   var vars = "api=deleteTask" + "&id=" + id;
@@ -107,28 +117,7 @@ const addTask = () => {
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState === 4 && xmlhttp.status === 201) {
       let res = xmlhttp.responseText;
-      res = JSON.parse(res);
-      let alertButtonContent = `<button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-        <span aria-hidden="true">&times;</span>
-      </button>`;
-
-      let alertColor =
-        res.success === "1" || xmlhttp.status === 201
-          ? "alert-success"
-          : "alert-danger";
-      let alertEle = document.getElementById("myAlert");
-      alertEle.innerHTML = res.message + alertButtonContent;
-      alertEle.classList.add(alertColor);
-      alertEle.classList.remove("d-none");
-      setTimeout(() => {
-        if (alertEle) alertEle.classList.add("d-none");
-      }, 5000);
-      loadTask();
+      helperCustomAlert(res, 201, "alert-success", "alert-danger", loadTask);
     }
   };
 
@@ -164,28 +153,7 @@ const editTask = () => {
         xmlhttp.status === 500)
     ) {
       let res = xmlhttp.responseText;
-
-      res = JSON.parse(res);
-      let alertButtonContent = `<button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-        <span aria-hidden="true">&times;</span>
-      </button>`;
-      let alertColor =
-        res.success === "1" || xmlhttp.status === 200
-          ? "alert-primary"
-          : "alert-danger";
-      let alertEle = document.getElementById("myAlert");
-      alertEle.innerHTML = res.message + alertButtonContent;
-      alertEle.classList.add(alertColor);
-      alertEle.classList.remove("d-none");
-      setTimeout(() => {
-        if (alertEle) alertEle.classList.add("d-none");
-      }, 5000);
-      search();
+      helperCustomAlert(res, 200, "alert-primary", "alert-danger", search);
     }
   };
   var vars =
@@ -279,7 +247,7 @@ const search = () => {
 
 // Function to Handle Filter
 const handleFilter = () => {
-  search("byPriority");
+  search();
   document.getElementById("dropdown-menu").classList.remove("show");
   return false;
 };
