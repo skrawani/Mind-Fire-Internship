@@ -2,6 +2,7 @@ const {
   insertUpdateTimeActivities,
 } = require("../models/TimeActivitiesService");
 
+// helper function for getTimeActivities
 const getTimeActivitiesHelper = async (qbo, userId) => {
   return new Promise(async (resolve) => {
     qbo.findTimeActivities(
@@ -19,6 +20,7 @@ const getTimeActivitiesHelper = async (qbo, userId) => {
   });
 };
 
+// get All TimeActivity from QBO
 const getTimeActivities = async (qboObjArray, userIdRealmIdMap) => {
   for (const qbo of qboObjArray) {
     const id = userIdRealmIdMap.get(qbo.realmId);

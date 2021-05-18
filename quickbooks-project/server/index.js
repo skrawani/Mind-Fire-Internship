@@ -1,12 +1,15 @@
+// importing required node modules
 require("dotenv").config({ path: __dirname + "/.env" });
 const QuickBooks = require("node-quickbooks");
 const dbConnection = require("./models/db");
 
+// importing required modules
 const { getUsers, updateAccessTokenAllUsers } = require("./models/userService");
 const getItems = require("./consoleCommands/fetchItems");
 const getEmployees = require("./consoleCommands/fetchEmployees");
 const getTimeActivities = require("./consoleCommands/fetchTimeActivities");
 
+// helper function for refreshTokenAccess
 const refreshTokenHelper = (qbo, id) => {
   return new Promise(async (resolve) => {
     qbo.refreshAccessToken(async (err, accessToken) => {
@@ -21,6 +24,7 @@ const refreshTokenHelper = (qbo, id) => {
   });
 };
 
+// refresh Access token for all users before any QBO operations
 const refreshAccessToken = async (qboObjArray, userIdRealmIdMap) => {
   for (const qbo of qboObjArray) {
     const id = userIdRealmIdMap.get(qbo.realmId);
@@ -28,6 +32,7 @@ const refreshAccessToken = async (qboObjArray, userIdRealmIdMap) => {
   }
 };
 
+// generate array of QBO objects for all `users` and generate a map [realmId => user] to get userId when needed
 const getArrayOfObjects = (users) => {
   const qboObjArray = [];
   var userIdRealmIdMap = new Map();
@@ -52,18 +57,25 @@ const getArrayOfObjects = (users) => {
 };
 
 const cronJob = async () => {
+  // get all APP users from DB
   const users = await getUsers();
-  //   console.log(users);
+
   const { qboObjArray, userIdRealmIdMap } = getArrayOfObjects(users);
-  //   console.log(qboObjArray);
+
   await refreshAccessToken(qboObjArray, userIdRealmIdMap);
+
+  // Fetch Items for all users from QBO
   await getItems(qboObjArray, userIdRealmIdMap);
+
+  // Fetch Employees for all users from QBO
   await getEmployees(qboObjArray, userIdRealmIdMap);
+
+  // Fetch TimeActivities for all users from QBO
   await getTimeActivities(qboObjArray, userIdRealmIdMap);
 
-  console.log("Cron Job Completed");
   //   closing the db connection after all operations
   dbConnection.end();
 };
 
+// invoking cronJob function()
 cronJob();

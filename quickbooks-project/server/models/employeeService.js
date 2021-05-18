@@ -1,5 +1,6 @@
 const dbConnection = require("./db");
 
+// helper function to give query statement for insert or update if exist for Employee Table
 const queryBuiderInsertWithUpdate = (tableName, fields, noOfObjects) => {
   const statement = `INSERT INTO ${tableName} ( ${fields.join(
     ", "
@@ -14,6 +15,7 @@ const queryBuiderInsertWithUpdate = (tableName, fields, noOfObjects) => {
   return statement;
 };
 
+// Function to Insert or Update if already exist in Employee Table
 const insertUpdateEmployee = async (Employees, userId) => {
   const fieldsOfEmployee = [
     `empId`,
@@ -29,7 +31,9 @@ const insertUpdateEmployee = async (Employees, userId) => {
     `updatedAt`,
     `createdAt`,
   ];
+
   let employeeDataArray = [];
+
   for (const employee of Employees) {
     const employeeRecord = [
       employee.Id,

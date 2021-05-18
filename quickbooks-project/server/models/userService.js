@@ -1,5 +1,6 @@
 const dbConnection = require("./db");
 
+// Get All users from DB
 const getUsers = async () => {
   const statement = `SELECT id, realmId , accessToken, refreshToken FROM user WHERE 1`;
   try {
@@ -11,6 +12,7 @@ const getUsers = async () => {
   }
 };
 
+// Update access token of a user
 const updateAccessTokenAllUsers = async (id, accessToken) => {
   const statememt = `UPDATE user SET accessToken = ? , refreshToken = ?, updatedAt = ? WHERE id = ?`;
   try {

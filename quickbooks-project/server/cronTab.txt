@@ -1,0 +1,5 @@
+
+commands entered in cronTab
+
+# fetch console commands everyday at 2:30 AM
+30 2 * * * /home/sachin/Documents/Mind-Fire-Internship/quickbooks-project/server/cronScript.sh

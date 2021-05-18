@@ -1,5 +1,7 @@
+// import mysql library
 const mysql = require("mysql2");
 
+// creting a connection pool as JS promise
 const pool = mysql
   .createPool({
     host: process.env.DB_HOST,
@@ -12,4 +14,5 @@ const pool = mysql
   })
   .promise();
 
+// exporing pool
 module.exports = pool;

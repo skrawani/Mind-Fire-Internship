@@ -1,5 +1,6 @@
 const { insertUpdateEmployee } = require("../models/employeeService");
 
+// helper function for getEmployees
 const getEmployeesHelper = async (qbo, userId) => {
   return new Promise(async (resolve) => {
     qbo.findEmployees(
@@ -17,6 +18,7 @@ const getEmployeesHelper = async (qbo, userId) => {
   });
 };
 
+// get All Employees from QBO
 const getEmployees = async (qboObjArray, userIdRealmIdMap) => {
   for (const qbo of qboObjArray) {
     const id = userIdRealmIdMap.get(qbo.realmId);

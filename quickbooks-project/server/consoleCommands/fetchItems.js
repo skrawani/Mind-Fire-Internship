@@ -1,5 +1,6 @@
 const { insertUpdateItems } = require("../models/itemService");
 
+// helper function for getItems
 const getItemsHelper = (qbo, userId) => {
   return new Promise(async (resolve) => {
     qbo.findItems(
@@ -17,6 +18,7 @@ const getItemsHelper = (qbo, userId) => {
   });
 };
 
+// get All Items from QBO
 const getItems = async (qboObjArray, userIdRealmIdMap) => {
   for (const qbo of qboObjArray) {
     const id = userIdRealmIdMap.get(qbo.realmId);

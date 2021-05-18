@@ -1,15 +1,12 @@
 {
-  "name": "node-paybooks",
+  "name": "node-fetch-qbo",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Node Script to Items, Employees, TimeAcitivities",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "devStart": "nodemon app"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
     "intuit-oauth": "^3.0.2",
