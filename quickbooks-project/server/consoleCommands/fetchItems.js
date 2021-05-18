@@ -1,81 +1,17 @@
-const getItemsHelper = (qbo, id) => {
+const { insertUpdateItems } = require("../models/itemService");
+
+const getItemsHelper = (qbo, userId) => {
   return new Promise(async (resolve) => {
     qbo.findItems(
       {
         fetchAll: true,
       },
-      async (err, { QueryResponse }) => {
-        let itemsDataArray = [];
-
-        const fieldsOfItem = [
-          `itemId`,
-          `userId`,
-          `domain`,
-          `name`,
-          `fullyQualifiedName`,
-          `type`,
-          `description`,
-          `incomeAccountId`,
-          `expenseAccountId`,
-          `assetAccountId`,
-          `qtyOnHand`,
-          `invStartDate`,
-          `active`,
-          `syncToken`,
-          `updatedAt`,
-          `createdAt`,
-        ];
-        const statememt = `INSERT INTO  item ( ${fieldsOfItem.join(
-          ", "
-        )} ) VALUES ${`( ${"?, ".repeat(16).slice(0, -2)}), `
-          .repeat(QueryResponse.Item.length)
-          .slice(0, -2)} ON DUPLICATE KEY UPDATE ${fieldsOfItem
-          .slice(0, -1)
-          .map((field) => {
-            return field + ` = VALUES ( ${field} )`;
-          })
-          .join(", ")} `;
-
-        for (const item of QueryResponse.Item) {
-          const {
-            Id,
-            domain,
-            Name,
-            FullyQualifiedName,
-            Type,
-            Description,
-            IncomeAccountRef,
-            ExpenseAccountRef,
-            AssetAccountRef,
-            QtyOnHand,
-            InvStartDate,
-            Active,
-            SyncToken,
-          } = item;
-          const itemDataArray = [
-            Id,
-            id,
-            domain || "QBO",
-            Name,
-            FullyQualifiedName,
-            Type,
-            Description || "",
-            IncomeAccountRef ? IncomeAccountRef.value : null,
-            ExpenseAccountRef ? ExpenseAccountRef.value : null,
-            AssetAccountRef ? AssetAccountRef.value : null,
-            QtyOnHand || null,
-            InvStartDate || null,
-            Active || null,
-            SyncToken,
-            new Date(),
-            new Date(),
-          ];
-          itemsDataArray.push(...itemDataArray);
+      async (err, { QueryResponse: { Item } }) => {
+        if (err) {
+          console.log(err);
         }
-
+        await insertUpdateItems(Item, userId);
         resolve();
-        const [rows] = await dbConnection.query(statememt, itemsDataArray);
-        // console.log(rows);
       }
     );
   });

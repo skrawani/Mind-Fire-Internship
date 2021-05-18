@@ -1,4 +1,4 @@
-const dbConnection = require("./models/db");
+const dbConnection = require("./db");
 
 const queryBuiderInsertWithUpdate = (tableName, fields, noOfObjects) => {
   const statement = `INSERT INTO ${tableName} ( ${fields.join(

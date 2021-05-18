@@ -1,16 +1,17 @@
-const dbConnection = require("./models/db");
+const dbConnection = require("./db");
 
 const getUsers = async () => {
   const statement = `SELECT id, realmId , accessToken, refreshToken FROM user WHERE 1`;
   try {
     const [rows, fields] = await dbConnection.query(statement);
-    return { success: true, data: rows, err: "" };
+    return rows;
   } catch (err) {
-    return { success: false, data: rows, err };
+    console.log(err);
+    return [];
   }
 };
 
-const updateAccessTokenAllUsers = async () => {
+const updateAccessTokenAllUsers = async (id, accessToken) => {
   const statememt = `UPDATE user SET accessToken = ? , refreshToken = ?, updatedAt = ? WHERE id = ?`;
   try {
     await dbConnection.query(statememt, [
@@ -19,9 +20,8 @@ const updateAccessTokenAllUsers = async () => {
       new Date(),
       id,
     ]);
-    return { success: true, err: "" };
   } catch (err) {
-    return { success: true, err };
+    console.log(err);
   }
 };
 
