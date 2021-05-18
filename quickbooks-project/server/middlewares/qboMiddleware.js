@@ -1,6 +1,6 @@
 var QuickBooks = require("node-quickbooks");
 
-var items;
+
 module.exports = (req, res, next) => {
   console.log(req.url);
   const { accessToken } = req.session;
