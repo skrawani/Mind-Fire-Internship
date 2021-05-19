@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Employee" table="employee">
+    <indexes>
+      <index name="empId_2" columns="empId"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="empId" columns="empId,userId"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="empid" type="bigint" column="empId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="userid" type="bigint" column="userId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="domain" type="string" column="domain" length="3" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">QBO</option>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="phone" type="string" column="phone" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="displayname" type="string" column="displayName" length="500" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="familyname" type="string" column="familyName" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="billabletime" type="boolean" column="billableTime" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="synctoken" type="string" column="syncToken" length="3" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="active" type="boolean" column="active" nullable="false"/>
+    <field name="createdat" type="datetime" column="createdAt" nullable="false"/>
+    <field name="updatedat" type="datetime" column="updatedAt" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

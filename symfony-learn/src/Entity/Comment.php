@@ -4,10 +4,26 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommentRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={
+ *          "GET",
+ *          "put"={
+ *              method"="PUT",
+ *              "security"="is_granted('IS_AUTHENTICATED_FULLY') and object.getAuthor() === user"
+ *           }
+ *      },
+ *     collectionOperations={
+ *          "GET",
+ *          "post"={
+ *              method"="POST",
+ *              "security"="is_granted('IS_AUTHENTICATED_FULLY')",
+ *          }
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
 class Comment
@@ -29,6 +45,18 @@ class Comment
      */
     private $published;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\BlogPost", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $blogPost;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,14 +74,52 @@ class Comment
         return $this;
     }
 
-    public function getPublished(): ?\DateTimeInterface
+    public function getPublished(): ?DateTimeInterface
     {
         return $this->published;
     }
 
-    public function setPublished(\DateTimeInterface $published): self
+    public function setPublished(DateTimeInterface $published): self
     {
         $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     * @return Comment
+     */
+    public function setAuthor(User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return BlogPost
+     */
+    public function getBlogPost(): BlogPost
+    {
+        return $this->blogPost;
+    }
+
+    /**
+     * @param BlogPost $blogPost
+     * @return Comment
+     */
+    public function setBlogPost(BlogPost $blogPost): self
+    {
+        $this->blogPost = $blogPost;
 
         return $this;
     }

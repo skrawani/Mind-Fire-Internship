@@ -4,9 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\BlogPost;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BlogPostCrudController extends AbstractCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return BlogPost::class;

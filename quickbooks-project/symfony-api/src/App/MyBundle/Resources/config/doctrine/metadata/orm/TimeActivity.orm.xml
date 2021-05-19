@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="TimeActivity" table="time_activity">
+    <unique-constraints>
+      <unique-constraint name="activityId" columns="activityId,userId"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="Id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="activityid" type="bigint" column="activityId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="userid" type="bigint" column="userId" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="domain" type="string" column="domain" length="3" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="default">QBO</option>
+      </options>
+    </field>
+    <field name="nameof" type="string" column="nameOf" length="8" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="hours" type="integer" column="hours" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="minutes" type="integer" column="minutes" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="hourlyrate" type="bigint" column="hourlyRate" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="billablestatus" type="string" column="billableStatus" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="text" column="description" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="itemid" type="bigint" column="itemId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="employeeid" type="bigint" column="employeeId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="customerid" type="bigint" column="customerId" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="txndate" type="date" column="txnDate" nullable="true"/>
+    <field name="synctoken" type="string" column="syncToken" length="3" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="createdat" type="datetime" column="createdAt" nullable="false"/>
+    <field name="updatedat" type="datetime" column="updatedAt" nullable="true">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>
