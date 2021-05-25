@@ -57,7 +57,6 @@ const insertUpdateTimeActivities = async (TimeActivity, userId) => {
     ];
     TimeActivityDataArray.push(...TimeActivityRecord);
   }
-
   const statememt = dbConnection.format(
     queryBuiderInsertWithUpdate(
       "time_activity",
@@ -73,4 +72,47 @@ const insertUpdateTimeActivities = async (TimeActivity, userId) => {
   }
 };
 
-module.exports = { insertUpdateTimeActivities };
+const getTimeActivities = async (userId) => {
+  const fieldsOfTimeActivity = [
+    `Id`,
+    `activityId`,
+    `userId`,
+    `domain`,
+    `nameOf`,
+    `hours`,
+    `minutes`,
+    `hourlyRate`,
+    `billableStatus`,
+    `description`,
+    `itemId`,
+    `employeeId`,
+    `customerId`,
+    `txnDate`,
+  ];
+  const statememt = `SELECT ${fieldsOfTimeActivity.join(
+    ", "
+  )} from time_activity WHERE activityId IS NULL AND userId =  ?`;
+  try {
+    const [rows, fields] = await dbConnection.query(statememt, [userId]);
+    return { sucess: true, data: rows, err: "" };
+  } catch (err) {
+    console.log(err);
+    return { sucess: false, data: [], err };
+  }
+};
+
+const setActivityId = async (activityId, syncToken, id) => {
+  const statement = `UPDATE time_activity SET activityId = ?, syncToken = ? WHERE Id = ?`;
+  console.log(statement, activityId, syncToken, id);
+  try {
+    dbConnection.query(statement, [activityId, syncToken, id]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  insertUpdateTimeActivities,
+  getTimeActivities,
+  setActivityId,
+};

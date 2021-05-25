@@ -8,6 +8,7 @@ const { getUsers, updateAccessTokenAllUsers } = require("./models/userService");
 const getItems = require("./consoleCommands/fetchItems");
 const getEmployees = require("./consoleCommands/fetchEmployees");
 const getTimeActivities = require("./consoleCommands/fetchTimeActivities");
+const setTimeActivities = require("./consoleCommands/pushTimeActivity");
 
 // helper function for refreshTokenAccess
 const refreshTokenHelper = (qbo, id) => {
@@ -53,29 +54,43 @@ const getArrayOfObjects = (users) => {
     );
     userIdRealmIdMap.set(user.realmId, user.id);
   }
+  // console.log("IN", qboObjArray);
   return { qboObjArray, userIdRealmIdMap };
 };
 
 const cronJob = async () => {
   // get all APP users from DB
   const users = await getUsers();
-
   const { qboObjArray, userIdRealmIdMap } = getArrayOfObjects(users);
 
   await refreshAccessToken(qboObjArray, userIdRealmIdMap);
 
-  // Fetch Items for all users from QBO
+  await setTimeActivities(qboObjArray, userIdRealmIdMap);
+
+  // // Fetch Items for all users from QBO
   await getItems(qboObjArray, userIdRealmIdMap);
 
-  // Fetch Employees for all users from QBO
+  // // Fetch Employees for all users from QBO
   await getEmployees(qboObjArray, userIdRealmIdMap);
 
-  // Fetch TimeActivities for all users from QBO
+  // // Fetch TimeActivities for all users from QBO
   await getTimeActivities(qboObjArray, userIdRealmIdMap);
 
   //   closing the db connection after all operations
   dbConnection.end();
 };
 
-// invoking cronJob function()
-cronJob();
+const pushPayrolls = async () => {
+  // get all APP users from DB
+  const users = await getUsers();
+  const { qboObjArray, userIdRealmIdMap } = getArrayOfObjects(users);
+
+  await refreshAccessToken(qboObjArray, userIdRealmIdMap);
+
+  await setTimeActivities(qboObjArray, userIdRealmIdMap);
+
+  //   closing the db connection after all operations
+  dbConnection.end();
+};
+
+module.exports = { cronJob, pushPayrolls };

@@ -7,11 +7,11 @@ const getItemsHelper = (qbo, userId) => {
       {
         fetchAll: true,
       },
-      async (err, { QueryResponse: { Item } }) => {
+      async (err, { QueryResponse }) => {
         if (err) {
           console.log(err);
         }
-        await insertUpdateItems(Item, userId);
+        await insertUpdateItems(QueryResponse.Item, userId);
         resolve();
       }
     );
