@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-
-
 use ApiPlatform\Core\Annotation\ApiResource;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -325,7 +323,6 @@ class User implements  UserInterface
 
     public function getRoles(): array
     {
-        // TODO: Implement getRoles() method.
         return ['ROLE_USER'];
     }
 
@@ -334,11 +331,8 @@ class User implements  UserInterface
         return null;
     }
 
-
-
     public function eraseCredentials()
     {
-
     }
 }
 

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -99,7 +100,7 @@ class Item
     private $qtyonhand;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      *
      * @ORM\Column(name="invStartDate", type="date", nullable=true)
      */
@@ -120,18 +121,155 @@ class Item
     private $synctoken;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime", nullable=false)
      */
     private $createdat;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="updatedAt", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $updatedat = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getItemid(): int
+    {
+        return $this->itemid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserid(): int
+    {
+        return $this->userid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDomain(): string
+    {
+        return $this->domain;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullyqualifiedname(): string
+    {
+        return $this->fullyqualifiedname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIncomeaccountid(): ?int
+    {
+        return $this->incomeaccountid;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getExpenseaccountid(): ?int
+    {
+        return $this->expenseaccountid;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAssetaccountid(): ?int
+    {
+        return $this->assetaccountid;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getQtyonhand(): ?int
+    {
+        return $this->qtyonhand;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getInvstartdate(): ?DateTime
+    {
+        return $this->invstartdate;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSynctoken(): string
+    {
+        return $this->synctoken;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedat(): DateTime
+    {
+        return $this->createdat;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdatedat()
+    {
+        return $this->updatedat;
+    }
+
 
 
 }

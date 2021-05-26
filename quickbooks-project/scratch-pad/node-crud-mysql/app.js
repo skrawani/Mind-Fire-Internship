@@ -25,18 +25,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-
-{
-    "FullyQualifiedName": "Trees",
-    "domain": "QBO",
-    "Name": "Trees",
-    "SyncToken": "0",
-    "sparse": false,
-    "Active": true,
-    "Type": "Category",
-    "Id": "29",
-    "MetaData": {
-       "CreateTime": "2015-10-06T08:50:34-07:00",
-       "LastUpdatedTime": "2015-10-06T08:50:34-07:00"
-    }
- }

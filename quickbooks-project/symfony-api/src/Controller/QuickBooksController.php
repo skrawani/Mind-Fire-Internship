@@ -3,58 +3,82 @@
 
 namespace App\Controller;
 
-use QuickBooksOnline\API\DataService\DataService;
+use App\Utils\QuickBooksService;
 use QuickBooksOnline\API\Exception\SdkException;
+use QuickBooksOnline\API\Exception\ServiceException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Routing\Annotation\Route;
+use App\QuickBooks\QuickBooks;
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
- * Class QuickBooks
+ * Class QuickBooksController
  * @package App\Controller
  * @Route("/api/qb")
  */
-class QuickBooks extends  AbstractController
+class QuickBooksController extends AbstractController
 {
     private  $dataService;
 
-    /**
-     * @throws SdkException
-     */
-    public function __construct()
+    public function __construct(QuickBooks $quickBooks)
     {
-        $dotenv = new Dotenv();
-        $dotenv->load(__DIR__.'/../../.env');
-        $this->dataService = DataService::Configure([
-            'auth_mode' => 'oauth2',
-            'ClientID' => $_ENV['client_id'],
-            'ClientSecret' =>  $_ENV['client_secret'],
-            'RedirectURI' => $_ENV['oauth_redirect_uri'],
-            'scope' => $_ENV['oauth_scope'],
-            'baseUrl' => "development"
-        ]);
-
+       $this->dataService = $quickBooks->getDataService();
     }
 
     /**
-     * @Route("/")
-     *
+     * @Route("/load")
      */
     public function test(): JsonResponse
     {
-        return $this->json('hey');
-    }
-    public function  getDataService(): DataService
-    {
-        return $this->dataService;
+        try {
+            $process = new Process(['/home/sachin/Documents/Mind-Fire-Internship/quickbooks-project/server/fetchCronScript.sh']);
+            $process->run();
+            if (!$process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
+            return $this->json(["success" => true, "err" => ""]);
+        }
+        catch (ProcessFailedException $ex) {
+            return $this->json(["success" => false, "err" => $ex]);
+        }
+
     }
 
     /**
-     * @Route("/callback)
+     * @Route("/authenticate")
      */
-    public function callback(){
+    public function authenticate(): JsonResponse
+    {
+        $OAuth2LoginHelper = $this->dataService->getOAuth2LoginHelper();
+        $authorizationUrl = $OAuth2LoginHelper->getAuthorizationCodeURL();
+       return $this->json(urlencode($authorizationUrl));
+    }
 
+
+    /**
+     * @Route("/callback")
+     */
+    public function callback(Request $request,QuickBooksService $service ): Response
+    {
+        $query = $request->query;
+
+        $OAuth2LoginHelper = $this->dataService->getOAuth2LoginHelper();
+        try {
+            $accessTokenObj = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($query->get("code"), $query->get("realmId"));
+            $this->dataService->updateOAuth2Token($accessTokenObj);
+            $accessTokenValue = $accessTokenObj->getAccessToken();
+            $refreshTokenValue = $accessTokenObj->getRefreshToken();
+            $realmId = $accessTokenObj->getRealmID();
+            $service->setAccessTokenAndRefreshToken($realmId, $accessTokenValue, $refreshTokenValue);
+        } catch (SdkException | ServiceException $e) {
+            var_dump($e);
+        }
+        return new Response();
     }
 
 }
