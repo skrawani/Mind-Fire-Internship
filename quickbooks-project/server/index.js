@@ -67,13 +67,13 @@ const cronJob = async () => {
 
   await setTimeActivities(qboObjArray, userIdRealmIdMap);
 
-  // // Fetch Items for all users from QBO
+  // Fetch Items for all users from QBO
   await getItems(qboObjArray, userIdRealmIdMap);
 
-  // // Fetch Employees for all users from QBO
+  // Fetch Employees for all users from QBO
   await getEmployees(qboObjArray, userIdRealmIdMap);
 
-  // // Fetch TimeActivities for all users from QBO
+  // Fetch TimeActivities for all users from QBO
   await getTimeActivities(qboObjArray, userIdRealmIdMap);
 
   //   closing the db connection after all operations

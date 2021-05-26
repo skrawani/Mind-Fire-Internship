@@ -21,9 +21,9 @@ const setTimeActivitiesHelper = async (qbo, rawData) => {
       };
     }
 
-    if (rawData.employeeId != null) {
+    if (rawData.empId != null) {
       data.EmployeeRef = {
-        value: rawData.employeeId,
+        value: rawData.empId,
       };
     }
 
@@ -37,10 +37,9 @@ const setTimeActivitiesHelper = async (qbo, rawData) => {
         value: rawData.vendorId,
       };
     }
-
     qbo.createTimeActivity(data, async (err, QueryResponse) => {
       if (err) {
-        console.log(err);
+        console.log(err.Fault);
       }
       try {
         await setActivityId(

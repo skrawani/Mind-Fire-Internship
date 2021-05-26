@@ -321,15 +321,19 @@ class User implements  UserInterface
         $this->updatedat = $updatedat;
     }
 
+    //    Abstract function to be implemented for userInterface
     public function getRoles(): array
     {
         return ['ROLE_USER'];
     }
 
+    //    Abstract function to be implemented for userInterface
+
     public function getSalt()
     {
         return null;
     }
+    //    Abstract function to be implemented for userInterface
 
     public function eraseCredentials()
     {

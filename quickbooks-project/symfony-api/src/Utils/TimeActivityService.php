@@ -4,6 +4,7 @@
 namespace App\Utils;
 
 
+use App\Entity\Employee;
 use App\Entity\TimeActivity;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,12 +26,22 @@ class TimeActivityService
 
     public function getTimeActivitiesByUserID(): array
     {
-        return $this->repository->findBy(["userid" => $this->user->getId()]);
+        $activities =  $this->repository->findBy(["userid" => $this->user->getId()]);
+        foreach ($activities as $activity) {
+            $foreignEmpId = $activity->getEmployeeid();
+            $empId = $this->doctrine->getRepository(Employee::class)->findOneBy(["id" => $foreignEmpId])->getEmpid();
+            $activity->setEmployeeid($empId);
+        }
+        return $activities;
     }
 
     public function getTimeActivitiesById($id): array
     {
-        return $this->repository->findBy(["userid" => $this->user->getId(), "id" => $id]);
+        $activity = $this->repository->findOneBy(["userid" => $this->user->getId(), "id" => $id]);
+        $foreignEmpId = $activity->getEmployeeid();
+        $empId = $this->doctrine->getRepository(Employee::class)->findOneBy(["id" => $foreignEmpId])->getEmpid();
+        $activity->setEmployeeid($empId);
+        return [$activity];
     }
 
     public function setTimeActivity($data ){
@@ -43,8 +54,8 @@ class TimeActivityService
         $time_activity->setHourlyrate($data['hourlyRate'] ?? 0 );
         $time_activity->setBillablestatus($data['billableStatus'] ?? null);
         $time_activity->setDescription($data['description'] ?? null);
-        $time_activity->setItemid($data['itemId'] ?? null);
-        $time_activity->setEmployeeid($data['employeeId'] ?? null);
+        $empId = $this->doctrine->getRepository(Employee::class)->findOneBy(["empid" => $data['employeeId'] ?? null, "userid" => $this->user->getId()])->getId();
+        $time_activity->setEmployeeid($empId);
         $time_activity->setVendorId($data['vendorId'] ?? null);
         $time_activity->setCustomerid($data['customerId'] ?? null);
         $time_activity->setTxndate($data['txnDate'] ?? new DateTime());

@@ -4,7 +4,11 @@ const dbConnection = require("./db");
 const queryBuiderInsertWithUpdate = (tableName, fields, noOfObjects) => {
   const statement = `INSERT INTO ${tableName} ( ${fields.join(
     ", "
-  )} ) VALUES ${`( ${"?, ".repeat(fields.length).slice(0, -2)}), `
+  )} ) VALUES ${`( ${"?, ".repeat(
+    9
+  )} (SELECT Id FROM employee WHERE empId = ? AND userId = ?), ${"?, "
+    .repeat(5)
+    .slice(0, -2)}), `
     .repeat(noOfObjects)
     .slice(0, -2)} ON DUPLICATE KEY UPDATE ${fields
     .slice(0, -1)
@@ -27,7 +31,6 @@ const insertUpdateTimeActivities = async (TimeActivity, userId) => {
     `hourlyRate`,
     `billableStatus`,
     `description`,
-    `itemId`,
     `employeeId`,
     `customerId`,
     `txnDate`,
@@ -47,8 +50,8 @@ const insertUpdateTimeActivities = async (TimeActivity, userId) => {
       activity.HourlyRate || 0,
       activity.BillableStatus,
       activity.Description || "",
-      activity.ItemRef ? activity.ItemRef.value : null,
       activity.EmployeeRef ? activity.EmployeeRef.value : null,
+      userId,
       activity.CustomerRef ? activity.CustomerRef.value : null,
       activity.TxnDate || null,
       activity.SyncToken,
@@ -57,6 +60,7 @@ const insertUpdateTimeActivities = async (TimeActivity, userId) => {
     ];
     TimeActivityDataArray.push(...TimeActivityRecord);
   }
+
   const statememt = dbConnection.format(
     queryBuiderInsertWithUpdate(
       "time_activity",
@@ -73,27 +77,32 @@ const insertUpdateTimeActivities = async (TimeActivity, userId) => {
 };
 
 const getTimeActivities = async (userId) => {
+  // // SELECT t.Id, t.activityId, t.userId, t.domain, t.nameOf, t.hours, t.minutes, t.hourlyRate, t.billableStatus, t.description, e.empId, t.customerId, t.txnDate
+  // from time_activity t LEFT JOIN employee e ON t.employeeId = e.id  WHERE t.activityId IS NULL AND t.userId =  13
   const fieldsOfTimeActivity = [
-    `Id`,
-    `activityId`,
-    `userId`,
-    `domain`,
-    `nameOf`,
-    `hours`,
-    `minutes`,
-    `hourlyRate`,
-    `billableStatus`,
-    `description`,
-    `itemId`,
-    `employeeId`,
-    `customerId`,
-    `txnDate`,
+    `t.Id`,
+    `t.activityId`,
+    `t.userId`,
+    `t.domain`,
+    `t.nameOf`,
+    `t.hours`,
+    `t.minutes`,
+    `t.hourlyRate`,
+    `t.billableStatus`,
+    `t.description`,
+    `e.empId`,
+    `t.customerId`,
+    `t.txnDate`,
   ];
-  const statememt = `SELECT ${fieldsOfTimeActivity.join(
-    ", "
-  )} from time_activity WHERE activityId IS NULL AND userId =  ?`;
+  const statememt = dbConnection.format(
+    `SELECT ${fieldsOfTimeActivity.join(
+      ", "
+    )} from time_activity t LEFT JOIN employee e ON t.employeeId = e.id  WHERE t.activityId IS NULL AND t.userId =  ?`,
+    [userId]
+  );
+  // console.log(statememt);
   try {
-    const [rows, fields] = await dbConnection.query(statememt, [userId]);
+    const [rows, fields] = await dbConnection.query(statememt);
     return { sucess: true, data: rows, err: "" };
   } catch (err) {
     console.log(err);

@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\TimeActivityController;
 use DateTime;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -90,12 +88,6 @@ class TimeActivity
      */
     private $description;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="itemId", type="bigint", nullable=true)
-     */
-    private $itemid;
 
     /**
      * @var int|null
@@ -299,21 +291,6 @@ class TimeActivity
         $this->description = $description;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getItemid(): ?int
-    {
-        return $this->itemid;
-    }
-
-    /**
-     * @param int|null $itemid
-     */
-    public function setItemid(?int $itemid): void
-    {
-        $this->itemid = $itemid;
-    }
 
     /**
      * @return int|null
@@ -422,11 +399,10 @@ class TimeActivity
     /**
      * @param DateTime|null $updatedat
      */
-    public function setUpdatedat($updatedat): void
+    public function setUpdatedat(?DateTime $updatedat): void
     {
         $this->updatedat = $updatedat;
     }
-
 
 
 }
