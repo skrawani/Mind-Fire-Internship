@@ -36,7 +36,7 @@ class QuickBooksController extends AbstractController
     public function test(): JsonResponse
     {
         try {
-            $process = new Process(['/home/sachin/Documents/Mind-Fire-Internship/quickbooks-project/server/fetchCronScript.sh']);
+            $process = new Process(['/home/sachin/Documents/Mind-Fire-Internship/quickbooks-project/server/scripts/fetchCronScript.sh']);
             $process->run();
             if (!$process->isSuccessful()) {
                 throw new ProcessFailedException($process);
