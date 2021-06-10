@@ -62,6 +62,7 @@ const getAccountDetailById = (req, res) => {
 
 const createAccount = (req, res) => {
   var oauthClient = req.app.get("oauthClient");
+  console.log(oauthClient);
   var url =
     oauthClient.environment == "sandbox"
       ? OAuthClient.environment.sandbox

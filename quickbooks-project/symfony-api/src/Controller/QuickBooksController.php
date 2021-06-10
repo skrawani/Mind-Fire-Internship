@@ -31,6 +31,13 @@ class QuickBooksController extends AbstractController
     }
 
     /**
+     * @Route("/isFirstLogin")
+     */
+    public function  isFirstLogin(QuickBooksService $service): JsonResponse
+    {
+        return $this->json(['isFirstLogin' => $service->isFirstLoginChecker()]);
+    }
+    /**
      * @Route("/load")
      */
     public function test(): JsonResponse
@@ -78,7 +85,7 @@ class QuickBooksController extends AbstractController
         } catch (SdkException | ServiceException $e) {
             var_dump($e);
         }
-        return new Response();
+        return new Response("<html><h1> Connected to QuickBooks, you can now close this window</h1></html>");
     }
 
 }

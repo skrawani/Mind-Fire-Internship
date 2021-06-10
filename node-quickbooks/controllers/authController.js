@@ -22,6 +22,7 @@ const authenticate = (req, res) => {
     scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
     state: "testState",
   }); // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
+  console.log(authUri);
   res.send(authUri);
 };
 
@@ -31,8 +32,9 @@ const callback = (req, res) => {
     .createToken(req.url)
     .then(function (authResponse) {
       oauth2_token_json = authResponse;
+      console.log("ORJ", oauth2_token_json);
       req.app.set("oauthClient", oauthClient);
-      console.log(oauthClient);
+      // console.log(oauthClient);
       oauth2_token_json = false;
     })
     .catch(function (e) {

@@ -33,7 +33,8 @@ class AuthenticationSuccessListener
         $data = $event->getData();
         $tokenJWT = $data['token'];
         unset($data['token']);
-        unset($data['refresh_token']);
+//        $data['realmId'] = 12345;
+//        unset($data['refresh_token']);
         $event->setData($data);
 
         $response->headers->setCookie(new Cookie('BEARER', $tokenJWT, (

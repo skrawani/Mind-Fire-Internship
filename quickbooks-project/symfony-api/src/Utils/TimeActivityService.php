@@ -28,8 +28,9 @@ class TimeActivityService
     {
         $activities =  $this->repository->findBy(["userid" => $this->user->getId()]);
         foreach ($activities as $activity) {
-            $foreignEmpId = $activity->getEmployeeid();
-            $empId = $this->doctrine->getRepository(Employee::class)->findOneBy(["id" => $foreignEmpId])->getEmpid();
+            $empId = $activity->getEmployeeid();
+            if($empId !== null)
+                $empId = $this->doctrine->getRepository(Employee::class)->findOneBy(["id" => $empId])->getEmpid();
             $activity->setEmployeeid($empId);
         }
         return $activities;
@@ -38,8 +39,9 @@ class TimeActivityService
     public function getTimeActivitiesById($id): array
     {
         $activity = $this->repository->findOneBy(["userid" => $this->user->getId(), "id" => $id]);
-        $foreignEmpId = $activity->getEmployeeid();
-        $empId = $this->doctrine->getRepository(Employee::class)->findOneBy(["id" => $foreignEmpId])->getEmpid();
+        $empId = $activity->getEmployeeid();
+        if($empId !== null)
+            $empId = $this->doctrine->getRepository(Employee::class)->findOneBy(["id" => $empId])->getEmpid();
         $activity->setEmployeeid($empId);
         return [$activity];
     }

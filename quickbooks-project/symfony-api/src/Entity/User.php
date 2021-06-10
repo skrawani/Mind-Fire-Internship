@@ -32,6 +32,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements  UserInterface
 {
+
+
     /**
      * @var int
      *
@@ -63,7 +65,7 @@ class User implements  UserInterface
     private $lastname;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(name="username", type="string", length=100, nullable=false   )
      * @Assert\NotBlank()
@@ -85,7 +87,7 @@ class User implements  UserInterface
     private $password;
 
     /**
-     * @var bool
+     * @var bool | null
      *
      * @ORM\Column(name="active", type="boolean", nullable=false, options={"default"="1"})
      * @Groups({"read"})
@@ -94,39 +96,39 @@ class User implements  UserInterface
     private $active = true;
 
     /**
-     * @var string
+     * @var string | null
      *
-     * @ORM\Column(name="realmId", type="string", length=50, nullable=false)
+     * @ORM\Column(name="realmId", type="string", length=50, nullable=true)
      * @Groups({"read"})
      */
     private $realmid;
 
     /**
-     * @var string
+     * @var string | null
      *
-     * @ORM\Column(name="accessToken", type="string", length=1000, nullable=false)
+     * @ORM\Column(name="accessToken", type="string", length=1000, nullable=true)
      * @Groups({"read","put"})
      */
     private $accesstoken;
 
     /**
-     * @var string
+     * @var string | null
      *
-     * @ORM\Column(name="refreshToken", type="string", length=1000, nullable=false)
+     * @ORM\Column(name="refreshToken", type="string", length=1000, nullable=true)
      * @Groups({"read","put"})
      */
     private $refreshtoken;
 
     /**
-     * @var bool
+     * @var bool | null
      *
-     * @ORM\Column(name="billable", type="boolean", nullable=false, options={"default"="1"})
+     * @ORM\Column(name="billable", type="boolean", nullable=true, options={"default"="1"})
      * @Groups({"read","put"})
      */
     private $billable = true;
 
     /**
-     * @var DateTime|null
+     * @var DateTime |null
      *
      * @ORM\Column(name="createdAt", type="datetime", nullable=true)
      * @Groups({"read","put"})
@@ -134,12 +136,18 @@ class User implements  UserInterface
     private $createdat;
 
     /**
-     * @var DateTime
+     * @var DateTime | null
      *
-     * @ORM\Column(name="updatedAt", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="updatedAt", type="datetime", nullable=true, options={"default"="CURRENT_TIMESTAMP"})
      * @Groups({"read","put"})
      */
-    private $updatedat = 'CURRENT_TIMESTAMP';
+    private $updatedat;
+
+
+    public function __construct()
+    {
+        $this->updatedat = new DateTime();
+    }
 
     /**
      * @return int
@@ -147,6 +155,14 @@ class User implements  UserInterface
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -181,14 +197,18 @@ class User implements  UserInterface
         $this->lastname = $lastname;
     }
 
-    public function getUsername(): ?string
+    /**
+     * @return string
+     */
+    public function getUsername(): string
     {
         return $this->username;
     }
+
     /**
-     * @param string|null $username
+     * @param string $username
      */
-    public function setUsername(?string $username): void
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -210,25 +230,25 @@ class User implements  UserInterface
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isActive(): bool
+    public function getActive(): ?bool
     {
         return $this->active;
     }
 
     /**
-     * @param bool $active
+     * @param bool|null $active
      */
-    public function setActive(bool $active): void
+    public function setActive(?bool $active): void
     {
         $this->active = $active;
     }
 
     /**
-     * @return string
+     * @return string | null
      */
-    public function getRealmid(): string
+    public function getRealmid(): ?string
     {
         return $this->realmid;
     }
@@ -242,49 +262,49 @@ class User implements  UserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAccesstoken(): string
+    public function getAccesstoken(): ?string
     {
         return $this->accesstoken;
     }
 
     /**
-     * @param string $accesstoken
+     * @param string|null $accesstoken
      */
-    public function setAccesstoken(string $accesstoken): void
+    public function setAccesstoken(?string $accesstoken): void
     {
         $this->accesstoken = $accesstoken;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRefreshtoken(): string
+    public function getRefreshtoken(): ?string
     {
         return $this->refreshtoken;
     }
 
     /**
-     * @param string $refreshtoken
+     * @param string|null $refreshtoken
      */
-    public function setRefreshtoken(string $refreshtoken): void
+    public function setRefreshtoken(?string $refreshtoken): void
     {
         $this->refreshtoken = $refreshtoken;
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isBillable(): bool
+    public function getBillable(): ?bool
     {
         return $this->billable;
     }
 
     /**
-     * @param bool $billable
+     * @param bool|null $billable
      */
-    public function setBillable(bool $billable): void
+    public function setBillable(?bool $billable): void
     {
         $this->billable = $billable;
     }
@@ -306,9 +326,9 @@ class User implements  UserInterface
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getUpdatedat()
+    public function getUpdatedat(): ?DateTime
     {
         return $this->updatedat;
     }
@@ -320,6 +340,7 @@ class User implements  UserInterface
     {
         $this->updatedat = $updatedat;
     }
+
 
     //    Abstract function to be implemented for userInterface
     public function getRoles(): array
